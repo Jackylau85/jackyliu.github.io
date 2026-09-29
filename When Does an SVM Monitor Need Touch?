@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>When Does an SVM Monitor Need Touch? | Jacky Liu</title>
+
+    <meta name="description" content="When does an SVM monitor need touch? Learn how USB touch, UART touch, capacitive touch, glove operation and wet finger operation affect SVM and AVM vehicle monitor design.">
+
+    <meta name="keywords" content="SVM monitor, SVM touch screen, AVM monitor, vehicle monitor touch, USB touch, UART touch, capacitive touch, glove touch, wet finger touch, vehicle HMI">
+
+    <meta name="author" content="Jacky Liu">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://jackylau85.github.io/jackyliu.github.io/when-does-svm-monitor-need-touch.html">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f7f7;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        header .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        header a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        article {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        h1 {
+            font-size: 38px;
+            line-height: 1.25;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            margin-top: 40px;
+            font-size: 28px;
+            color: #111827;
+        }
+
+        h3 {
+            margin-top: 28px;
+            font-size: 21px;
+            color: #1f2937;
+        }
+
+        .category {
+            display: inline-block;
+            font-size: 14px;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            background: #f3f4f6;
+            border-left: 4px solid #2563eb;
+            padding: 18px 20px;
+            margin: 25px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        .related {
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 1px solid #ddd;
+        }
+
+        footer {
+            text-align: center;
+            color: #777;
+            padding: 40px 20px;
+        }
+
+        @media (max-width: 700px) {
+            article {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <a href="index.html">← Back to Jacky Liu</a>
+    </div>
+</header>
+
+<main>
+    <article>
+
+        <div class="category">Technical Guide · SVM / AVM · Vehicle Monitor / HMI</div>
+
+        <h1>When Does an SVM Monitor Need Touch?</h1>
+
+        <div class="meta">
+            By Jacky Liu · September 29, 2026
+        </div>
+
+        <p>
+            Not every SVM or AVM system needs a touchscreen.
+            In some vehicle camera systems, the monitor only needs to display the processed image.
+            In others, the driver or operator needs to change views, open menus, adjust settings,
+            or control the SVM system directly from the display.
+        </p>
+
+        <p>
+            This is where touch becomes more than a display feature.
+            It becomes part of the vehicle's HMI — the human-machine interface between
+            the SVM system and the driver.
+        </p>
+
+        <div class="highlight">
+            <strong>The key question is not simply "Does the monitor have touch?"</strong><br>
+            The better question is:
+            <strong>"Does the driver need to interact with the SVM system through the monitor?"</strong>
+        </div>
+
+        <h2>1. When Does an SVM Monitor Actually Need Touch?</h2>
+
+        <p>
+            A basic SVM system may work like this:
+        </p>
+
+        <p>
+            <strong>Camera → SVM Box → HDMI → Vehicle Monitor</strong>
+        </p>
+
+        <p>
+            In this architecture, the SVM box performs image processing and stitching,
+            while the monitor mainly displays the final image.
+            Touch may not be necessary.
+        </p>
+
+        <p>
+            However, the system becomes different when the operator needs to interact with
+            the software.
+        </p>
+
+        <p>For example, touch may be useful when the driver needs to:</p>
+
+        <ul>
+            <li>Change between different camera views</li>
+            <li>Select different SVM or AVM viewing modes</li>
+            <li>Open system menus</li>
+            <li>Adjust image or display settings</li>
+            <li>Control vehicle camera functions</li>
+            <li>Interact with an HMI application</li>
+            <li>Operate the system without physical buttons</li>
+        </ul>
+
+        <p>
+            In these cases, the monitor is no longer only a video output device.
+            It becomes an interactive HMI component.
+        </p>
+
+        <h2>2. HDMI Video Does Not Mean Touch</h2>
+
+        <p>
+            One common misunderstanding is that an HDMI connection automatically provides
+            touchscreen control.
+        </p>
+
+        <p>
+            HDMI normally carries the video signal from the SVM box to the monitor.
+            Touch communication is a separate interface.
+        </p>
+
+        <p>
+            A typical architecture may therefore look like:
+        </p>
+
+        <p>
+            <strong>
+                SVM Box → HDMI → Monitor<br>
+                Monitor → USB / UART → SVM Box or Host System
+            </strong>
+        </p>
+
+        <p>
+            The exact architecture depends on how the SVM software and host system are designed.
+            Therefore, when specifying a touchscreen monitor, it is important to confirm both
+            the video interface and the touch interface.
+        </p>
+
+        <h2>3. USB Touch</h2>
+
+        <p>
+            USB is a common way to connect a capacitive touchscreen to the host system.
+        </p>
+
+        <p>
+            In many vehicle monitor applications, HDMI is used for video while USB is used
+            for touch communication.
+        </p>
+
+        <p>
+            The structure can be:
+        </p>
+
+        <p>
+            <strong>
+                SVM Box → HDMI → Monitor<br>
+                Monitor → USB → SVM Box / Host
+            </strong>
+        </p>
+
+        <p>
+            The advantage of this architecture is that video and touch have clearly separated
+            interfaces.
+        </p>
+
+        <p>
+            However, the important point is not simply whether the monitor has a USB connector.
+            The host system must also support the corresponding touch device and communication logic.
+        </p>
+
+        <h2>4. UART Touch</h2>
+
+        <p>
+            UART is another possible interface for touch communication.
+        </p>
+
+        <p>
+            Unlike USB, UART is a serial communication interface and is often used when the
+            system architecture requires a direct serial connection between the touchscreen
+            controller and the host system.
+        </p>
+
+        <p>
+            For an SVM project, this means that the customer should confirm:
+        </p>
+
+        <ul>
+            <li>Which touch controller is being used</li>
+            <li>Which UART communication protocol is required</li>
+            <li>Baud rate and communication settings</li>
+            <li>How touch commands are interpreted by the host system</li>
+            <li>Whether the SVM software supports the selected touch interface</li>
+        </ul>
+
+        <div class="highlight">
+            <strong>USB Touch and UART Touch are not simply two different connectors.</strong>
+            They can represent different system architectures and communication requirements.
+        </div>
+
+        <h2>5. Capacitive Touch</h2>
+
+        <p>
+            Capacitive touch is widely used in modern touch displays.
+            It detects changes in the electrical characteristics around the touch surface.
+        </p>
+
+        <p>
+            For vehicle applications, capacitive touch can provide a smooth and familiar
+            smartphone-like user experience.
+        </p>
+
+        <p>
+            But vehicle applications are more demanding than indoor consumer electronics.
+        </p>
+
+        <p>
+            The touchscreen may need to operate under:
+        </p>
+
+        <ul>
+            <li>Vibration</li>
+            <li>Temperature changes</li>
+            <li>Electrical noise</li>
+            <li>Different installation conditions</li>
+            <li>Glove operation</li>
+            <li>Wet or contaminated fingers</li>
+        </ul>
+
+        <p>
+            Therefore, simply specifying "capacitive touch" is not enough.
+            The actual operating environment needs to be considered.
+        </p>
+
+        <h2>6. What About Glove Touch?</h2>
+
+        <p>
+            A normal capacitive touchscreen may work well with a bare finger,
+            but the situation can change when the operator is wearing gloves.
+        </p>
+
+        <p>
+            This is especially important for construction equipment, agricultural machinery,
+            mining vehicles, trucks and other industrial vehicles where operators may wear
+            protective gloves.
+        </p>
+
+        <p>
+            If glove operation is required, the touchscreen should be designed and tested
+            specifically for that application.
+        </p>
+
+        <p>
+            The important question is therefore not:
+        </p>
+
+        <p>
+            <strong>"Is it a capacitive touchscreen?"</strong>
+        </p>
+
+        <p>
+            Instead:
+        </p>
+
+        <p>
+            <strong>"Can the touchscreen reliably recognize the intended touch operation
+            while the operator is wearing the required type of glove?"</strong>
+        </p>
+
+        <h2>7. What About Wet Finger Operation?</h2>
+
+        <p>
+            Vehicle environments can also involve water, rain, cleaning, condensation,
+            or wet hands.
+        </p>
+
+        <p>
+            A touchscreen that works perfectly in a dry indoor environment may not provide
+            the same user experience when the touch surface is wet.
+        </p>
+
+        <p>
+            This is why "wet finger touch" can become an important requirement for
+            vehicle and industrial displays.
+        </p>
+
+        <p>
+            Wet operation should be considered together with the touchscreen controller,
+            touch algorithm, cover glass, surface treatment and actual application conditions.
+        </p>
+
+        <p>
+            It is also important to distinguish between:
+        </p>
+
+        <ul>
+            <li>Touching the screen with a wet finger</li>
+            <li>Water on the screen surface</li>
+            <li>Rain or water droplets during operation</li>
+            <li>Cleaning the display</li>
+        </ul>
+
+        <p>
+            These conditions are not necessarily identical from a touchscreen performance
+            perspective.
+        </p>
+
+        <h2>8. USB Touch vs UART Touch</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>USB Touch</th>
+                    <th>UART Touch</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Interface</td>
+                    <td>USB</td>
+                    <td>Serial UART</td>
+                </tr>
+                <tr>
+                    <td>Typical role</td>
+                    <td>Touch input to a host system</td>
+                    <td>Touch communication with a host controller</td>
+                </tr>
+                <tr>
+                    <td>System dependency</td>
+                    <td>Host must support the USB touch device</td>
+                    <td>Host must support the required UART protocol</td>
+                </tr>
+                <tr>
+                    <td>Application</td>
+                    <td>Common for HDMI + touch monitor architectures</td>
+                    <td>Useful for systems using serial communication</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>9. Capacitive Touch vs Glove / Wet Finger</h2>
+
+        <p>
+            These terms should also not be treated as the same thing.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Requirement</th>
+                    <th>What It Means</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Capacitive Touch</td>
+                    <td>The basic touchscreen sensing technology</td>
+                </tr>
+                <tr>
+                    <td>Glove Touch</td>
+                    <td>The touchscreen is expected to recognize operation through gloves</td>
+                </tr>
+                <tr>
+                    <td>Wet Finger</td>
+                    <td>The touchscreen is expected to remain usable with wet fingers or under specified wet conditions</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            In other words, "capacitive" describes the sensing technology,
+            while "glove" and "wet finger" describe application requirements.
+        </p>
+
+        <h2>10. Touch Is Also an Installation Issue</h2>
+
+        <p>
+            Touch performance should not be evaluated only on a laboratory desk.
+        </p>
+
+        <p>
+            In an actual vehicle, the monitor may be connected to multiple electronic systems,
+            long cables, vehicle power supplies and other equipment that can introduce
+            electrical noise.
+        </p>
+
+        <p>
+            Therefore, an SVM touchscreen should also be tested under actual installation
+            conditions.
+        </p>
+
+        <p>
+            Some practical questions include:
+        </p>
+
+        <ul>
+            <li>Does touch remain stable after vehicle startup?</li>
+            <li>Does touch remain responsive when the engine is running?</li>
+            <li>Does the HDMI video remain stable while touch is being used?</li>
+            <li>Does the USB or UART connection remain reliable?</li>
+            <li>Does the touchscreen work with the customer's glove?</li>
+            <li>Does it work under the expected wet-finger condition?</li>
+            <li>Are the touch and video cables routed correctly?</li>
+        </ul>
+
+        <h2>11. When Should You Specify Touch for an SVM Monitor?</h2>
+
+        <p>
+            A simple way to decide is to start from the operator's actual workflow.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Application</th>
+                    <th>Touch Requirement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monitor only displays a fixed SVM image</td>
+                    <td>Touch may not be necessary</td>
+                </tr>
+                <tr>
+                    <td>Driver changes SVM viewing modes</td>
+                    <td>Touch can be useful</td>
+                </tr>
+                <tr>
+                    <td>Driver needs system menus</td>
+                    <td>Touch may be required</td>
+                </tr>
+                <tr>
+                    <td>Monitor is part of a larger HMI system</td>
+                    <td>Touch may be required</td>
+                </tr>
+                <tr>
+                    <td>Construction or mining application</td>
+                    <td>Consider glove and environmental requirements</td>
+                </tr>
+                <tr>
+                    <td>Outdoor / wet operating environment</td>
+                    <td>Consider wet-finger and water-related touch performance</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>12. A Practical Checklist for SVM Touchscreen Selection</h2>
+
+        <p>
+            Before selecting a touchscreen monitor for an SVM or AVM system,
+            I would check the following:
+        </p>
+
+        <ol>
+            <li>Does the driver actually need to interact with the SVM system?</li>
+            <li>Where is the SVM software running?</li>
+            <li>Is HDMI used for video?</li>
+            <li>Is USB or UART required for touch?</li>
+            <li>Is capacitive touch required?</li>
+            <li>Does the operator need to use gloves?</li>
+            <li>Does the application require wet-finger operation?</li>
+            <li>Has the touchscreen been tested in the actual vehicle environment?</li>
+            <li>Are the touch and video interfaces compatible with the customer's system?</li>
+        </ol>
+
+        <h2>13. The Main Lesson</h2>
+
+        <p>
+            Touch should not be added simply because a touchscreen looks more advanced.
+        </p>
+
+        <p>
+            The correct approach is to start from the system and the driver's operation.
+        </p>
+
+        <p>
+            <strong>
+                Application → SVM Architecture → HMI Requirement → Touch Technology → Interface → Monitor
+            </strong>
+        </p>
+
+        <p>
+            If the monitor only needs to display the SVM image,
+            touch may add unnecessary complexity.
+        </p>
+
+        <p>
+            But if the driver needs to interact with the SVM system,
+            then the touchscreen becomes an important part of the HMI.
+        </p>
+
+        <p>
+            At that point, USB Touch, UART Touch, capacitive sensing,
+            glove operation and wet-finger performance should all be considered
+            as part of the complete system rather than as isolated monitor specifications.
+        </p>
+
+        <div class="related">
+            <h2>Related Articles</h2>
+
+            <ul>
+                <li>
+                    <a href="monitor-as-hmi-in-svm-system.html">
+                        Why Is the Monitor More Than a Display Device in an SVM System?
+                    </a>
+                </li>
+
+                <li>
+                    <a href="why-svm-avm-needs-proper-display-interface.html">
+                        Why Does an SVM / AVM System Need a Proper Display Interface?
+                    </a>
+                </li>
+
+                <li>
+                    <a href="5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html">
+                        5 Things to Check When Connecting an SVM Box to a Vehicle Monitor
+                    </a>
+                </li>
+
+                <li>
+                    <a href="hdmi-vs-ahd-vehicle-camera-system.html">
+                        HDMI vs AHD for Vehicle Camera Systems: What Is the Difference?
+                    </a>
+                </li>
+
+                <li>
+                    <a href="1920x1080-vs-1024x600.html">
+                        1920×1080 vs 1024×600: Which Resolution Is Better for Vehicle Monitors?
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </article>
+</main>
+
+<footer>
+    © 2026 Jacky Liu · Vehicle Monitor · Vehicle Safety · SVM / AVM
+</footer>
+
+</body>
+</html>
