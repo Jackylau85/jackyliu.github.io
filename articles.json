@@ -49,6 +49,13 @@
     "url": "why-vehicle-camera-image-quality-changes-after-installation.html"
   },
   {
+    "title": "Why Can Cables Matter More Than the Power Supply in a Vehicle Monitor?",
+    "description": "In vehicle monitor systems, the power supply is important, but cables, connectors, voltage drop, grounding, shielding and cable routing can sometimes have an even greater impact on system stability.",
+    "category": "Technical Insight · Vehicle Monitor / Wiring",
+    "date": "September 29, 2026",
+    "url": "why-cables-can-matter-more-than-power-supply.html"
+  },
+  {
     "title": "How to Choose a Vehicle Monitor for SVM / AVM Systems?",
     "description": "A practical guide to choosing a vehicle monitor for SVM and AVM systems, including resolution, input compatibility, brightness, trigger control, touch and installation conditions.",
     "category": "Technical Guide · SVM / AVM",
