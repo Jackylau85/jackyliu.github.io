@@ -235,6 +235,35 @@
             font-size: 13px;
         }
 
+        /* Article expand / collapse button */
+
+        .article-toggle-wrapper {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .article-toggle {
+            display: inline-block;
+            padding: 11px 22px;
+            border: 1px solid #4b5563;
+            border-radius: 8px;
+            background: transparent;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .2s ease, border-color .2s ease;
+        }
+
+        .article-toggle:hover {
+            background: #1f2937;
+            border-color: #6b7280;
+        }
+
+        .article-hidden {
+            display: none;
+        }
+
         @media (max-width: 800px) {
             .grid {
                 grid-template-columns: 1fr;
@@ -406,6 +435,18 @@
             <div class="card">
                 <p>Loading articles...</p>
             </div>
+
+        </div>
+
+        <div id="article-toggle-wrapper"
+             class="article-toggle-wrapper"
+             style="display: none;">
+
+            <button id="article-toggle"
+                    class="article-toggle"
+                    type="button">
+                View More Articles
+            </button>
 
         </div>
 
@@ -623,6 +664,8 @@
 async function loadArticles() {
 
     const articleList = document.getElementById("article-list");
+    const toggleWrapper = document.getElementById("article-toggle-wrapper");
+    const toggleButton = document.getElementById("article-toggle");
 
     try {
 
@@ -647,11 +690,22 @@ async function loadArticles() {
             return;
         }
 
-        articles.forEach(article => {
+        articles.forEach((article, index) => {
 
             const card = document.createElement("a");
 
             card.className = "card";
+
+            /*
+                Show only the newest 4 articles by default.
+                Older articles remain on the page but are hidden
+                until the visitor clicks "View More Articles".
+            */
+
+            if (index >= 4) {
+                card.classList.add("article-hidden");
+            }
+
             card.href = article.url;
 
             const dateHTML = article.date
@@ -659,7 +713,9 @@ async function loadArticles() {
                 : "";
 
             card.innerHTML = `
-                <div class="tag">${article.category || "Technical Insight"}</div>
+                <div class="tag">
+                    ${article.category || "Technical Insight"}
+                </div>
 
                 <h3>${article.title}</h3>
 
@@ -677,6 +733,41 @@ async function loadArticles() {
             articleList.appendChild(card);
 
         });
+
+
+        /*
+            Only show the toggle button when there are
+            more than 4 articles.
+        */
+
+        if (articles.length > 4) {
+
+            toggleWrapper.style.display = "block";
+
+            let expanded = false;
+
+            toggleButton.addEventListener("click", function () {
+
+                const hiddenArticles =
+                    articleList.querySelectorAll(".article-hidden");
+
+                expanded = !expanded;
+
+                hiddenArticles.forEach(article => {
+
+                    article.style.display =
+                        expanded ? "block" : "none";
+
+                });
+
+                toggleButton.textContent =
+                    expanded
+                        ? "Show Less"
+                        : "View More Articles";
+
+            });
+
+        }
 
     } catch (error) {
 
