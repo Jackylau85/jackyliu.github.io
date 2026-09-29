@@ -697,12 +697,12 @@ async function loadArticles() {
             card.className = "card";
 
             /*
-                Show only the newest 4 articles by default.
+                Show only the newest 3 articles by default.
                 Older articles remain on the page but are hidden
                 until the visitor clicks "View More Articles".
             */
 
-            if (index >= 4) {
+            if (index >= 3) {
                 card.classList.add("article-hidden");
             }
 
@@ -737,10 +737,10 @@ async function loadArticles() {
 
         /*
             Only show the toggle button when there are
-            more than 4 articles.
+            more than 3 articles.
         */
 
-        if (articles.length > 4) {
+        if (articles.length > 3) {
 
             toggleWrapper.style.display = "block";
 
