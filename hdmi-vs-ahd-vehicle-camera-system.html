@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HDMI vs AHD for Vehicle Camera Systems: What Is the Difference? | Jacky Liu</title>
+
+    <meta name="description"
+          content="HDMI vs AHD for vehicle camera systems. Learn how HDMI and AHD differ in signal transmission, system structure, cable requirements, display compatibility and SVM / AVM applications.">
+
+    <meta name="keywords"
+          content="HDMI vs AHD, vehicle camera system, AHD camera, HDMI camera, vehicle monitor, SVM, AVM, vehicle display, AHD monitor">
+
+    <meta name="author" content="Jacky Liu">
+
+    <link rel="canonical"
+          href="https://jackylau85.github.io/jackyliu.github.io/hdmi-vs-ahd-vehicle-camera-system.html">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8fa;
+            color: #222;
+            line-height: 1.8;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(900px, 92%);
+            margin: auto;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .back {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        .article-header {
+            padding: 80px 0 50px;
+        }
+
+        .category {
+            font-size: 13px;
+            font-weight: 700;
+            color: #6b7280;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        h1 {
+            font-size: clamp(36px, 6vw, 56px);
+            line-height: 1.15;
+            margin: 0 0 20px;
+            color: #111827;
+        }
+
+        .meta {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        article {
+            background: white;
+            padding: 45px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 70px;
+        }
+
+        article h2 {
+            font-size: 28px;
+            margin-top: 45px;
+            margin-bottom: 15px;
+            color: #111827;
+        }
+
+        article h3 {
+            font-size: 21px;
+            margin-top: 30px;
+            color: #111827;
+        }
+
+        article p {
+            margin: 0 0 20px;
+        }
+
+        article ul {
+            padding-left: 25px;
+        }
+
+        article li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: #f3f4f6;
+            border-left: 4px solid #111827;
+            padding: 20px 22px;
+            margin: 30px 0;
+        }
+
+        .comparison {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+
+        .comparison th,
+        .comparison td {
+            border: 1px solid #e5e7eb;
+            padding: 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .comparison th {
+            background: #f3f4f6;
+            font-weight: 700;
+        }
+
+        .conclusion {
+            background: #111827;
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .conclusion h2 {
+            color: white;
+            margin-top: 0;
+        }
+
+        footer {
+            background: #0b1120;
+            color: #9ca3af;
+            padding: 30px 0;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+
+            article {
+                padding: 28px 22px;
+            }
+
+            .article-header {
+                padding: 60px 0 35px;
+            }
+
+            article h2 {
+                font-size: 24px;
+            }
+
+            .comparison {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="container header-inner">
+
+        <div class="logo">
+            Jacky Liu
+        </div>
+
+        <a class="back"
+           href="index.html">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</header>
+
+
+<section class="article-header">
+
+    <div class="container">
+
+        <div class="category">
+            Technical Guide · Vehicle Monitor / SVM / AVM
+        </div>
+
+        <h1>
+            HDMI vs AHD for Vehicle Camera Systems:
+            What Is the Difference?
+        </h1>
+
+        <div class="meta">
+            By Jacky Liu · September 29, 2026
+        </div>
+
+    </div>
+
+</section>
+
+
+<main class="container">
+
+<article>
+
+    <p>
+        When people talk about vehicle camera systems,
+        HDMI and AHD are sometimes treated simply as two
+        different ways of transmitting high-definition video.
+    </p>
+
+    <p>
+        In practice, the difference is more important than that.
+        HDMI and AHD usually appear in different system structures,
+        use different transmission methods and create different
+        requirements for cameras, displays, cables and control units.
+    </p>
+
+    <p>
+        For an SVM, AVM or multi-camera vehicle system,
+        choosing the interface should therefore start with the
+        complete system architecture rather than the word
+        "HD" on a specification sheet.
+    </p>
+
+
+    <div class="highlight">
+
+        <strong>
+            The main point:
+        </strong>
+
+        A higher-definition signal does not automatically mean
+        HDMI is better than AHD, or that AHD is better than HDMI.
+        The right interface depends on how the complete vehicle
+        camera system is designed.
+
+    </div>
+
+
+    <h2>
+        1. What Is AHD?
+    </h2>
+
+    <p>
+        AHD, or Analog High Definition, is a video transmission
+        technology commonly used in vehicle camera systems and
+        other surveillance applications.
+    </p>
+
+    <p>
+        AHD cameras normally send high-definition video through
+        a physical video cable to a compatible monitor, DVR or
+        video processing device.
+    </p>
+
+    <p>
+        One of the practical characteristics of AHD is that the
+        camera and display system can be relatively straightforward.
+        For vehicle applications, this can be useful when several
+        cameras need to be connected over dedicated cable runs.
+    </p>
+
+    <h3>
+        Typical vehicle application
+    </h3>
+
+    <ul>
+
+        <li>
+            Rear-view camera systems
+        </li>
+
+        <li>
+            Multi-camera vehicle monitoring
+        </li>
+
+        <li>
+            Construction equipment
+        </li>
+
+        <li>
+            Trucks and buses
+        </li>
+
+        <li>
+            Mining vehicles
+        </li>
+
+        <li>
+            SVM / AVM systems using compatible video processing
+        </li>
+
+    </ul>
+
+
+    <h2>
+        2. What Is HDMI?
+    </h2>
+
+    <p>
+        HDMI is a digital interface designed to transmit
+        digital video and audio.
+    </p>
+
+    <p>
+        In vehicle electronics, HDMI can be used between a
+        camera processing unit, SVM box, AVM controller,
+        multimedia system or other video source and a display.
+    </p>
+
+    <p>
+        A vehicle monitor with an HDMI input can therefore
+        act as the display interface for a digital video
+        processing system.
+    </p>
+
+    <p>
+        This is particularly relevant when the image processing
+        is performed inside another device rather than inside
+        the monitor itself.
+    </p>
+
+
+    <h2>
+        3. HDMI and AHD Are Not Simply "Better" or "Worse"
+    </h2>
+
+    <p>
+        A common mistake is to compare HDMI and AHD only by
+        image resolution.
+    </p>
+
+    <p>
+        For example, someone may see a 1920×1080 HDMI system
+        and assume that HDMI must always provide a better
+        solution than an AHD system.
+    </p>
+
+    <p>
+        That conclusion is too simple.
+    </p>
+
+    <p>
+        The camera resolution, image processor, transmission
+        distance, cable, connector, monitor input and overall
+        system architecture all affect the final result.
+    </p>
+
+
+    <table class="comparison">
+
+        <thead>
+
+            <tr>
+                <th>Item</th>
+                <th>AHD</th>
+                <th>HDMI</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>Signal type</td>
+                <td>Analog high-definition video</td>
+                <td>Digital video</td>
+            </tr>
+
+            <tr>
+                <td>Typical role</td>
+                <td>Camera-to-monitor / DVR transmission</td>
+                <td>Processor / SVM box-to-display transmission</td>
+            </tr>
+
+            <tr>
+                <td>Vehicle camera systems</td>
+                <td>Common</td>
+                <td>Depends on system architecture</td>
+            </tr>
+
+            <tr>
+                <td>Multi-camera applications</td>
+                <td>Common with compatible monitor / DVR systems</td>
+                <td>Usually requires a processing unit before display</td>
+            </tr>
+
+            <tr>
+                <td>System structure</td>
+                <td>Can be relatively direct</td>
+                <td>Often part of a digital processing architecture</td>
+            </tr>
+
+            <tr>
+                <td>Display requirement</td>
+                <td>Compatible AHD input</td>
+                <td>HDMI input</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+    <h2>
+        4. The Most Important Question:
+        Where Is the Image Processing Done?
+    </h2>
+
+    <p>
+        For SVM and AVM systems, this is often more important
+        than simply asking whether the monitor supports HDMI
+        or AHD.
+    </p>
+
+    <p>
+        If the SVM box receives multiple camera inputs,
+        performs image stitching and produces one processed
+        video output, the monitor may only need to receive
+        the final processed image.
+    </p>
+
+    <p>
+        In that type of architecture, HDMI can be a practical
+        interface between the SVM box and the display.
+    </p>
+
+    <p>
+        In another system, the monitor may receive several
+        camera signals directly and perform switching or
+        display control itself.
+    </p>
+
+    <p>
+        In that situation, multiple AHD inputs can be useful.
+    </p>
+
+
+    <div class="highlight">
+
+        <strong>
+            Before selecting the monitor, ask:
+        </strong>
+
+        <br><br>
+
+        Where does the camera signal go first?
+
+        <br>
+
+        Camera → Monitor?
+
+        <br>
+
+        Or Camera → SVM / AVM Box → Monitor?
+
+    </div>
+
+
+    <h2>
+        5. Why This Matters for SVM / AVM
+    </h2>
+
+    <p>
+        An SVM or AVM system is not simply a monitor with
+        four cameras.
+    </p>
+
+    <p>
+        The system may include cameras, a stitching or processing
+        unit, display, touch interface, trigger signals,
+        power supply and communication interfaces.
+    </p>
+
+    <p>
+        Therefore, the monitor interface should be selected
+        according to the output of the processing system.
+    </p>
+
+    <p>
+        For example, if an SVM box outputs HDMI, a monitor
+        with an HDMI input can provide a straightforward
+        display interface.
+    </p>
+
+    <p>
+        If a vehicle camera system uses four AHD cameras
+        directly connected to a display or DVR system,
+        an AHD monitor may be more appropriate.
+    </p>
+
+
+    <h2>
+        6. Cable and Installation Conditions Still Matter
+    </h2>
+
+    <p>
+        The interface is only one part of the system.
+    </p>
+
+    <p>
+        Vehicle installations introduce conditions that are
+        not always present during laboratory testing.
+    </p>
+
+    <ul>
+
+        <li>
+            Long cable runs
+        </li>
+
+        <li>
+            Electrical noise
+        </li>
+
+        <li>
+            Grounding differences
+        </li>
+
+        <li>
+            Voltage fluctuations
+        </li>
+
+        <li>
+            Connector vibration
+        </li>
+
+        <li>
+            Routing near power cables
+        </li>
+
+        <li>
+            Temperature changes
+        </li>
+
+    </ul>
+
+    <p>
+        A video interface that works correctly on a bench
+        should still be tested under the actual installation
+        conditions.
+    </p>
+
+
+    <h2>
+        7. Don't Choose the Monitor Before Understanding
+        the Complete System
+    </h2>
+
+    <p>
+        In real projects, customers sometimes start with a
+        simple requirement such as:
+    </p>
+
+    <div class="highlight">
+
+        "We need a 10.1-inch Full HD monitor."
+
+    </div>
+
+    <p>
+        That specification is useful, but it is not enough
+        to select the correct display.
+    </p>
+
+    <p>
+        The next questions should include:
+    </p>
+
+    <ul>
+
+        <li>
+            What is the camera resolution?
+        </li>
+
+        <li>
+            Is the camera output AHD, CVBS or another format?
+        </li>
+
+        <li>
+            Is there an SVM / AVM processing box?
+        </li>
+
+        <li>
+            What is the output interface of the processing box?
+        </li>
+
+        <li>
+            How many camera channels are required?
+        </li>
+
+        <li>
+            What is the cable length?
+        </li>
+
+        <li>
+            Is touch control required?
+        </li>
+
+        <li>
+            Is the monitor installed inside a cab or exposed
+            to outdoor conditions?
+        </li>
+
+    </ul>
+
+
+    <h2>
+        8. The Display Is Only One Part of the System
+    </h2>
+
+    <p>
+        A vehicle monitor can have an excellent panel and
+        still provide a poor system result if the input signal,
+        camera or processing unit does not match.
+    </p>
+
+    <p>
+        This is why I prefer to look at vehicle displays from
+        the system perspective.
+    </p>
+
+    <p>
+        The correct question is not:
+    </p>
+
+    <div class="highlight">
+
+        <strong>
+            "Which interface is better?"
+        </strong>
+
+    </div>
+
+    <p>
+        A more useful question is:
+    </p>
+
+    <div class="highlight">
+
+        <strong>
+            "Which interface fits the architecture of this
+            vehicle camera system?"
+        </strong>
+
+    </div>
+
+
+    <div class="conclusion">
+
+        <h2>
+            Main Lesson
+        </h2>
+
+        <p>
+            HDMI and AHD serve different roles in vehicle
+            camera systems.
+        </p>
+
+        <p>
+            AHD can be practical for direct camera video
+            transmission and multi-camera vehicle applications,
+            while HDMI can be useful when a digital processing
+            unit such as an SVM / AVM box provides the final
+            video output to the display.
+        </p>
+
+        <p>
+            The right choice should therefore be based on the
+            complete system architecture, including cameras,
+            processing, display, cables, connectors and
+            installation conditions.
+        </p>
+
+        <p>
+            <strong>
+                Start with the system. Then choose the interface.
+            </strong>
+        </p>
+
+    </div>
+
+</article>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+
+        © 2026 Jacky Liu. All rights reserved.
+
+    </div>
+
+</footer>
+
+</body>
+</html>
