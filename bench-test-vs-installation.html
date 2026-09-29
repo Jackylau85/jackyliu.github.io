@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation? | Jacky Liu</title>
+
+    <meta name="description" content="Why can a vehicle monitor work perfectly on the bench but fail after installation? A practical look at power supply, grounding, voltage drop, EMI, wiring and signal compatibility.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+            background: #f5f5f5;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 22px 0;
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 14px;
+        }
+
+        .hero {
+            background: #171717;
+            color: white;
+            padding: 90px 24px;
+        }
+
+        .hero-inner {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .category {
+            font-size: 14px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: 46px;
+            line-height: 1.15;
+            margin: 0 0 24px;
+        }
+
+        .intro {
+            font-size: 19px;
+            color: #ccc;
+            max-width: 760px;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 24px;
+        }
+
+        article {
+            background: white;
+            padding: 50px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-top: 50px;
+            margin-bottom: 18px;
+            color: #111;
+        }
+
+        h3 {
+            font-size: 21px;
+            margin-top: 32px;
+            color: #222;
+        }
+
+        p {
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .highlight {
+            background: #f1f1f1;
+            border-left: 4px solid #111;
+            padding: 20px 24px;
+            margin: 30px 0;
+        }
+
+        .checklist {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .author {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #ddd;
+            color: #555;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            color: #111;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 34px;
+            }
+
+            article {
+                padding: 28px 22px;
+            }
+
+            .hero {
+                padding: 60px 24px;
+            }
+
+            .nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav a {
+                margin-left: 12px;
+                margin-right: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+        <div class="logo">JACKY LIU</div>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="index.html#insights">Insights</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </div>
+</header>
+
+
+<section class="hero">
+    <div class="hero-inner">
+
+        <div class="category">
+            Technical Insight · Vehicle Monitor
+        </div>
+
+        <h1>
+            Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?
+        </h1>
+
+        <div class="intro">
+            A vehicle monitor may work perfectly during a bench test and still show a black screen, flickering image, intermittent signal or unexpected reboot after installation.
+            The difference is usually not the monitor itself. The real problem is often the installation environment.
+        </div>
+
+    </div>
+</section>
+
+
+<main class="content">
+
+<article>
+
+    <p>
+        One of the most common situations in vehicle electronics is surprisingly simple:
+        the monitor works perfectly in the workshop, but something changes after it is installed on the vehicle.
+    </p>
+
+    <p>
+        The image may suddenly become unstable. The monitor may restart.
+        The camera signal may disappear intermittently.
+        Touch control may become unreliable.
+        In some cases, everything works when the vehicle is stationary but becomes unstable after the engine starts.
+    </p>
+
+    <p>
+        This is why a bench test is important, but it is not the final test.
+        A vehicle creates a much more complicated electrical and electromagnetic environment.
+    </p>
+
+
+    <h2>1. Power Supply Is Different on a Real Vehicle</h2>
+
+    <p>
+        On a workbench, a monitor is often powered by a stable laboratory power supply.
+        The voltage is clean and the wiring is short.
+    </p>
+
+    <p>
+        A vehicle is different.
+        The power system can contain voltage fluctuations, electrical noise, transient conditions and long wiring paths.
+    </p>
+
+    <div class="highlight">
+        A monitor that works correctly at a stable 12 V or 24 V bench supply may behave differently when connected to the actual vehicle power system.
+    </div>
+
+    <p>
+        When troubleshooting a field installation, it is therefore important to measure the actual voltage at the monitor connector, not only the nominal vehicle voltage.
+    </p>
+
+
+    <h2>2. Voltage Drop Can Become a Hidden Problem</h2>
+
+    <p>
+        Long cables, small wire gauges, connectors and additional connection points can introduce voltage drop.
+    </p>
+
+    <p>
+        The vehicle battery may provide sufficient voltage, but the voltage measured at the monitor can be lower,
+        especially when other electrical loads are operating.
+    </p>
+
+    <p>
+        This is one reason cable selection and connection design should be considered as part of the monitor system rather than as a separate accessory.
+    </p>
+
+
+    <h2>3. Grounding Matters</h2>
+
+    <p>
+        Grounding problems can create symptoms that are difficult to reproduce on a bench.
+    </p>
+
+    <p>
+        Depending on the vehicle architecture, poor grounding or different ground references between devices can contribute to image interference,
+        unstable signals or unexpected behavior.
+    </p>
+
+    <p>
+        When a system contains several devices — for example, cameras, monitors, DVRs and other electronic equipment —
+        the complete grounding architecture should be considered.
+    </p>
+
+
+    <h2>4. EMI Can Appear Only After Installation</h2>
+
+    <p>
+        Electromagnetic interference is another important difference between a bench test and a vehicle installation.
+    </p>
+
+    <p>
+        On the bench, the monitor and camera may be separated from motors, alternators, relays and other electrical equipment.
+        Inside a vehicle, these devices can be physically much closer.
+    </p>
+
+    <p>
+        When the engine starts or other equipment begins operating, the electrical environment can change significantly.
+    </p>
+
+    <p>
+        This is why a system that looks perfect during a static test may show noise, flickering or intermittent signal problems during actual operation.
+    </p>
+
+
+    <h2>5. Cable and Connector Problems Are Easy to Overlook</h2>
+
+    <p>
+        The monitor and camera may both be functioning correctly, but the connection between them may not be reliable.
+    </p>
+
+    <p>
+        Cable length, shielding, connector quality, pin assignment, grounding and mechanical installation can all influence system performance.
+    </p>
+
+    <p>
+        In vehicle applications, connectors also have to deal with vibration, temperature changes, moisture and repeated mechanical stress.
+    </p>
+
+
+    <h2>6. Signal Compatibility Is More Than Resolution</h2>
+
+    <p>
+        A monitor may support the required resolution but still not work correctly with a particular camera or vehicle vision system.
+    </p>
+
+    <p>
+        For example, the system design may need to consider the video input type, signal format,
+        trigger control, switching logic and compatibility between the camera, monitor and recording equipment.
+    </p>
+
+    <p>
+        This is particularly important in multi-camera SVM and AVM applications.
+    </p>
+
+
+    <h2>7. Bench Testing Should Simulate the Real Application</h2>
+
+    <p>
+        A better approach is to gradually make the bench test more similar to the real installation.
+    </p>
+
+    <p>
+        Instead of testing only the monitor by itself, test the complete system:
+    </p>
+
+    <ul>
+        <li>Actual camera</li>
+        <li>Actual cable length</li>
+        <li>Actual connector structure</li>
+        <li>Actual power supply conditions</li>
+        <li>Trigger signals</li>
+        <li>DVR or SVM/AVM equipment</li>
+        <li>Touch interface, if used</li>
+    </ul>
+
+
+    <h2>Practical Installation Checklist</h2>
+
+    <div class="checklist">
+
+        <ul>
+            <li>Measure voltage directly at the monitor input.</li>
+            <li>Check voltage during engine start and normal operation.</li>
+            <li>Check grounding between the camera and monitor system.</li>
+            <li>Inspect connectors and pin assignments.</li>
+            <li>Check cable length and cable construction.</li>
+            <li>Test the system with the engine running.</li>
+            <li>Test other electrical equipment operating at the same time.</li>
+            <li>Check whether the video signal is stable under actual installation conditions.</li>
+        </ul>
+
+    </div>
+
+
+    <h2>The Main Lesson</h2>
+
+    <p>
+        A vehicle monitor is not working alone.
+        Its real-world performance depends on the complete electrical and connection environment around it.
+    </p>
+
+    <p>
+        That means monitor selection, camera compatibility, power supply, grounding, wiring,
+        connectors and installation conditions should be considered as one system.
+    </p>
+
+    <div class="highlight">
+        <strong>Bench testing tells you whether the product works.</strong><br>
+        <strong>Installation testing tells you whether the system works.</strong>
+    </div>
+
+
+    <div class="author">
+
+        <strong>About Jacky Liu</strong>
+
+        <p>
+            I work in business development for vehicle electronics and safety products,
+            with a focus on vehicle monitors, camera systems, SVM/AVM applications
+            and low-voltage connectivity.
+        </p>
+
+        <p>
+            Through working with vehicle electronics companies and system integrators,
+            I focus on practical product requirements, installation challenges and hardware solutions.
+        </p>
+
+        <p>
+            This website is my personal knowledge space for sharing practical observations
+            about vehicle displays, vehicle vision and safety systems.
+        </p>
+
+    </div>
+
+    <a class="back" href="index.html">
+        ← Back to Home
+    </a>
+
+</article>
+
+</main>
+
+
+<footer>
+    © 2026 Jacky Liu. All rights reserved.
+</footer>
+
+</body>
+</html>
