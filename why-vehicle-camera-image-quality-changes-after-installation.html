@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Why Does a Vehicle Camera Image Look Good in the Factory but Poor After Installation? | Jacky Liu</title>
+
+    <meta name="description"
+          content="Why can a vehicle camera image look clear during testing but become noisy, unstable or darker after installation? A practical look at cables, power, grounding, EMI, connectors and installation conditions.">
+
+    <meta name="keywords"
+          content="vehicle camera image quality, vehicle camera system, vehicle camera installation, AHD camera, vehicle monitor, camera noise, camera signal, vehicle safety camera">
+
+    <meta name="author" content="Jacky Liu">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical"
+          href="https://jackylau85.github.io/jackyliu.github.io/why-vehicle-camera-image-quality-changes-after-installation.html">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8fa;
+            color: #222;
+            line-height: 1.8;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(900px, 92%);
+            margin: auto;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .back {
+            color: #d1d5db;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        article {
+            background: white;
+            margin: 50px auto;
+            padding: 55px 65px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .category {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(34px, 5vw, 50px);
+            line-height: 1.2;
+            margin: 0 0 20px;
+        }
+
+        .meta {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 28px;
+            line-height: 1.3;
+            margin-top: 48px;
+            margin-bottom: 18px;
+        }
+
+        h3 {
+            font-size: 21px;
+            margin-top: 32px;
+        }
+
+        p {
+            margin: 0 0 20px;
+        }
+
+        ul {
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: #f3f4f6;
+            border-left: 4px solid #111827;
+            padding: 20px 24px;
+            margin: 30px 0;
+        }
+
+        .problem-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin: 30px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        .related {
+            margin-top: 55px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .related a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .related a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #0b1120;
+            color: #9ca3af;
+            padding: 30px 0;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            article {
+                padding: 35px 25px;
+                margin: 25px auto;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            h2 {
+                font-size: 25px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container header-inner">
+
+        <div class="logo">
+            Jacky Liu
+        </div>
+
+        <a class="back"
+           href="index.html">
+            ← Back to Home
+        </a>
+
+    </div>
+</header>
+
+
+<main class="container">
+
+    <article>
+
+        <div class="category">
+            Technical Insight · Vehicle Camera System
+        </div>
+
+        <h1>
+            Why Does a Vehicle Camera Image Look Good in the Factory but Poor After Installation?
+        </h1>
+
+        <div class="meta">
+            By Jacky Liu · September 29, 2026
+        </div>
+
+
+        <p>
+            A vehicle camera can produce a very clear image during
+            factory testing and then show a completely different image
+            after it is installed on the vehicle.
+        </p>
+
+        <p>
+            The image may become noisy, unstable, darker or less clear.
+            Sometimes the problem appears only when the engine is running.
+        </p>
+
+        <p>
+            This can be confusing because the camera itself may not have
+            changed at all.
+        </p>
+
+        <p>
+            In many cases, the difference comes from the complete vehicle
+            environment rather than from the camera alone.
+        </p>
+
+
+        <div class="highlight">
+
+            <strong>
+                A vehicle camera system is not only a camera.
+            </strong>
+
+            <br><br>
+
+            Camera + Power + Grounding + Cable + Connector + Display
+            + Installation Environment
+
+        </div>
+
+
+        <h2>
+            1. Factory Testing Is Usually a Clean Environment
+        </h2>
+
+        <p>
+            During factory testing, a camera is often connected to a
+            short cable and a stable power supply.
+        </p>
+
+        <p>
+            The monitor may be placed close to the camera, and the whole
+            system may be sitting on a test bench.
+        </p>
+
+        <p>
+            This is useful for checking whether the product itself works,
+            but it does not reproduce all of the conditions inside a
+            real vehicle.
+        </p>
+
+        <p>
+            Once the system is installed, the cable may become several
+            meters long and may run through areas containing motors,
+            relays, power cables and other electrical equipment.
+        </p>
+
+
+        <h2>
+            2. Cable Length Can Change the Result
+        </h2>
+
+        <p>
+            One of the first things I check when an installed camera
+            system behaves differently is the cable.
+        </p>
+
+        <p>
+            A short cable on the test bench may work perfectly.
+            The production installation may require a much longer cable.
+        </p>
+
+        <p>
+            The longer connection creates a different electrical
+            environment for the video signal.
+        </p>
+
+        <p>
+            Cable construction, shielding, connector quality and routing
+            can all become important.
+        </p>
+
+        <div class="problem-box">
+
+            <strong>
+                Typical difference:
+            </strong>
+
+            <ul>
+
+                <li>
+                    Factory: short cable and controlled environment
+                </li>
+
+                <li>
+                    Vehicle: longer cable and more complex routing
+                </li>
+
+                <li>
+                    Result: different signal conditions
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <h2>
+            3. Grounding Can Affect the Image
+        </h2>
+
+        <p>
+            Grounding is another area that is easy to overlook.
+        </p>
+
+        <p>
+            The camera, monitor and vehicle electrical system need to
+            work together as one electrical system.
+        </p>
+
+        <p>
+            If the grounding conditions are different between the
+            factory test and the actual vehicle installation, the image
+            can also behave differently.
+        </p>
+
+        <p>
+            Depending on the system, poor grounding or ground potential
+            differences may contribute to visible image interference,
+            noise or instability.
+        </p>
+
+        <p>
+            This is one reason why changing the camera or monitor
+            immediately is not always the correct first step.
+        </p>
+
+
+        <h2>
+            4. The Engine Changes the Electrical Environment
+        </h2>
+
+        <p>
+            Another common situation is:
+        </p>
+
+        <p>
+            <strong>
+                The camera looks good when the vehicle is off, but the
+                image changes after the engine starts.
+            </strong>
+        </p>
+
+        <p>
+            The reason is that the electrical environment of the vehicle
+            has changed.
+        </p>
+
+        <p>
+            Alternators, motors, relays and other electrical loads can
+            introduce different electrical conditions compared with a
+            laboratory or bench power supply.
+        </p>
+
+        <p>
+            If a problem appears only after the engine starts, I would
+            investigate the vehicle power and grounding conditions before
+            assuming that the camera has failed.
+        </p>
+
+
+        <h2>
+            5. EMI Can Enter Through the Installation
+        </h2>
+
+        <p>
+            Vehicle installations can contain many potential sources of
+            electromagnetic interference.
+        </p>
+
+        <p>
+            Video cables may run close to power cables, motors or other
+            electrical components.
+        </p>
+
+        <p>
+            The way cables are routed can therefore matter.
+        </p>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Situation</th>
+                    <th>Possible Concern</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>
+                        Video cable runs close to high-current wiring
+                    </td>
+
+                    <td>
+                        Increased possibility of electrical interference
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Poor cable shielding
+                    </td>
+
+                    <td>
+                        Reduced protection against external noise
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Poor connector contact
+                    </td>
+
+                    <td>
+                        Intermittent or unstable signal connection
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Different grounding arrangement
+                    </td>
+
+                    <td>
+                        Possible image noise or instability
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+        <h2>
+            6. Connector Quality Matters More Than It Looks
+        </h2>
+
+        <p>
+            In a vehicle environment, connectors are exposed to vibration,
+            temperature changes, moisture and repeated mechanical stress.
+        </p>
+
+        <p>
+            A connector that works during a short laboratory test may
+            behave differently after long-term installation.
+        </p>
+
+        <p>
+            This is particularly important for camera systems because the
+            video signal must remain stable while the vehicle is moving.
+        </p>
+
+        <p>
+            Connector selection should therefore consider the actual
+            vehicle application rather than only whether the connector
+            can carry the signal.
+        </p>
+
+
+        <h2>
+            7. Power Supply Is Part of the Camera System
+        </h2>
+
+        <p>
+            A camera may be specified for a certain voltage range, but
+            the actual voltage seen by the camera can depend on the
+            vehicle wiring and installation.
+        </p>
+
+        <p>
+            Voltage drop can occur across long cables, connectors,
+            switches and other components.
+        </p>
+
+        <p>
+            This means that checking the voltage at the power source is
+            not always enough.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                Check the voltage where the camera actually receives
+                power.
+            </strong>
+
+            <br><br>
+
+            Source voltage ≠ necessarily camera input voltage
+
+        </div>
+
+
+        <h2>
+            8. Camera and Monitor Compatibility Still Matters
+        </h2>
+
+        <p>
+            Not every image problem is caused by installation.
+        </p>
+
+        <p>
+            The camera and monitor also need to support compatible video
+            formats and signal requirements.
+        </p>
+
+        <p>
+            For example, the system may involve different resolutions,
+            video standards or input interfaces.
+        </p>
+
+        <p>
+            A camera can be working correctly while the display system is
+            not interpreting the signal in the way the application
+            requires.
+        </p>
+
+        <p>
+            This is why I prefer to look at the complete video chain:
+        </p>
+
+        <div class="highlight">
+
+            Camera → Cable → Interface → Display
+
+        </div>
+
+        <p>
+            If there is an SVM / AVM processor in the system, the chain
+            becomes:
+        </p>
+
+        <div class="highlight">
+
+            Camera → Cable → SVM / AVM Processor → Display Interface → Monitor
+
+        </div>
+
+
+        <h2>
+            9. How I Would Troubleshoot the Problem
+        </h2>
+
+        <p>
+            When a camera image is good on the bench but poor after
+            installation, I would not immediately replace the camera.
+        </p>
+
+        <p>
+            I would compare the factory condition with the vehicle
+            condition step by step.
+        </p>
+
+        <div class="problem-box">
+
+            <strong>
+                Practical troubleshooting checklist:
+            </strong>
+
+            <ul>
+
+                <li>
+                    Test the camera with the original short cable.
+                </li>
+
+                <li>
+                    Test the complete production cable.
+                </li>
+
+                <li>
+                    Measure voltage at the camera.
+                </li>
+
+                <li>
+                    Check the grounding arrangement.
+                </li>
+
+                <li>
+                    Check whether the problem appears only when the
+                    engine is running.
+                </li>
+
+                <li>
+                    Check cable routing near power cables and motors.
+                </li>
+
+                <li>
+                    Inspect connectors and terminals.
+                </li>
+
+                <li>
+                    Test another known-good display or cable.
+                </li>
+
+                <li>
+                    Confirm camera and display signal compatibility.
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <h2>
+            10. The Most Important Lesson
+        </h2>
+
+        <p>
+            One of the biggest mistakes in vehicle electronics is
+            testing each component separately and assuming that the
+            final vehicle system will behave in exactly the same way.
+        </p>
+
+        <p>
+            A camera can work correctly.
+        </p>
+
+        <p>
+            A monitor can work correctly.
+        </p>
+
+        <p>
+            A cable can also work correctly during a simple test.
+        </p>
+
+        <p>
+            But the complete system can still have a problem after
+            installation.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                The real test is not only whether each component works.
+            </strong>
+
+            <br><br>
+
+            The real test is whether the complete system remains stable
+            under actual vehicle conditions.
+
+        </div>
+
+
+        <h2>
+            Conclusion
+        </h2>
+
+        <p>
+            When a vehicle camera image looks good in the factory but
+            poor after installation, the camera itself is not necessarily
+            the problem.
+        </p>
+
+        <p>
+            Cable length, grounding, power supply, EMI, connectors,
+            signal compatibility and installation routing can all change
+            the final result.
+        </p>
+
+        <p>
+            This is why vehicle camera systems should be tested not only
+            on the bench, but also under realistic installation
+            conditions.
+        </p>
+
+        <p>
+            For me, the most useful way to look at a vehicle camera
+            problem is to consider the complete signal and power chain,
+            rather than focusing on one component.
+        </p>
+
+
+        <div class="related">
+
+            <h2>
+                Related Articles
+            </h2>
+
+            <p>
+                <a href="bench-test-vs-installation.html">
+                    Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?
+                </a>
+            </p>
+
+            <p>
+                <a href="why-wiring-matters.html">
+                    Why Wiring Matters in Vehicle Safety Systems
+                </a>
+            </p>
+
+            <p>
+                <a href="hdmi-vs-ahd-vehicle-camera-system.html">
+                    HDMI vs AHD for Vehicle Camera Systems: What Is the Difference?
+                </a>
+            </p>
+
+            <p>
+                <a href="why-svm-avm-needs-proper-display-interface.html">
+                    Why Does an SVM / AVM System Need a Proper Display Interface?
+                </a>
+            </p>
+
+        </div>
+
+    </article>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+        © 2026 Jacky Liu. All rights reserved.
+    </div>
+
+</footer>
+
+</body>
+</html>
