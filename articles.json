@@ -35,6 +35,13 @@
     "url": "what-brightness-does-a-vehicle-monitor-need.html"
   },
   {
+    "title": "Why Does a Vehicle Camera Image Look Good in the Factory but Poor After Installation?",
+    "description": "Why can a vehicle camera image look clear during testing but become noisy, unstable or darker after installation? A practical look at cables, power, grounding, EMI, connectors and installation conditions.",
+    "category": "Technical Insight · Vehicle Camera System",
+    "date": "September 29, 2026",
+    "url": "why-vehicle-camera-image-quality-changes-after-installation.html"
+  },
+  {
     "title": "How to Choose a Vehicle Monitor for SVM / AVM Systems?",
     "description": "A practical guide to choosing a vehicle monitor for SVM and AVM systems, including resolution, input compatibility, brightness, trigger control, touch and installation conditions.",
     "category": "Technical Guide · SVM / AVM",
