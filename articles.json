@@ -1,5 +1,12 @@
 [
   {
+    "title": "Why Is the Monitor More Than a Display Device in an SVM System?",
+    "description": "In an SVM system, the monitor is more than a device for displaying images. It is the HMI between the camera system, SVM box and driver, combining video display, touch interaction, alerts and system control.",
+    "category": "Technical Insight · SVM / AVM · HMI",
+    "date": "September 29, 2026",
+    "url": "monitor-as-hmi-in-svm-system.html"
+  },
+  {
     "title": "Why Does a Vehicle Monitor Have EMI Problems?",
     "description": "Why do vehicle monitors sometimes experience EMI problems after installation? Learn how power supply, grounding, wiring, switching devices, video cables and vehicle electrical environments affect display stability.",
     "category": "Technical Insight · Vehicle Monitor / EMI",
