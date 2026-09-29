@@ -35,6 +35,13 @@
     "url": "why-svm-avm-needs-proper-display-interface.html"
   },
   {
+    "title": "5 Things to Check When Connecting an SVM Box to a Vehicle Monitor",
+    "description": "Before connecting an SVM Box to a vehicle monitor, check HDMI signal, resolution, touch interface, power supply, and EMI/cable conditions. A practical guide for SVM and AVM systems.",
+    "category": "Technical Guide · SVM / AVM · Vehicle Monitor",
+    "date": "September 29, 2026",
+    "url": "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html"
+  },
+  {
     "title": "HDMI vs AHD for Vehicle Camera Systems: What Is the Difference?",
     "description": "HDMI vs AHD for vehicle camera systems. Learn how HDMI and AHD differ in signal transmission, system structure, cable requirements, display compatibility and SVM / AVM applications.",
     "category": "Technical Guide · Vehicle Monitor / SVM / AVM",
