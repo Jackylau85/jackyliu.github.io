@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Why Does an SVM / AVM System Need a Proper Display Interface? | Jacky Liu</title>
+
+    <meta name="description"
+          content="Why does an SVM or AVM system need the right display interface? A practical look at HDMI, AHD, CVBS, USB, signal compatibility, touch control and system architecture.">
+
+    <meta name="keywords"
+          content="SVM display interface, AVM display interface, SVM monitor, AVM monitor, HDMI vehicle monitor, AHD monitor, vehicle display interface, vehicle camera system">
+
+    <meta name="author" content="Jacky Liu">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical"
+          href="https://jackylau85.github.io/jackyliu.github.io/why-svm-avm-needs-proper-display-interface.html">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8fa;
+            color: #222;
+            line-height: 1.8;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(900px, 92%);
+            margin: auto;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .back {
+            color: #d1d5db;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        article {
+            background: white;
+            margin: 50px auto;
+            padding: 55px 65px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .category {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(34px, 5vw, 50px);
+            line-height: 1.2;
+            margin: 0 0 20px;
+        }
+
+        .meta {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 28px;
+            line-height: 1.3;
+            margin-top: 48px;
+            margin-bottom: 18px;
+        }
+
+        h3 {
+            font-size: 21px;
+            margin-top: 32px;
+        }
+
+        p {
+            margin: 0 0 20px;
+        }
+
+        ul {
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: #f3f4f6;
+            border-left: 4px solid #111827;
+            padding: 20px 24px;
+            margin: 30px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        .checklist {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin: 30px 0;
+        }
+
+        .related {
+            margin-top: 55px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .related a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .related a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #0b1120;
+            color: #9ca3af;
+            padding: 30px 0;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            article {
+                padding: 35px 25px;
+                margin: 25px auto;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            h2 {
+                font-size: 25px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container header-inner">
+
+        <div class="logo">
+            Jacky Liu
+        </div>
+
+        <a class="back"
+           href="index.html">
+            ← Back to Home
+        </a>
+
+    </div>
+</header>
+
+
+<main class="container">
+
+    <article>
+
+        <div class="category">
+            Technical Guide · SVM / AVM
+        </div>
+
+        <h1>
+            Why Does an SVM / AVM System Need a Proper Display Interface?
+        </h1>
+
+        <div class="meta">
+            By Jacky Liu · September 29, 2026
+        </div>
+
+
+        <p>
+            In an SVM or AVM system, the display is often treated as
+            the final part of the system.
+        </p>
+
+        <p>
+            Cameras capture images. The SVM / AVM processor receives
+            those camera signals, processes or stitches them, and then
+            sends the final image to the vehicle display.
+        </p>
+
+        <p>
+            Because the display is at the end of the chain, it can be
+            tempting to think that choosing a screen is simply a matter
+            of selecting the right size and resolution.
+        </p>
+
+        <p>
+            In real vehicle applications, however, the interface between
+            the processing unit and the display can be just as important
+            as the display itself.
+        </p>
+
+
+        <div class="highlight">
+
+            <strong>
+                The important question is not only "What resolution does
+                the monitor have?"
+            </strong>
+
+            <br><br>
+
+            It is also:
+            <strong>
+                "How does the processed image get from the SVM / AVM system
+                to the display?"
+            </strong>
+
+        </div>
+
+
+        <h2>
+            1. Where Does the Image Processing Happen?
+        </h2>
+
+        <p>
+            The first thing I look at is the system architecture.
+        </p>
+
+        <p>
+            There are different ways an SVM / AVM system can be designed.
+            The cameras may connect directly to an SVM processor, while
+            the processor generates the final surround-view image.
+        </p>
+
+        <p>
+            In another architecture, the display itself may receive
+            multiple camera inputs and handle functions such as camera
+            switching or trigger control.
+        </p>
+
+        <p>
+            These two systems may look similar from the user's
+            perspective, but the display interface requirements can be
+            completely different.
+        </p>
+
+
+        <h2>
+            2. HDMI and AHD Can Play Different Roles
+        </h2>
+
+        <p>
+            HDMI and AHD are sometimes compared as if one must always be
+            better than the other.
+        </p>
+
+        <p>
+            For vehicle applications, I think it is more useful to ask
+            where each interface is being used in the system.
+        </p>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Interface</th>
+                    <th>Typical Role</th>
+                    <th>Example Application</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>AHD</td>
+
+                    <td>
+                        Camera video transmission
+                        or direct camera input
+                    </td>
+
+                    <td>
+                        Multiple AHD cameras connected to
+                        a vehicle monitor or processor
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>HDMI</td>
+
+                    <td>
+                        Digital video output from a processor
+                        to a display
+                    </td>
+
+                    <td>
+                        SVM / AVM box generating a final
+                        processed image for an HDMI monitor
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>CVBS</td>
+
+                    <td>
+                        Standard-definition analog video
+                    </td>
+
+                    <td>
+                        Legacy cameras, backup cameras
+                        or auxiliary video sources
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>USB / UART</td>
+
+                    <td>
+                        Touch or control communication
+                    </td>
+
+                    <td>
+                        Touch commands sent from the monitor
+                        to an external control system
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+        <p>
+            This means a vehicle monitor can potentially have different
+            interfaces serving completely different functions.
+        </p>
+
+        <p>
+            For example, HDMI may carry the processed video image,
+            while USB is used for touch communication.
+        </p>
+
+        <p>
+            Looking at only the video connector would therefore not
+            describe the complete display interface.
+        </p>
+
+
+        <h2>
+            3. The Display Is Part of the System, Not Just a Screen
+        </h2>
+
+        <p>
+            An SVM / AVM monitor may need to do much more than display
+            an image.
+        </p>
+
+        <p>
+            Depending on the application, it may need to support:
+        </p>
+
+        <ul>
+
+            <li>
+                Multiple video formats
+            </li>
+
+            <li>
+                Different input resolutions
+            </li>
+
+            <li>
+                Camera switching
+            </li>
+
+            <li>
+                Trigger signals
+            </li>
+
+            <li>
+                Touch control
+            </li>
+
+            <li>
+                External control through USB or UART
+            </li>
+
+            <li>
+                Different power supply conditions
+            </li>
+
+            <li>
+                Vehicle-specific installation requirements
+            </li>
+
+        </ul>
+
+        <p>
+            This is why a monitor that looks suitable from its product
+            specification may still not be suitable for a particular
+            SVM / AVM system.
+        </p>
+
+
+        <h2>
+            4. Resolution Must Match the Complete System
+        </h2>
+
+        <p>
+            A common example is the relationship between the camera,
+            SVM processor and display resolution.
+        </p>
+
+        <p>
+            Suppose the SVM processor outputs a 1920×1080 image.
+            A Full HD monitor is an obvious match.
+        </p>
+
+        <p>
+            But if the system outputs a different resolution, the
+            display needs to support that signal correctly.
+        </p>
+
+        <p>
+            Problems can appear when people select the monitor based
+            only on the panel resolution without checking the actual
+            output signal of the SVM / AVM box.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                Camera resolution, processor output and monitor input
+                should be considered as one chain.
+            </strong>
+
+            <br><br>
+
+            Camera → SVM / AVM Processor → Display Interface → Monitor
+
+        </div>
+
+
+        <h2>
+            5. Touch Creates Another Interface
+        </h2>
+
+        <p>
+            In some SVM / AVM applications, the monitor is not simply
+            an image output device.
+        </p>
+
+        <p>
+            The operator may need to touch the screen to change camera
+            views, select a menu, switch between display modes or
+            interact with the vehicle system.
+        </p>
+
+        <p>
+            This creates a second communication path.
+        </p>
+
+        <p>
+            The video signal may travel through HDMI, while touch data
+            may be transmitted through USB or UART.
+        </p>
+
+        <p>
+            Therefore, the display interface should be considered as
+            both a <strong>video interface</strong> and a
+            <strong>control interface</strong> when the application
+            requires interaction.
+        </p>
+
+
+        <h2>
+            6. Installation Conditions Still Matter
+        </h2>
+
+        <p>
+            Even when the interface is technically compatible,
+            installation conditions can affect system performance.
+        </p>
+
+        <p>
+            A vehicle is not the same environment as a desktop computer.
+        </p>
+
+        <p>
+            Long cable runs, electrical noise, grounding conditions,
+            voltage fluctuations and connector quality can all affect
+            the system.
+        </p>
+
+        <p>
+            This is particularly important when the display is installed
+            far away from the SVM / AVM processor.
+        </p>
+
+        <p>
+            The interface decision therefore needs to consider not only
+            the signal format, but also the physical installation.
+        </p>
+
+
+        <h2>
+            7. A Practical Way to Select the Interface
+        </h2>
+
+        <p>
+            When I look at a new SVM / AVM display project, I prefer to
+            start with the system rather than the monitor specification.
+        </p>
+
+        <div class="checklist">
+
+            <strong>Questions I would check first:</strong>
+
+            <ul>
+
+                <li>
+                    Where are the cameras connected?
+                </li>
+
+                <li>
+                    Where is the image stitching or processing performed?
+                </li>
+
+                <li>
+                    What video output does the SVM / AVM processor provide?
+                </li>
+
+                <li>
+                    What resolution does the processor output?
+                </li>
+
+                <li>
+                    How long is the cable between the processor and display?
+                </li>
+
+                <li>
+                    Does the monitor need touch control?
+                </li>
+
+                <li>
+                    Is USB or UART required for communication?
+                </li>
+
+                <li>
+                    Are trigger signals required?
+                </li>
+
+                <li>
+                    What power supply does the vehicle provide?
+                </li>
+
+                <li>
+                    What are the actual installation conditions?
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <h2>
+            8. The Most Important Lesson
+        </h2>
+
+        <p>
+            In vehicle electronics, it is easy to start with a product
+            specification.
+        </p>
+
+        <p>
+            For example:
+        </p>
+
+        <p>
+            <strong>
+                "We need a 10.1-inch Full HD monitor."
+            </strong>
+        </p>
+
+        <p>
+            But that is only the beginning.
+        </p>
+
+        <p>
+            The more important questions are:
+        </p>
+
+        <ul>
+
+            <li>
+                What signal does the system output?
+            </li>
+
+            <li>
+                Which interface carries the image?
+            </li>
+
+            <li>
+                How is touch or control communicated?
+            </li>
+
+            <li>
+                How long is the connection?
+            </li>
+
+            <li>
+                Where will the monitor be installed?
+            </li>
+
+        </ul>
+
+        <p>
+            Once these questions are answered, the monitor specification
+            becomes much easier to define.
+        </p>
+
+
+        <div class="highlight">
+
+            <strong>
+                My approach is simple:
+            </strong>
+
+            <br><br>
+
+            Application → System → Interface → Product
+
+            <br><br>
+
+            Not:
+
+            <br>
+
+            Product → Specification → Application
+
+        </div>
+
+
+        <h2>
+            Conclusion
+        </h2>
+
+        <p>
+            A display interface is not just a connector on the back of
+            a monitor.
+        </p>
+
+        <p>
+            In an SVM / AVM system, it is part of the communication path
+            between the image-processing system and the operator.
+        </p>
+
+        <p>
+            HDMI, AHD, CVBS, USB and UART can all have different roles.
+            The right choice depends on the architecture of the complete
+            vehicle system.
+        </p>
+
+        <p>
+            This is why I prefer to understand the application and system
+            structure first, and only then decide what the monitor needs
+            to support.
+        </p>
+
+
+        <div class="related">
+
+            <h2>
+                Related Articles
+            </h2>
+
+            <p>
+                <a href="hdmi-vs-ahd-vehicle-camera-system.html">
+                    HDMI vs AHD for Vehicle Camera Systems: What Is the Difference?
+                </a>
+            </p>
+
+            <p>
+                <a href="1920x1080-vs-1024x600.html">
+                    1920×1080 vs 1024×600: Which Resolution Is Better for Vehicle Monitors?
+                </a>
+            </p>
+
+            <p>
+                <a href="how-to-choose-vehicle-monitor.html">
+                    How to Choose a Vehicle Monitor for SVM / AVM Systems?
+                </a>
+            </p>
+
+        </div>
+
+    </article>
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+        © 2026 Jacky Liu. All rights reserved.
+    </div>
+
+</footer>
+
+</body>
+</html>
