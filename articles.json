@@ -21,6 +21,13 @@
     "url": "why-vehicle-monitor-has-emi-problems.html"
   },
   {
+    "title": "SVM Display Resolution: Why Does System Matching Matter More Than Pixels?",
+    "description": "How important is display resolution in an SVM system? Compare 1024×600, 1280×800 and 1920×1080 and learn why Camera → SVM Box → Display matching matters more than choosing the highest resolution.",
+    "category": "Technical Guide · SVM / AVM · Vehicle Display",
+    "date": "September 29, 2026",
+    "url": "svm-display-resolution-system-matching.html"
+  },
+  {
     "title": "Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?",
     "description": "Why can a vehicle monitor work perfectly on the bench but fail after installation? A practical look at power supply, grounding, voltage drop, EMI, wiring and signal compatibility.",
     "category": "Technical Insight · Vehicle Monitor",
