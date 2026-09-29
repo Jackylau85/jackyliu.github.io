@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?",
+    "description": "Why can a vehicle monitor work perfectly on the bench but fail after installation? A practical look at power supply, grounding, voltage drop, EMI, wiring and signal compatibility.",
+    "category": "Technical Insight · Vehicle Monitor",
+    "date": "September 29, 2026",
+    "url": "bench-test-vs-installation.html"
+  },
+  {
+    "title": "1920×1080 vs 1024×600: Which Resolution Is Better for Vehicle Monitors?",
+    "description": "1920×1080 vs 1024×600 for vehicle monitors. Learn how screen resolution, camera input, display size, viewing distance, and application requirements affect the right choice for SVM and AVM systems.",
+    "category": "Technical Guide · Vehicle Monitor / SVM / AVM",
+    "date": "September 29, 2026",
+    "url": "1920x1080-vs-1024x600.html"
+  },
+  {
+    "title": "How to Choose a Vehicle Monitor for SVM / AVM Systems?",
+    "description": "A practical guide to choosing a vehicle monitor for SVM and AVM systems, including resolution, input compatibility, brightness, trigger control, touch and installation conditions.",
+    "category": "Technical Guide · SVM / AVM",
+    "date": "",
+    "url": "how-to-choose-vehicle-monitor.html"
+  },
+  {
+    "title": "Why Wiring Matters in Vehicle Safety Systems",
+    "description": "Why wiring, connectors, power supply and signal transmission matter in vehicle safety and camera systems. Practical observations from vehicle electronics applications.",
+    "category": "Technical Insight · Vehicle Safety",
+    "date": "",
+    "url": "why-wiring-matters.html"
+  }
+]
