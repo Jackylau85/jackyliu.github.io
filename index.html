@@ -1,337 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Jacky Liu | Vehicle Monitor & Vehicle Safety Systems</title>
+<title>Jacky Liu | Vehicle Monitor, Vehicle Safety & SVM / AVM</title>
 
-    <meta name="description" content="Jacky Liu shares practical knowledge about vehicle monitors, SVM/AVM systems, vehicle safety, camera systems and low-voltage connectivity.">
+<meta name="description" content="Jacky Liu shares practical insights on vehicle monitors, SVM / AVM systems, vehicle safety, camera systems, wiring and connectivity.">
 
-    <style>
+<meta name="keywords" content="vehicle monitor, vehicle display, SVM, AVM, vehicle safety, camera system, AHD, HDMI, vehicle wiring, industrial vehicle">
 
-        * {
-            box-sizing: border-box;
-        }
+<meta name="author" content="Jacky Liu">
 
-        html {
-            scroll-behavior: smooth;
-        }
+<style>
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #222;
-            background: #f5f5f5;
-            line-height: 1.7;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        a {
-            text-decoration: none;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: #111;
-            color: white;
-        }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f6f8;
+    color: #222;
+    line-height: 1.7;
+}
 
-        .nav {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-        .logo {
-            font-size: 21px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
+/* Header */
 
-        .nav-links a {
-            color: white;
-            margin-left: 28px;
-            font-size: 14px;
-        }
+header {
+    background: #111;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-        .nav-links a:hover {
-            opacity: 0.65;
-        }
+.nav {
+    max-width: 1180px;
+    margin: auto;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .hero {
-            background: #171717;
-            color: white;
-            padding: 120px 24px;
-        }
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
 
-        .hero-inner {
-            max-width: 1100px;
-            margin: auto;
-        }
+.nav-links {
+    display: flex;
+    gap: 26px;
+    font-size: 14px;
+}
 
-        .eyebrow {
-            color: #aaa;
-            font-size: 14px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
+.nav-links a {
+    color: #ddd;
+}
 
-        .hero h1 {
-            max-width: 850px;
-            font-size: 58px;
-            line-height: 1.08;
-            margin: 0 0 28px;
-        }
+.nav-links a:hover {
+    color: white;
+}
 
-        .hero p {
-            max-width: 760px;
-            font-size: 19px;
-            color: #ccc;
-            margin-bottom: 35px;
-        }
+/* Hero */
 
-        .button {
-            display: inline-block;
-            padding: 13px 22px;
-            background: white;
-            color: #111;
-            margin-right: 10px;
-            font-size: 14px;
-            font-weight: bold;
-        }
+.hero {
+    background: #111;
+    color: white;
+    padding: 100px 24px 110px;
+}
 
-        .button.dark {
-            background: transparent;
-            color: white;
-            border: 1px solid #555;
-        }
+.hero-inner {
+    max-width: 1180px;
+    margin: auto;
+}
 
-        section {
-            padding: 90px 24px;
-        }
+.hero-label {
+    color: #aaa;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-        }
+.hero h1 {
+    max-width: 850px;
+    font-size: 54px;
+    line-height: 1.12;
+    margin: 0 0 25px;
+}
 
-        .section-title {
-            font-size: 36px;
-            margin-bottom: 15px;
-            color: #111;
-        }
+.hero p {
+    max-width: 760px;
+    font-size: 19px;
+    color: #ccc;
+    margin-bottom: 35px;
+}
 
-        .section-intro {
-            max-width: 720px;
-            color: #666;
-            margin-bottom: 45px;
-        }
+.hero-button {
+    display: inline-block;
+    padding: 13px 22px;
+    background: white;
+    color: #111;
+    border-radius: 6px;
+    font-weight: 600;
+}
 
-        .work-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
+.hero-button:hover {
+    background: #ddd;
+}
 
-        .work-card {
-            background: white;
-            padding: 30px;
-            min-height: 240px;
-            border: 1px solid #e5e5e5;
-        }
+/* Sections */
 
-        .number {
-            color: #999;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
+section {
+    max-width: 1180px;
+    margin: auto;
+    padding: 80px 24px;
+}
 
-        .work-card h3 {
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
+.section-title {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
 
-        .work-card p {
-            font-size: 15px;
-            color: #666;
-        }
+.section-intro {
+    max-width: 760px;
+    color: #666;
+    margin-bottom: 40px;
+}
 
-        .insights {
-            background: white;
-        }
+/* Cards */
 
-        .article-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
 
-        .article-card {
-            background: #f7f7f7;
-            padding: 30px;
-            border: 1px solid #e5e5e5;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    border: 1px solid #e5e5e5;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-        }
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
 
-        .article-date {
-            font-size: 13px;
-            color: #999;
-            margin-bottom: 15px;
-        }
+.card h3 {
+    margin-top: 0;
+    font-size: 21px;
+}
 
-        .article-card h3 {
-            font-size: 21px;
-            line-height: 1.35;
-            margin: 0 0 15px;
-        }
+.card p {
+    color: #666;
+}
 
-        .article-card h3 a {
-            color: #111;
-        }
+.card-link {
+    margin-top: 18px;
+    display: inline-block;
+    font-weight: 600;
+}
 
-        .article-card p {
-            color: #666;
-            font-size: 15px;
-        }
+/* Focus */
 
-        .read-more {
-            display: inline-block;
-            margin-top: 10px;
-            color: #111;
-            font-weight: bold;
-            font-size: 14px;
-        }
+.focus-number {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
 
-        .about {
-            background: #f5f5f5;
-        }
+/* Problems */
 
-        .about-content {
-            max-width: 800px;
-        }
+.problem-card {
+    background: #111;
+    color: white;
+    border-radius: 10px;
+    padding: 28px;
+}
 
-        .about-content p {
-            font-size: 17px;
-            color: #555;
-        }
+.problem-card p {
+    color: #bbb;
+}
 
-        .contact {
-            background: #171717;
-            color: white;
-        }
+.problem-card .card-link {
+    color: white;
+}
 
-        .contact .section-title {
-            color: white;
-        }
+/* Cases */
 
-        .contact p {
-            color: #bbb;
-            max-width: 650px;
-        }
+.case-card {
+    background: white;
+    border-left: 4px solid #111;
+    padding: 28px;
+    border-radius: 8px;
+    border-top: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
 
-        .email {
-            display: inline-block;
-            margin-top: 20px;
-            color: white;
-            font-size: 20px;
-            border-bottom: 1px solid #777;
-            padding-bottom: 5px;
-        }
+.case-meta {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 12px;
+}
 
-        footer {
-            background: #111;
-            color: #888;
-            text-align: center;
-            padding: 30px 20px;
-            font-size: 13px;
-        }
+/* About */
 
-        @media (max-width: 900px) {
+.about {
+    background: white;
+    max-width: none;
+}
 
-            .work-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+.about-inner {
+    max-width: 1180px;
+    margin: auto;
+    padding: 80px 24px;
+}
 
-            .article-grid {
-                grid-template-columns: 1fr;
-            }
+.about-content {
+    max-width: 800px;
+}
 
-            .hero h1 {
-                font-size: 46px;
-            }
+.about-content p {
+    color: #555;
+}
 
-        }
+/* Contact */
 
-        @media (max-width: 650px) {
+.contact-box {
+    background: #111;
+    color: white;
+    border-radius: 12px;
+    padding: 50px;
+}
 
-            .nav {
-                flex-direction: column;
-                gap: 15px;
-            }
+.contact-box p {
+    color: #bbb;
+}
 
-            .nav-links a {
-                margin: 0 8px;
-            }
+.contact-email {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+}
 
-            .hero {
-                padding: 80px 24px;
-            }
+/* Footer */
 
-            .hero h1 {
-                font-size: 38px;
-            }
+footer {
+    background: #111;
+    color: #888;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 13px;
+}
 
-            .work-grid {
-                grid-template-columns: 1fr;
-            }
+/* Mobile */
 
-            section {
-                padding: 65px 20px;
-            }
+@media (max-width: 800px) {
 
-        }
+    .nav {
+        flex-direction: column;
+        gap: 15px;
+    }
 
-    </style>
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 70px 24px 80px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 29px;
+    }
+
+    .contact-box {
+        padding: 32px 25px;
+    }
+
+    .contact-email {
+        font-size: 18px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-<header>
+<!-- Navigation -->
 
+<header>
     <div class="nav">
 
         <div class="logo">
             JACKY LIU
         </div>
 
-        <div class="nav-links">
+        <nav class="nav-links">
             <a href="#focus">Focus</a>
             <a href="#insights">Insights</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#cases">Cases</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-        </div>
+        </nav>
 
     </div>
-
 </header>
 
 
-<section class="hero">
+<!-- Hero -->
+
+<div class="hero">
 
     <div class="hero-inner">
 
-        <div class="eyebrow">
+        <div class="hero-label">
             Vehicle Electronics · Safety · Connectivity
         </div>
 
@@ -340,110 +359,381 @@
         </h1>
 
         <p>
-            Practical experience in vehicle displays, SVM/AVM,
-            camera systems, vehicle safety and low-voltage connectivity.
+            Practical experience and technical insights covering vehicle displays,
+            SVM / AVM systems, camera systems, vehicle safety and low-voltage connectivity.
         </p>
 
-        <a class="button" href="#insights">
-            Technical Insights
-        </a>
-
-        <a class="button dark" href="#contact">
-            Contact Me
+        <a class="hero-button" href="#insights">
+            Explore Insights
         </a>
 
     </div>
 
-</section>
+</div>
 
+
+<!-- Focus -->
 
 <section id="focus">
 
-    <div class="container">
+    <h2 class="section-title">
+        What I Focus On
+    </h2>
 
-        <h2 class="section-title">
-            What I Work On
-        </h2>
+    <p class="section-intro">
+        My work sits at the intersection of vehicle displays, camera systems,
+        safety applications and practical vehicle connectivity.
+    </p>
 
-        <p class="section-intro">
-            My work focuses on practical vehicle electronics applications,
-            especially products and systems used in commercial vehicles,
-            industrial equipment and vehicle safety applications.
-        </p>
+    <div class="grid">
+
+        <div class="card">
+            <div class="focus-number">01</div>
+            <h3>Vehicle Monitors & Displays</h3>
+            <p>
+                Display selection, resolution, brightness, touch interfaces,
+                power requirements, installation conditions and system integration.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="focus-number">02</div>
+            <h3>SVM / AVM Systems</h3>
+            <p>
+                Practical considerations for surround view and multi-camera
+                systems, including displays, camera inputs, switching and HMI.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="focus-number">03</div>
+            <h3>Vehicle Safety</h3>
+            <p>
+                Camera-based safety systems for commercial vehicles,
+                construction equipment, industrial vehicles and other demanding applications.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="focus-number">04</div>
+            <h3>Wiring & Connectivity</h3>
+            <p>
+                Low-voltage wiring, connectors, shielding, signal integrity,
+                power delivery and practical vehicle installation.
+            </p>
+        </div>
+
+    </div>
+
+</section>
 
 
-        <div class="work-grid">
+<!-- Insights -->
 
-            <div class="work-card">
+<section id="insights">
 
-                <div class="number">
-                    01
-                </div>
+    <h2 class="section-title">
+        Technical Insights
+    </h2>
 
-                <h3>
-                    Vehicle Monitors & Displays
-                </h3>
+    <p class="section-intro">
+        Practical observations from vehicle electronics projects,
+        product development and real-world installation problems.
+    </p>
 
-                <p>
-                    Vehicle displays for camera systems,
-                    SVM/AVM, commercial vehicles and industrial equipment.
-                </p>
 
+    <div class="grid">
+
+        <a class="card"
+           href="bench-test-vs-installation.html">
+
+            <h3>
+                Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?
+            </h3>
+
+            <p>
+                Power supply, voltage drop, grounding, EMI, cables,
+                connectors and signal compatibility.
+            </p>
+
+            <div class="card-link">
+                Read Article →
             </div>
 
+        </a>
 
-            <div class="work-card">
 
-                <div class="number">
-                    02
-                </div>
+        <a class="card"
+           href="how-to-choose-vehicle-monitor.html">
 
-                <h3>
-                    SVM / AVM Systems
-                </h3>
+            <h3>
+                How to Choose a Vehicle Monitor for SVM / AVM Systems?
+            </h3>
 
-                <p>
-                    Multi-camera vehicle vision systems,
-                    display interfaces and practical installation considerations.
-                </p>
+            <p>
+                Resolution, brightness, camera inputs, switching,
+                touch interface and installation conditions.
+            </p>
 
+            <div class="card-link">
+                Read Article →
             </div>
 
+        </a>
 
-            <div class="work-card">
 
-                <div class="number">
-                    03
-                </div>
+        <a class="card"
+           href="why-wiring-matters.html">
 
-                <h3>
-                    Vehicle Safety
-                </h3>
+            <h3>
+                Why Wiring Matters in Vehicle Safety Systems
+            </h3>
 
-                <p>
-                    Camera-based safety systems, blind-spot visibility,
-                    vehicle monitoring and industrial vehicle applications.
-                </p>
+            <p>
+                Cable length, connectors, shielding, signal integrity
+                and power delivery can directly affect system reliability.
+            </p>
 
+            <div class="card-link">
+                Read Article →
             </div>
 
+        </a>
 
-            <div class="work-card">
+    </div>
 
-                <div class="number">
-                    04
-                </div>
 
-                <h3>
-                    Wiring & Connectivity
-                </h3>
+    <!-- Technical Problems -->
 
-                <p>
-                    Low-voltage wiring harnesses, camera connections,
-                    USB, M12 and other vehicle electronics interfaces.
-                </p>
+    <h2 class="section-title" style="margin-top:80px;">
+        Technical Problems I Help Solve
+    </h2>
 
+    <p class="section-intro">
+        Some of the questions that often appear when a vehicle vision
+        or safety system moves from prototype to real-world installation.
+    </p>
+
+
+    <div class="grid">
+
+        <div class="problem-card">
+            <h3>
+                The image works on the bench — why does it fail in the vehicle?
+            </h3>
+
+            <p>
+                Installation environment, power, grounding, EMI,
+                cable routing and signal compatibility can change the result.
+            </p>
+        </div>
+
+
+        <div class="problem-card">
+            <h3>
+                Which display is suitable for an SVM / AVM system?
+            </h3>
+
+            <p>
+                The answer depends on camera resolution, interface,
+                brightness, switching, touch requirements and installation conditions.
+            </p>
+        </div>
+
+
+        <div class="problem-card">
+            <h3>
+                Why does a camera system become unstable with longer cables?
+            </h3>
+
+            <p>
+                Cable quality, shielding, connectors, power and signal
+                integrity all become more important as installation distance increases.
+            </p>
+        </div>
+
+
+        <div class="problem-card">
+            <h3>
+                What should be considered before selecting a vehicle display?
+            </h3>
+
+            <p>
+                A display should be considered as part of the complete vehicle
+                system rather than as an isolated screen.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Solutions -->
+
+<section id="solutions">
+
+    <h2 class="section-title">
+        Solutions
+    </h2>
+
+    <p class="section-intro">
+        Different vehicle applications create different requirements.
+        These are the areas where I focus on practical system-level solutions.
+    </p>
+
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>SVM / AVM Display Solutions</h3>
+
+            <p>
+                Vehicle displays for surround-view and multi-camera systems,
+                including high-resolution display, HDMI / AHD / CVBS interfaces,
+                touch HMI and vehicle-grade installation requirements.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>Vehicle Safety Camera Systems</h3>
+
+            <p>
+                Camera and display combinations for blind-spot monitoring,
+                rear-view applications, construction equipment and commercial vehicles.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>Industrial Vehicle Monitoring</h3>
+
+            <p>
+                Display and camera solutions for demanding working environments
+                such as construction, mining, agriculture, ports and industrial vehicles.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>Wiring & Connectivity</h3>
+
+            <p>
+                Practical low-voltage connectivity covering USB, M12,
+                camera connections, signal cables, power and customized harness solutions.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Cases -->
+
+<section id="cases">
+
+    <h2 class="section-title">
+        Selected Cases
+    </h2>
+
+    <p class="section-intro">
+        Examples of application-oriented projects and product development.
+        Customer names and confidential project information are not disclosed.
+    </p>
+
+
+    <div class="grid">
+
+        <div class="case-card">
+
+            <div class="case-meta">
+                SVM / AVM · Vehicle Display
             </div>
+
+            <h3>
+                10.1" Full HD Display for SVM System
+            </h3>
+
+            <p>
+                A high-resolution 10.1" display designed for integration
+                with an SVM system, with HDMI video input and USB touch interface.
+            </p>
+
+            <p>
+                <strong>Focus:</strong>
+                Display resolution · Touch HMI · Vehicle installation
+            </p>
+
+        </div>
+
+
+        <div class="case-card">
+
+            <div class="case-meta">
+                Vehicle Safety · Multi-Camera
+            </div>
+
+            <h3>
+                Multi-Camera Vehicle Safety System
+            </h3>
+
+            <p>
+                A multi-camera monitoring system combining vehicle cameras,
+                display and recording functions for demanding vehicle applications.
+            </p>
+
+            <p>
+                <strong>Focus:</strong>
+                Camera system · Display · Vehicle safety
+            </p>
+
+        </div>
+
+
+        <div class="case-card">
+
+            <div class="case-meta">
+                Industrial Vehicle · Connectivity
+            </div>
+
+            <h3>
+                Vehicle Camera & Display Connectivity
+            </h3>
+
+            <p>
+                A practical connection solution involving vehicle cameras,
+                monitor interfaces, connectors and low-voltage wiring.
+            </p>
+
+            <p>
+                <strong>Focus:</strong>
+                Wiring · Connectors · Signal integrity
+            </p>
+
+        </div>
+
+
+        <div class="case-card">
+
+            <div class="case-meta">
+                Engineering Vehicle · Safety
+            </div>
+
+            <h3>
+                Camera-Based Safety Monitoring
+            </h3>
+
+            <p>
+                Camera, monitor and recording components integrated
+                for heavy-duty vehicle safety applications.
+            </p>
+
+            <p>
+                <strong>Focus:</strong>
+                Visibility · Monitoring · Safety
+            </p>
 
         </div>
 
@@ -452,123 +742,11 @@
 </section>
 
 
-<section id="insights" class="insights">
+<!-- About -->
 
-    <div class="container">
+<div class="about" id="about">
 
-        <h2 class="section-title">
-            Technical Insights
-        </h2>
-
-        <p class="section-intro">
-            Practical observations from working with vehicle monitors,
-            camera systems, wiring and vehicle safety applications.
-        </p>
-
-
-        <div class="article-grid">
-
-
-            <!-- ARTICLE 1 -->
-
-            <div class="article-card">
-
-                <div class="article-date">
-                    September 29, 2026 · Vehicle Monitor
-                </div>
-
-                <h3>
-
-                    <a href="bench-test-vs-installation.html">
-                        Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?
-                    </a>
-
-                </h3>
-
-                <p>
-                    Power supply, grounding, voltage drop,
-                    EMI, wiring and signal compatibility can all
-                    affect real-world vehicle monitor performance.
-                </p>
-
-                <a class="read-more"
-                   href="bench-test-vs-installation.html">
-                    Read Article →
-                </a>
-
-            </div>
-
-
-            <!-- ARTICLE 2 -->
-
-            <div class="article-card">
-
-                <div class="article-date">
-                    Technical Guide · Vehicle Monitor
-                </div>
-
-                <h3>
-
-                    <a href="how-to-choose-vehicle-monitor.html">
-                        How to Choose a Vehicle Monitor for SVM / AVM Systems?
-                    </a>
-
-                </h3>
-
-                <p>
-                    Resolution is only one part of the decision.
-                    Input compatibility, trigger control, brightness,
-                    touch interface and installation conditions also matter.
-                </p>
-
-                <a class="read-more"
-                   href="how-to-choose-vehicle-monitor.html">
-                    Read Article →
-                </a>
-
-            </div>
-
-
-            <!-- ARTICLE 3 -->
-
-            <div class="article-card">
-
-                <div class="article-date">
-                    Technical Guide · Vehicle Safety
-                </div>
-
-                <h3>
-
-                    <a href="why-wiring-matters.html">
-                        Why Wiring Matters in Vehicle Safety Systems
-                    </a>
-
-                </h3>
-
-                <p>
-                    A reliable camera system depends not only on
-                    the camera and monitor, but also on stable power,
-                    signal transmission and connection architecture.
-                </p>
-
-                <a class="read-more"
-                   href="why-wiring-matters.html">
-                    Read Article →
-                </a>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section id="about" class="about">
-
-    <div class="container">
+    <div class="about-inner">
 
         <div class="about-content">
 
@@ -577,45 +755,52 @@
             </h2>
 
             <p>
-                I work in business development for vehicle electronics
-                and safety products, with a focus on vehicle monitors,
-                camera systems and related connectivity.
+                I work in vehicle electronics and vehicle safety,
+                with a particular focus on vehicle monitors, camera systems,
+                SVM / AVM applications and low-voltage connectivity.
             </p>
 
             <p>
-                My work involves communicating with vehicle electronics
-                companies, system integrators and equipment manufacturers
-                to understand practical product requirements and develop
-                suitable hardware solutions.
+                My work involves more than selecting products from a specification sheet.
+                Real vehicle projects often require attention to installation conditions,
+                signal compatibility, wiring, connectors, power supply and practical system integration.
             </p>
 
             <p>
-                This website is a personal knowledge space where I share
-                practical observations about vehicle displays,
-                SVM/AVM, vehicle safety and wiring.
+                This website is where I share what I learn from these projects —
+                including technical observations, product selection considerations
+                and practical problems encountered in vehicle applications.
+            </p>
+
+            <p>
+                The goal is simple:
+                <strong>make vehicle electronics easier to understand and easier to apply.</strong>
             </p>
 
         </div>
 
     </div>
 
-</section>
+</div>
 
 
-<section id="contact" class="contact">
+<!-- Contact -->
 
-    <div class="container">
+<section id="contact">
+
+    <div class="contact-box">
 
         <h2 class="section-title">
             Contact
         </h2>
 
         <p>
-            For discussions about vehicle monitors,
-            vehicle vision, safety systems or wiring and connectivity.
+            If you are working on a vehicle display, SVM / AVM,
+            camera or vehicle safety project and want to discuss
+            the technical requirements, feel free to contact me.
         </p>
 
-        <a class="email"
+        <a class="contact-email"
            href="mailto:jacky@linkacc.com">
             jacky@linkacc.com
         </a>
@@ -625,12 +810,13 @@
 </section>
 
 
+<!-- Footer -->
+
 <footer>
 
-    © 2026 Jacky Liu. All rights reserved.
+    © 2026 Jacky Liu · Vehicle Electronics · Vehicle Safety · Connectivity
 
 </footer>
-
 
 </body>
 </html>
