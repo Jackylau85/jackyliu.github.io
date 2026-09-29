@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>5 Things to Check When Connecting an SVM Box to a Vehicle Monitor | Jacky Liu</title>
+
+    <meta name="description" content="Before connecting an SVM Box to a vehicle monitor, check HDMI signal, resolution, touch interface, power supply, and EMI/cable conditions. A practical guide for SVM and AVM systems.">
+
+    <meta name="keywords" content="SVM Box, vehicle monitor, SVM system, AVM system, HDMI, touch interface, vehicle display, EMI, vehicle camera system, vehicle monitor connection">
+
+    <meta name="author" content="Jacky Liu">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://jackylau85.github.io/jackyliu.github.io/5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+            color: #222;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #ffffff;
+        }
+
+        .category {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 38px;
+            line-height: 1.25;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 25px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-top: 28px;
+        }
+
+        .meta {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 35px;
+        }
+
+        p {
+            font-size: 17px;
+        }
+
+        ul, ol {
+            font-size: 17px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f5f5f5;
+        }
+
+        .highlight {
+            background: #f7f7f7;
+            border-left: 4px solid #222;
+            padding: 18px 20px;
+            margin: 25px 0;
+        }
+
+        .lesson {
+            background: #f2f2f2;
+            padding: 22px;
+            margin-top: 35px;
+        }
+
+        .related {
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 1px solid #ddd;
+        }
+
+        a {
+            color: #1a5dab;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="category">Technical Guide · SVM / AVM · Vehicle Monitor</div>
+
+    <h1>5 Things to Check When Connecting an SVM Box to a Vehicle Monitor</h1>
+
+    <div class="meta">
+        By Jacky Liu · September 29, 2026
+    </div>
+
+    <p>
+        In many SVM and AVM systems, the system architecture looks simple:
+    </p>
+
+    <div class="highlight">
+        <strong>Camera → SVM Box → HDMI → Vehicle Monitor → Touch / HMI</strong>
+    </div>
+
+    <p>
+        However, connecting an SVM Box to a vehicle monitor is not simply a matter of plugging in an HDMI cable.
+        A system can work correctly on the bench and still show a black screen, incorrect image, unstable touch,
+        unexpected restart, or image interference after installation in the vehicle.
+    </p>
+
+    <p>
+        Before integrating an SVM Box with a vehicle monitor, I normally recommend checking five areas:
+    </p>
+
+    <ol>
+        <li>HDMI signal</li>
+        <li>Resolution</li>
+        <li>Touch interface</li>
+        <li>Power supply</li>
+        <li>EMI and cable conditions</li>
+    </ol>
+
+    <p>
+        These five points cover much of the practical interface between the SVM processing system and the display side.
+    </p>
+
+
+    <h2>1. HDMI Signal: Is the Monitor Receiving the Right Signal?</h2>
+
+    <p>
+        The first question is not simply whether both devices have an HDMI connector.
+        The important question is whether the HDMI signal output by the SVM Box is actually compatible with the monitor.
+    </p>
+
+    <p>
+        An SVM Box may process multiple camera inputs, stitch the images, perform calibration,
+        and then output one processed video signal to the monitor.
+    </p>
+
+    <p>
+        The monitor therefore needs to correctly receive and display that output signal.
+    </p>
+
+    <h3>Things to confirm</h3>
+
+    <ul>
+        <li>HDMI input type</li>
+        <li>HDMI signal format</li>
+        <li>Supported input resolution</li>
+        <li>Supported refresh rate, when relevant</li>
+        <li>Whether the SVM Box output is stable during startup</li>
+        <li>Whether the monitor can correctly recognize the signal after vehicle power-up</li>
+    </ul>
+
+    <p>
+        A common mistake is to assume that "HDMI is HDMI" and therefore every HDMI monitor should work with every SVM Box.
+        In real applications, the complete signal specification still needs to be checked.
+    </p>
+
+
+    <h2>2. Resolution: Can the Monitor Match the SVM Box Output?</h2>
+
+    <p>
+        Resolution is another important point.
+    </p>
+
+    <p>
+        For example, an SVM Box may output 1920×1080, while the selected vehicle monitor has a different native resolution.
+        The monitor may still display the image in some cases, but scaling, aspect ratio, image sharpness,
+        or compatibility can become issues.
+    </p>
+
+    <p>
+        The correct question is not simply:
+    </p>
+
+    <div class="highlight">
+        <strong>"Is 1920×1080 better than 1024×600?"</strong>
+    </div>
+
+    <p>
+        The better question is:
+    </p>
+
+    <div class="highlight">
+        <strong>"Does the monitor resolution match the output and requirements of the complete SVM system?"</strong>
+    </div>
+
+    <h3>Check these items</h3>
+
+    <ul>
+        <li>SVM Box output resolution</li>
+        <li>Monitor supported input resolution</li>
+        <li>Monitor native panel resolution</li>
+        <li>Aspect ratio</li>
+        <li>Image scaling behavior</li>
+        <li>Required viewing distance and screen size</li>
+    </ul>
+
+    <p>
+        A higher-resolution panel is not automatically the correct solution.
+        The camera system, SVM processing unit, display size, viewing distance and overall system architecture
+        should all be considered together.
+    </p>
+
+
+    <h2>3. Touch Interface: Where Does the Touch Signal Go?</h2>
+
+    <p>
+        If the vehicle monitor includes a touchscreen, HDMI alone is usually not the complete interface.
+    </p>
+
+    <p>
+        HDMI can carry the video signal, but the touch signal normally needs another communication path.
+        Depending on the monitor and system architecture, this may involve USB or UART.
+    </p>
+
+    <div class="highlight">
+        <strong>Video interface ≠ Touch interface</strong>
+    </div>
+
+    <p>
+        This distinction becomes particularly important when the SVM Box or another vehicle controller
+        needs to receive commands from the monitor.
+    </p>
+
+    <h3>Questions to confirm</h3>
+
+    <ul>
+        <li>Is the monitor touchscreen?</li>
+        <li>Is touch required by the SVM system?</li>
+        <li>Is USB or UART used for touch communication?</li>
+        <li>Does the SVM Box support the required touch protocol?</li>
+        <li>Does the operating logic require touch events to be sent back to the SVM Box?</li>
+        <li>Is the touch interface stable under actual vehicle conditions?</li>
+    </ul>
+
+    <p>
+        In an SVM system, the monitor can become the HMI between the system and the driver.
+        Therefore, touch should be considered as part of the system interface rather than as an optional feature added at the end.
+    </p>
+
+
+    <h2>4. Power: Can the Monitor Work Reliably on the Vehicle?</h2>
+
+    <p>
+        A monitor may work perfectly when connected to a laboratory power supply.
+        That does not necessarily mean it will behave the same way inside a vehicle.
+    </p>
+
+    <p>
+        Vehicle power systems can experience voltage fluctuations, startup conditions,
+        transient events, voltage drops and electrical noise.
+    </p>
+
+    <p>
+        Therefore, the power specification needs to be checked at the system level.
+    </p>
+
+    <h3>Important points include</h3>
+
+    <ul>
+        <li>Vehicle nominal voltage</li>
+        <li>Actual operating voltage range</li>
+        <li>Voltage drop across the cable</li>
+        <li>Power connector and contact resistance</li>
+        <li>Grounding method</li>
+        <li>Power behavior during vehicle startup</li>
+        <li>Power behavior when other vehicle equipment is operating</li>
+    </ul>
+
+    <p>
+        For example, a monitor specified for a wide DC input range may still experience problems
+        if the actual voltage reaching the monitor becomes unstable because of the wiring or connector system.
+    </p>
+
+    <p>
+        This is why power should be checked at the monitor input rather than only at the vehicle battery or power source.
+    </p>
+
+
+    <h2>5. EMI and Cable: What Happens After Installation?</h2>
+
+    <p>
+        The fifth point is often underestimated.
+    </p>
+
+    <p>
+        An SVM system may look completely stable on a workbench.
+        After installation, however, the video image may show noise, flickering, lines,
+        intermittent signal loss or even unexpected restarts.
+    </p>
+
+    <p>
+        EMI and cable installation can be part of the reason.
+    </p>
+
+    <h3>Things worth checking</h3>
+
+    <ul>
+        <li>HDMI cable length</li>
+        <li>Cable quality and construction</li>
+        <li>Connector quality</li>
+        <li>Power and signal cable routing</li>
+        <li>Grounding</li>
+        <li>Distance from high-current or high-noise wiring</li>
+        <li>Engine and vehicle electrical environment</li>
+        <li>Shielding and cable design</li>
+    </ul>
+
+    <p>
+        The cable is not simply an accessory between the SVM Box and monitor.
+        In a vehicle environment, it becomes part of the signal and power transmission system.
+    </p>
+
+    <p>
+        This is especially important when the cable needs to pass through a long vehicle harness,
+        around an engine compartment, or through an area with significant electrical interference.
+    </p>
+
+
+    <h2>One SVM Connection Actually Contains Several Interfaces</h2>
+
+    <p>
+        Looking only at the HDMI connector can make the connection appear very simple.
+        In reality, an SVM Box and vehicle monitor can involve several different interfaces at the same time.
+    </p>
+
+    <table>
+        <tr>
+            <th>Interface / Condition</th>
+            <th>Main Question</th>
+        </tr>
+
+        <tr>
+            <td>HDMI</td>
+            <td>Can the monitor correctly receive the SVM Box video output?</td>
+        </tr>
+
+        <tr>
+            <td>Resolution</td>
+            <td>Does the display support the required output and image format?</td>
+        </tr>
+
+        <tr>
+            <td>Touch</td>
+            <td>Can the touch signal communicate correctly with the system?</td>
+        </tr>
+
+        <tr>
+            <td>Power</td>
+            <td>Does the monitor receive stable power under real vehicle conditions?</td>
+        </tr>
+
+        <tr>
+            <td>EMI / Cable</td>
+            <td>Will the signal remain stable after actual vehicle installation?</td>
+        </tr>
+    </table>
+
+
+    <h2>A Practical SVM Box to Monitor Checklist</h2>
+
+    <p>
+        Before starting a new SVM monitor integration project, I would suggest confirming the following information:
+    </p>
+
+    <ol>
+        <li>What video signal does the SVM Box output?</li>
+        <li>What resolution does the SVM Box output?</li>
+        <li>What input resolutions does the monitor support?</li>
+        <li>Is touchscreen functionality required?</li>
+        <li>Which touch interface is required — USB or UART?</li>
+        <li>What is the actual vehicle voltage range?</li>
+        <li>How long is the power and HDMI cable?</li>
+        <li>Where will the cables be installed?</li>
+        <li>Has the complete system been tested on the actual vehicle?</li>
+    </ol>
+
+
+    <h2>Why Bench Testing Is Not Enough</h2>
+
+    <p>
+        One of the most important lessons from vehicle electronics projects is that a successful bench test
+        does not automatically mean a successful vehicle installation.
+    </p>
+
+    <p>
+        On the bench, the SVM Box and monitor may be connected with a short cable,
+        a stable laboratory power supply and a clean electrical environment.
+    </p>
+
+    <p>
+        Inside the vehicle, the same system may face longer cables, vibration,
+        voltage fluctuations, grounding differences, electrical noise and different installation conditions.
+    </p>
+
+    <p>
+        Therefore, the final validation should be performed as a complete system under realistic installation conditions.
+    </p>
+
+
+    <div class="lesson">
+        <h2>Main Lesson</h2>
+
+        <p>
+            Connecting an SVM Box to a vehicle monitor is not simply an HDMI connection.
+        </p>
+
+        <p>
+            The five areas that should be checked are:
+        </p>
+
+        <ol>
+            <li><strong>HDMI signal</strong></li>
+            <li><strong>Resolution</strong></li>
+            <li><strong>Touch interface</strong></li>
+            <li><strong>Power</strong></li>
+            <li><strong>EMI / cable conditions</strong></li>
+        </ol>
+
+        <p>
+            When these five points are considered together, the monitor becomes part of the complete SVM system
+            rather than simply a screen connected to an SVM Box.
+        </p>
+
+        <p>
+            A practical approach is:
+        </p>
+
+        <div class="highlight">
+            <strong>Application → SVM Architecture → Signal → Display → Touch → Power → Installation</strong>
+        </div>
+
+        <p>
+            This system-level approach can prevent many problems before mass production.
+        </p>
+    </div>
+
+
+    <div class="related">
+        <h2>Related Articles</h2>
+
+        <ul>
+            <li>
+                <a href="why-svm-avm-needs-proper-display-interface.html">
+                    Why Does an SVM / AVM System Need a Proper Display Interface?
+                </a>
+            </li>
+
+            <li>
+                <a href="hdmi-vs-ahd-vehicle-camera-system.html">
+                    HDMI vs AHD for Vehicle Camera Systems: What Is the Difference?
+                </a>
+            </li>
+
+            <li>
+                <a href="1920x1080-vs-1024x600.html">
+                    1920×1080 vs 1024×600: Which Resolution Is Better for Vehicle Monitors?
+                </a>
+            </li>
+
+            <li>
+                <a href="monitor-as-hmi-in-svm-system.html">
+                    Why Is the Monitor More Than a Display Device in an SVM System?
+                </a>
+            </li>
+
+            <li>
+                <a href="why-vehicle-monitor-has-emi-problems.html">
+                    Why Does a Vehicle Monitor Have EMI Problems?
+                </a>
+            </li>
+
+            <li>
+                <a href="why-cables-can-matter-more-than-power-supply.html">
+                    Why Can Cables Matter More Than the Power Supply in a Vehicle Monitor?
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
