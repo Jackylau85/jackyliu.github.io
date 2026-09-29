@@ -1,20 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
-    <loc>https://jackylau85.github.io/jackyliu.github.io/</loc>
-  </url>
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/</loc>
+    </url>
 
-  <url>
-    <loc>https://jackylau85.github.io/jackyliu.github.io/bench-test-vs-installation.html</loc>
-  </url>
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/bench-test-vs-installation.html</loc>
+    </url>
 
-  <url>
-    <loc>https://jackylau85.github.io/jackyliu.github.io/how-to-choose-vehicle-monitor.html</loc>
-  </url>
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/how-to-choose-vehicle-monitor.html</loc>
+    </url>
 
-  <url>
-    <loc>https://jackylau85.github.io/jackyliu.github.io/why-wiring-matters.html</loc>
-  </url>
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/why-wiring-matters.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/1920x1080-vs-1024x600.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/what-brightness-does-a-vehicle-monitor-need.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/hdmi-vs-ahd-vehicle-camera-system.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/why-svm-avm-needs-proper-display-interface.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/why-vehicle-camera-image-quality-changes-after-installation.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/why-vehicle-monitor-has-emi-problems.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/why-cables-can-matter-more-than-power-supply.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/why-vehicle-monitors-use-m12-connectors.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/monitor-as-hmi-in-svm-system.html</loc>
+    </url>
+
+    <url>
+        <loc>https://jackylau85.github.io/jackyliu.github.io/5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html</loc>
+    </url>
 
 </urlset>
