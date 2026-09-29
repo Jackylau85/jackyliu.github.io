@@ -1,0 +1,128 @@
+name: Build Article Index
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate articles.json
+        run: |
+          python3 <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          articles = []
+
+          excluded = {
+              "index.html",
+              "404.html"
+          }
+
+          for file in Path(".").glob("*.html"):
+              if file.name in excluded:
+                  continue
+
+              text = file.read_text(encoding="utf-8", errors="ignore")
+
+              title_match = re.search(
+                  r"<title[^>]*>(.*?)</title>",
+                  text,
+                  re.I | re.S
+              )
+
+              description_match = re.search(
+                  r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']',
+                  text,
+                  re.I | re.S
+              )
+
+              category_match = re.search(
+                  r'<div[^>]*class=["\'][^"\']*category[^"\']*["\'][^>]*>(.*?)</div>',
+                  text,
+                  re.I | re.S
+              )
+
+              date_match = re.search(
+                  r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}',
+                  text,
+                  re.I
+              )
+
+              if not title_match:
+                  continue
+
+              title = re.sub(r"\s+", " ", title_match.group(1)).strip()
+
+              title = re.sub(
+                  r"\s*\|\s*Jacky Liu\s*$",
+                  "",
+                  title,
+                  flags=re.I
+              )
+
+              description = ""
+              if description_match:
+                  description = re.sub(
+                      r"\s+",
+                      " ",
+                      description_match.group(1)
+                  ).strip()
+
+              category = "Technical Insight"
+              if category_match:
+                  category = re.sub(
+                      r"\s+",
+                      " ",
+                      category_match.group(1)
+                  ).strip()
+
+              date = ""
+              if date_match:
+                  date = date_match.group(0)
+
+              articles.append({
+                  "title": title,
+                  "description": description,
+                  "category": category,
+                  "date": date,
+                  "url": file.name
+              })
+
+          articles.sort(
+              key=lambda x: x.get("date", ""),
+              reverse=True
+          )
+
+          Path("articles.json").write_text(
+              json.dumps(
+                  articles,
+                  ensure_ascii=False,
+                  indent=2
+              ),
+              encoding="utf-8"
+          )
+          PY
+
+      - name: Commit articles.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add articles.json
+
+          git diff --cached --quiet || \
+            git commit -m "Automatically update article index"
+
+          git push
