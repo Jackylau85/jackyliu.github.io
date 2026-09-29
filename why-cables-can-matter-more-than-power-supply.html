@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Why Can Cables Matter More Than the Power Supply in a Vehicle Monitor? | Jacky Liu</title>
+
+    <meta name="description" content="In vehicle monitor systems, the power supply is important, but cables, connectors, voltage drop, grounding, shielding and cable routing can sometimes have an even greater impact on system stability.">
+
+    <meta name="keywords" content="vehicle monitor cable, vehicle display cable, vehicle monitor power cable, automotive display wiring, vehicle camera cable, AHD cable, vehicle monitor voltage drop, vehicle wiring, SVM AVM cable">
+
+    <meta name="author" content="Jacky Liu">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://jackylau85.github.io/jackyliu.github.io/why-cables-can-matter-more-than-power-supply.html">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8fa;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 55px 20px;
+        }
+
+        .header-inner {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .category {
+            display: inline-block;
+            font-size: 14px;
+            color: #93c5fd;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin: 0 0 18px;
+        }
+
+        .meta {
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        article {
+            background: white;
+            padding: 45px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            margin-top: 40px;
+            font-size: 28px;
+            color: #111827;
+        }
+
+        h3 {
+            margin-top: 28px;
+            font-size: 21px;
+            color: #1f2937;
+        }
+
+        p {
+            font-size: 17px;
+            margin: 18px 0;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        .highlight {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 20px 22px;
+            margin: 28px 0;
+            border-radius: 6px;
+        }
+
+        .warning {
+            background: #fff7ed;
+            border-left: 4px solid #f97316;
+            padding: 20px 22px;
+            margin: 28px 0;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 13px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        .checklist {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        a {
+            color: #2563eb;
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            article {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+
+        <div class="category">
+            Technical Insight · Vehicle Monitor / Wiring
+        </div>
+
+        <h1>Why Can Cables Matter More Than the Power Supply in a Vehicle Monitor?</h1>
+
+        <div class="meta">
+            By Jacky Liu · September 29, 2026
+        </div>
+
+    </div>
+</header>
+
+<main>
+
+<article>
+
+<p>
+When a vehicle monitor has an unstable image, unexpected restarting or intermittent signal problems, the first thing people often check is the power supply.
+</p>
+
+<p>
+That makes sense. A stable voltage is obviously important for any electronic device.
+</p>
+
+<p>
+But in real vehicle applications, there is another part of the system that is sometimes underestimated:
+<strong>the cable.</strong>
+</p>
+
+<div class="highlight">
+<strong>A good power source does not guarantee good power at the monitor.</strong>
+The cable, connector, grounding path and installation environment between the power source and the monitor can change the actual electrical conditions seen by the device.
+</div>
+
+<p>
+This is why a vehicle monitor can work perfectly on the bench but behave differently after installation.
+</p>
+
+
+<h2>1. The Power Supply Is Not the Same as the Power at the Monitor</h2>
+
+<p>
+Suppose a vehicle provides a stable 12V supply.
+It is tempting to assume that the monitor will also receive a stable 12V.
+</p>
+
+<p>
+But the monitor may be connected through several meters of cable, connectors, extension harnesses, switches or other components.
+</p>
+
+<p>
+Every part of this path can introduce resistance.
+</p>
+
+<p>
+When current flows through the cable, a voltage drop can occur.
+</p>
+
+<p>
+The result is simple:
+</p>
+
+<table>
+
+<tr>
+    <th>At the Power Source</th>
+    <th>At the Monitor</th>
+</tr>
+
+<tr>
+    <td>Voltage appears normal</td>
+    <td>Voltage may be lower under load</td>
+</tr>
+
+<tr>
+    <td>Stable with short test cable</td>
+    <td>Different with long vehicle harness</td>
+</tr>
+
+<tr>
+    <td>Clean laboratory environment</td>
+    <td>Real vehicle electrical environment</td>
+</tr>
+
+</table>
+
+<div class="warning">
+<strong>This is why measuring voltage only at the battery or power source may not tell the whole story.</strong>
+For troubleshooting, it can be more useful to check the voltage directly at the monitor under actual operating conditions.
+</div>
+
+
+<h2>2. Cable Length Matters</h2>
+
+<p>
+The longer the cable, the more attention should be paid to its electrical characteristics.
+</p>
+
+<p>
+Longer cables can increase resistance and therefore increase voltage drop.
+</p>
+
+<p>
+The actual effect depends on factors such as:
+</p>
+
+<ul>
+    <li>Cable length</li>
+    <li>Conductor cross-sectional area</li>
+    <li>Current consumption</li>
+    <li>Cable material</li>
+    <li>Connector resistance</li>
+    <li>Temperature</li>
+</ul>
+
+<p>
+This becomes particularly important when a monitor is installed far away from the vehicle's main power connection.
+</p>
+
+<p>
+A cable that works perfectly for a short bench test may not provide the same electrical performance when extended through a real vehicle.
+</p>
+
+
+<h2>3. Cable Gauge Can Change the Result</h2>
+
+<p>
+Two cables may look almost identical from the outside but have different conductor sizes.
+</p>
+
+<p>
+For power wiring, conductor size directly affects resistance.
+</p>
+
+<p>
+If the cable is too small for the application, voltage drop can increase as current increases.
+</p>
+
+<p>
+This can become more noticeable when the vehicle system is operating under different conditions.
+</p>
+
+<p>
+For example, a monitor may appear stable when the system is lightly loaded but become unstable when several cameras, a DVR, an SVM processor or other equipment are operating at the same time.
+</p>
+
+<div class="highlight">
+<strong>The important question is not only "What voltage does the vehicle provide?"</strong>
+It is also "What voltage actually reaches the monitor while the complete system is operating?"
+</div>
+
+
+<h2>4. Connectors Are Part of the Cable System</h2>
+
+<p>
+A cable is not only the wire itself.
+The complete connection path may include several connectors, terminals, adapters and extension points.
+</p>
+
+<p>
+Every connection introduces another interface that can affect reliability.
+</p>
+
+<p>
+Poor or unsuitable connectors may cause:
+</p>
+
+<ul>
+    <li>Higher contact resistance</li>
+    <li>Intermittent connections</li>
+    <li>Unstable grounding</li>
+    <li>Signal problems</li>
+    <li>Problems caused by vibration</li>
+    <li>Problems caused by moisture or contamination</li>
+</ul>
+
+<p>
+This is particularly important for commercial vehicles, construction equipment and other applications where vibration, dust, water and temperature changes are part of normal operation.
+</p>
+
+
+<h2>5. The Ground Wire Can Be Just as Important</h2>
+
+<p>
+When discussing power cables, people often focus only on the positive power wire.
+</p>
+
+<p>
+But the ground path is equally important.
+</p>
+
+<p>
+A monitor needs a reliable return path for current.
+If the ground connection has excessive resistance or is connected to an unsuitable location, the system may become unstable.
+</p>
+
+<p>
+Grounding problems can also interact with video signals and create visible image interference.
+</p>
+
+<p>
+This is one reason why a system can sometimes appear to have a video problem when the underlying issue is actually the power or grounding path.
+</p>
+
+
+<h2>6. Cable Routing Can Affect EMI</h2>
+
+<p>
+The cable's physical location inside the vehicle can also matter.
+</p>
+
+<p>
+A video or signal cable routed next to high-current power wiring may be exposed to electromagnetic interference.
+</p>
+
+<p>
+The risk depends on the complete system, but routing should be considered when troubleshooting image noise or unstable signals.
+</p>
+
+<p>
+For example, it may be useful to check whether a video cable is running close to:
+</p>
+
+<ul>
+    <li>Motor wiring</li>
+    <li>Relay circuits</li>
+    <li>High-current power cables</li>
+    <li>DC/DC converters</li>
+    <li>Inverters</li>
+    <li>Other switching devices</li>
+</ul>
+
+<p>
+Changing the cable routing temporarily can sometimes be a useful troubleshooting test.
+</p>
+
+
+<h2>7. Power Cable and Video Cable Have Different Jobs</h2>
+
+<p>
+Not every vehicle cable should be evaluated in the same way.
+</p>
+
+<p>
+A power cable mainly needs to deliver stable electrical power.
+A video cable needs to preserve signal integrity.
+</p>
+
+<p>
+In a vehicle camera system, both can affect the final display image.
+</p>
+
+<table>
+
+<tr>
+    <th>Cable Type</th>
+    <th>Important Considerations</th>
+</tr>
+
+<tr>
+    <td>Power Cable</td>
+    <td>Conductor size, length, voltage drop, current capacity, grounding</td>
+</tr>
+
+<tr>
+    <td>AHD Video Cable</td>
+    <td>Signal integrity, shielding, impedance, connectors, cable length</td>
+</tr>
+
+<tr>
+    <td>HDMI Cable</td>
+    <td>Signal integrity, connector reliability, cable length, installation environment</td>
+</tr>
+
+<tr>
+    <td>USB Cable</td>
+    <td>Power delivery, data transmission, cable length, connector quality</td>
+</tr>
+
+<tr>
+    <td>Touch / UART Cable</td>
+    <td>Signal integrity, grounding, connector quality and routing</td>
+</tr>
+
+</table>
+
+<p>
+This is why choosing a cable simply because "it can carry the signal" may not be enough for a vehicle application.
+</p>
+
+
+<h2>8. Why Does a System Work With a Short Cable but Fail With a Long Cable?</h2>
+
+<p>
+This is a common troubleshooting question.
+</p>
+
+<p>
+The short cable used during product testing may create a very favorable electrical environment.
+</p>
+
+<p>
+Once the cable becomes longer, several things can change:
+</p>
+
+<ul>
+    <li>Resistance increases</li>
+    <li>Voltage drop increases</li>
+    <li>Signal attenuation may increase</li>
+    <li>Exposure to electromagnetic noise increases</li>
+    <li>There may be more connectors and connection points</li>
+    <li>The cable may pass through a more complex electrical environment</li>
+</ul>
+
+<p>
+Therefore, cable length should be considered as part of the system design rather than something added at the final installation stage.
+</p>
+
+
+<h2>9. A Cable Can Be Electrically Suitable but Mechanically Wrong</h2>
+
+<p>
+Vehicle applications are not only about electrical specifications.
+</p>
+
+<p>
+The cable also has to survive the physical environment.
+</p>
+
+<p>
+Depending on the application, the cable may experience:
+</p>
+
+<ul>
+    <li>Continuous vibration</li>
+    <li>Repeated bending</li>
+    <li>Temperature changes</li>
+    <li>Moisture</li>
+    <li>Dust</li>
+    <li>Oil or other contaminants</li>
+    <li>Repeated maintenance and disconnection</li>
+</ul>
+
+<p>
+A cable that works electrically in a laboratory may not necessarily provide the same reliability after months or years of vehicle operation.
+</p>
+
+<div class="highlight">
+<strong>For vehicle electronics, cable design has both an electrical side and a mechanical side.</strong>
+</div>
+
+
+<h2>10. Cables Can Also Affect Installation Cost</h2>
+
+<p>
+Cable selection is sometimes treated as a small part of the total project cost.
+</p>
+
+<p>
+But the wrong cable design can create additional costs later.
+</p>
+
+<p>
+For example:
+</p>
+
+<ul>
+    <li>Additional adapters may be required</li>
+    <li>Extension cables may need to be added</li>
+    <li>Connectors may need to be changed</li>
+    <li>Installation time may increase</li>
+    <li>Field failures may require service visits</li>
+    <li>The complete harness may need to be redesigned</li>
+</ul>
+
+<p>
+For a small prototype, this may not be significant.
+For hundreds or thousands of vehicles, it can become a much larger issue.
+</p>
+
+
+<h2>11. A Practical Cable Checklist for Vehicle Monitors</h2>
+
+<div class="checklist">
+
+<h3>Power</h3>
+
+<ul>
+    <li>What is the actual cable length?</li>
+    <li>Is the conductor size suitable for the current?</li>
+    <li>What voltage reaches the monitor under load?</li>
+    <li>Is the ground path reliable?</li>
+</ul>
+
+<h3>Video</h3>
+
+<ul>
+    <li>What video interface is being used?</li>
+    <li>Is the cable suitable for the signal type?</li>
+    <li>Is the cable length within a reasonable range for the system?</li>
+    <li>Is shielding required?</li>
+</ul>
+
+<h3>Connectors</h3>
+
+<ul>
+    <li>Are the connectors mechanically secure?</li>
+    <li>Are they suitable for the vehicle environment?</li>
+    <li>Are there unnecessary adapters or extension points?</li>
+</ul>
+
+<h3>Installation</h3>
+
+<ul>
+    <li>Is the cable routed near high-current wiring?</li>
+    <li>Is the cable protected from vibration and mechanical damage?</li>
+    <li>Are power and signal cables arranged appropriately?</li>
+</ul>
+
+</div>
+
+
+<h2>12. What Should Be Tested Before Mass Production?</h2>
+
+<p>
+A vehicle monitor should ideally be tested with the actual cable and installation conditions that will be used in production.
+</p>
+
+<p>
+A useful validation process can include:
+</p>
+
+<ul>
+    <li>Actual vehicle power supply</li>
+    <li>Actual production-length cables</li>
+    <li>Actual connectors</li>
+    <li>Actual camera system</li>
+    <li>Actual SVM/AVM processor where applicable</li>
+    <li>Engine running conditions</li>
+    <li>Other vehicle equipment operating at the same time</li>
+    <li>Vibration and environmental conditions</li>
+</ul>
+
+<p>
+This can reveal problems that are difficult to reproduce on a laboratory bench.
+</p>
+
+
+<h2>13. The Main Lesson</h2>
+
+<p>
+When a vehicle monitor has a problem, it is natural to start with the electronic device itself.
+</p>
+
+<p>
+But the monitor is only one part of the complete system.
+</p>
+
+<p>
+The actual electrical path may look more like this:
+</p>
+
+<div class="highlight">
+<strong>
+Power Source → Fuse → Harness → Connector → Extension Cable → Ground → Monitor
+</strong>
+</div>
+
+<p>
+For a camera system, the signal path may be even longer:
+</p>
+
+<div class="highlight">
+<strong>
+Camera → Connector → Video Cable → Extension Harness → SVM / AVM Box → Display Cable → Monitor
+</strong>
+</div>
+
+<p>
+Every connection and every cable in this chain can influence the final result.
+</p>
+
+<p>
+That is why, in some vehicle applications, the cable can matter as much as—or sometimes more than—the power supply itself.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+A stable vehicle monitor system is not created simply by choosing a good display and connecting it to a stable power source.
+</p>
+
+<p>
+Cable length, conductor size, voltage drop, grounding, connectors, shielding, routing and mechanical reliability all contribute to the final performance.
+</p>
+
+<p>
+When a system works perfectly on the bench but becomes unstable after installation, the cable should not be treated as an afterthought.
+</p>
+
+<div class="highlight">
+<strong>
+In vehicle electronics, the cable is part of the system—not just an accessory.
+</strong>
+</div>
+
+
+<h2>Related Articles</h2>
+
+<ul>
+
+    <li>
+        <a href="why-vehicle-monitor-has-emi-problems.html">
+            Why Does a Vehicle Monitor Have EMI Problems?
+        </a>
+    </li>
+
+    <li>
+        <a href="bench-test-vs-installation.html">
+            Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?
+        </a>
+    </li>
+
+    <li>
+        <a href="why-wiring-matters.html">
+            Why Wiring Matters in Vehicle Safety Systems
+        </a>
+    </li>
+
+    <li>
+        <a href="why-vehicle-camera-image-quality-changes-after-installation.html">
+            Why Does a Vehicle Camera Image Look Good in the Factory but Poor After Installation?
+        </a>
+    </li>
+
+    <li>
+        <a href="hdmi-vs-ahd-vehicle-camera-system.html">
+            HDMI vs AHD for Vehicle Camera Systems: What Is the Difference?
+        </a>
+    </li>
+
+</ul>
+
+</article>
+
+</main>
+
+<footer>
+    © 2026 Jacky Liu · Vehicle Monitor · Vehicle Safety · SVM / AVM · Camera Systems
+</footer>
+
+</body>
+</html>
