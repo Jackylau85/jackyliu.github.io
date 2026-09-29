@@ -35,6 +35,13 @@
     "url": "why-svm-avm-needs-proper-display-interface.html"
   },
   {
+    "title": "When Does an SVM Monitor Need Touch?",
+    "description": "When does an SVM monitor need touch? Learn how USB touch, UART touch, capacitive touch, glove operation and wet finger operation affect SVM and AVM vehicle monitor design.",
+    "category": "Technical Guide · SVM / AVM · Vehicle Monitor / HMI",
+    "date": "September 29, 2026",
+    "url": "when-does-an-svm-monitor-need-touch.html"
+  },
+  {
     "title": "5 Things to Check When Connecting an SVM Box to a Vehicle Monitor",
     "description": "Before connecting an SVM Box to a vehicle monitor, check HDMI signal, resolution, touch interface, power supply, and EMI/cable conditions. A practical guide for SVM and AVM systems.",
     "category": "Technical Guide · SVM / AVM · Vehicle Monitor",
