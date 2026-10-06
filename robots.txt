@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jackylau85.github.io/jackyliu.github.io/sitemap.xml
