@@ -15,6 +15,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -23,32 +27,222 @@ body {
     line-height: 1.7;
 }
 
+/* =========================
+   HEADER
+   ========================= */
+
 header {
     background: #111;
     color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .nav {
     max-width: 1100px;
     margin: auto;
-    padding: 20px 24px;
+    padding: 18px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
 .logo {
     font-size: 21px;
     font-weight: bold;
     letter-spacing: 2px;
+    white-space: nowrap;
 }
 
-.nav a {
-    color: white;
-    margin-left: 25px;
+/* =========================
+   NAVIGATION
+   ========================= */
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.main-nav > a,
+.nav-link {
+    color: #d1d5db;
     font-size: 14px;
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
+
+.main-nav > a:hover,
+.nav-link:hover {
+    color: white;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown-arrow {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+}
+
+.nav-item:hover .dropdown-arrow,
+.nav-item:focus-within .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* =========================
+   INSIGHTS DROPDOWN
+   ========================= */
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 18px);
+    right: 0;
+
+    width: 720px;
+    max-width: 80vw;
+    max-height: 75vh;
+    overflow-y: auto;
+
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+
+    padding: 18px;
+
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+
+    display: none;
+}
+
+.dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 35px;
+
+    width: 15px;
+    height: 15px;
+
+    background: #1f2937;
+
+    border-left: 1px solid #374151;
+    border-top: 1px solid #374151;
+
+    transform: rotate(45deg);
+}
+
+.nav-item:hover .dropdown-menu,
+.nav-item:focus-within .dropdown-menu {
+    display: block;
+}
+
+.dropdown-inner {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 22px 28px;
+}
+
+.dropdown-group-title {
+    color: #9ca3af;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    margin-bottom: 7px;
+    padding: 0 8px;
+}
+
+.dropdown-group a {
+    display: block;
+
+    color: #e5e7eb;
+
+    font-size: 13px;
+    line-height: 1.45;
+
+    padding: 7px 8px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.dropdown-group a:hover {
+    background: #374151;
+    color: white;
+}
+
+.dropdown-all {
+    display: block;
+
+    color: #93c5fd;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    padding: 7px 8px 12px;
+
+    margin-bottom: 12px;
+
+    border-bottom: 1px solid #374151;
+
+    text-decoration: none;
+}
+
+.dropdown-all:hover {
+    color: #bfdbfe;
+}
+
+/* =========================
+   MOBILE MENU
+   ========================= */
+
+.mobile-menu-toggle {
+    display: none;
+
+    border: 1px solid #374151;
+    background: #1f2937;
+
+    color: white;
+
+    border-radius: 7px;
+
+    padding: 7px 10px;
+
+    font-size: 20px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+/* =========================
+   HERO
+   ========================= */
 
 .hero {
     background: #171717;
@@ -86,6 +280,10 @@ h1 {
     color: #ccc;
     max-width: 780px;
 }
+
+/* =========================
+   CONTENT
+   ========================= */
 
 .content {
     max-width: 900px;
@@ -139,6 +337,10 @@ li {
     text-decoration: none;
 }
 
+/* =========================
+   FOOTER
+   ========================= */
+
 footer {
     background: #111;
     color: #888;
@@ -146,7 +348,96 @@ footer {
     padding: 30px;
 }
 
-@media (max-width: 700px) {
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 800px) {
+
+    .nav {
+        padding: 16px 20px;
+        flex-wrap: wrap;
+    }
+
+    .mobile-menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-nav {
+        display: none;
+
+        width: 100%;
+
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 0;
+
+        padding: 8px 0 12px;
+    }
+
+    .main-nav.mobile-open {
+        display: flex;
+    }
+
+    .main-nav > a {
+        display: block;
+        padding: 10px 4px;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-link {
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px 4px;
+    }
+
+    .dropdown-menu {
+        position: static;
+
+        width: 100%;
+        max-width: none;
+        max-height: none;
+
+        display: none;
+
+        margin: 4px 0 8px;
+
+        padding: 12px;
+
+        background: #1f2937;
+
+        border: 1px solid #374151;
+        border-radius: 8px;
+
+        box-shadow: none;
+    }
+
+    .dropdown-menu::before {
+        display: none;
+    }
+
+    .nav-item.mobile-open .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-inner {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .dropdown-group a {
+        padding: 8px;
+    }
+
+    .hero {
+        padding: 65px 24px;
+    }
 
     h1 {
         font-size: 34px;
@@ -156,9 +447,24 @@ footer {
         padding: 28px 22px;
     }
 
-    .nav {
-        flex-direction: column;
-        gap: 15px;
+}
+
+@media (max-width: 480px) {
+
+    .intro {
+        font-size: 17px;
+    }
+
+}
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (min-width: 801px) and (max-width: 1000px) {
+
+    .dropdown-menu {
+        width: 650px;
     }
 
 }
@@ -167,7 +473,13 @@ footer {
 
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     HEADER
+     ========================= -->
 
 <header>
 
@@ -177,35 +489,132 @@ footer {
 JACKY LIU
 </div>
 
-<div>
 
-<a href="index.html">Home</a>
-<a href="index.html#insights">Insights</a>
-<a href="index.html#about">About</a>
-<a href="index.html#contact">Contact</a>
+<button
+    class="mobile-menu-toggle"
+    id="mobile-menu-toggle"
+    type="button"
+    aria-label="Open navigation menu"
+    aria-expanded="false"
+    aria-controls="main-nav"
+>
+☰
+</button>
+
+
+<nav
+    class="main-nav"
+    id="main-nav"
+>
+
+
+<a href="index.html">
+Focus
+</a>
+
+
+<div
+    class="nav-item"
+    id="insights-nav-item"
+>
+
+
+<button
+    class="nav-link"
+    id="insights-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="insights-dropdown"
+>
+
+Insights
+
+<span class="dropdown-arrow">
+▼
+</span>
+
+</button>
+
+
+<div
+    class="dropdown-menu"
+    id="insights-dropdown"
+>
+
+
+<a
+    class="dropdown-all"
+    href="index.html#insights"
+>
+View All Insights →
+</a>
+
+
+<div
+    class="dropdown-inner"
+    id="insights-dropdown-inner"
+>
+
+<div class="dropdown-group">
+
+<div class="dropdown-group-title">
+Loading...
+</div>
 
 </div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<a href="index.html#problems">
+Problems
+</a>
+
+
+<a href="index.html#about">
+About
+</a>
+
+
+<a href="index.html#contact">
+Contact
+</a>
+
+
+</nav>
 
 </div>
 
 </header>
 
 
+<!-- =========================
+     HERO
+     ========================= -->
+
 <section class="hero">
 
 <div class="hero-inner">
+
 
 <div class="category">
 Technical Insight · Vehicle Monitor
 </div>
 
+
 <h1>
 Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?
 </h1>
 
+
 <div class="meta">
 By Jacky Liu · September 29, 2026
 </div>
+
 
 <div class="intro">
 A vehicle monitor may work perfectly during a bench test and still show a black screen,
@@ -213,19 +622,26 @@ flickering image, intermittent signal or unexpected reboot after installation.
 The difference is often the installation environment.
 </div>
 
+
 </div>
 
 </section>
 
 
+<!-- =========================
+     ARTICLE
+     ========================= -->
+
 <main class="content">
 
 <article>
+
 
 <p>
 One of the most common situations in vehicle electronics is surprisingly simple:
 the monitor works perfectly in the workshop, but something changes after it is installed on the vehicle.
 </p>
+
 
 <p>
 The image may suddenly become unstable. The monitor may restart.
@@ -233,18 +649,23 @@ The camera signal may disappear intermittently.
 Touch control may become unreliable.
 </p>
 
+
 <p>
 This is why a bench test is important, but it is not the final test.
 A vehicle creates a much more complicated electrical and electromagnetic environment.
 </p>
 
 
-<h2>1. Power Supply Is Different on a Real Vehicle</h2>
+<h2>
+1. Power Supply Is Different on a Real Vehicle
+</h2>
+
 
 <p>
 On a workbench, a monitor is often powered by a stable laboratory power supply.
 The voltage is clean and the wiring is short.
 </p>
+
 
 <p>
 A vehicle is different.
@@ -252,18 +673,25 @@ The power system can contain voltage fluctuations, electrical noise,
 transient conditions and long wiring paths.
 </p>
 
+
 <div class="highlight">
+
 A monitor that works correctly on a stable bench power supply may behave differently
 when connected to the actual vehicle power system.
+
 </div>
 
 
-<h2>2. Voltage Drop Can Become a Hidden Problem</h2>
+<h2>
+2. Voltage Drop Can Become a Hidden Problem
+</h2>
+
 
 <p>
 Long cables, small wire gauges, connectors and additional connection points
 can introduce voltage drop.
 </p>
+
 
 <p>
 The vehicle battery may provide sufficient voltage,
@@ -271,11 +699,15 @@ but the voltage measured at the monitor can be lower.
 </p>
 
 
-<h2>3. Grounding Matters</h2>
+<h2>
+3. Grounding Matters
+</h2>
+
 
 <p>
 Grounding problems can create symptoms that are difficult to reproduce on a bench.
 </p>
+
 
 <p>
 When a system contains several devices — for example cameras,
@@ -284,12 +716,16 @@ the complete grounding architecture should be considered.
 </p>
 
 
-<h2>4. EMI Can Appear Only After Installation</h2>
+<h2>
+4. EMI Can Appear Only After Installation
+</h2>
+
 
 <p>
 Electromagnetic interference is another important difference between
 a bench test and a vehicle installation.
 </p>
+
 
 <p>
 On the bench, the monitor and camera may be separated from motors,
@@ -298,12 +734,16 @@ Inside a vehicle, these devices can be physically much closer.
 </p>
 
 
-<h2>5. Cable and Connector Problems Are Easy to Overlook</h2>
+<h2>
+5. Cable and Connector Problems Are Easy to Overlook
+</h2>
+
 
 <p>
 The monitor and camera may both be functioning correctly,
 but the connection between them may not be reliable.
 </p>
+
 
 <p>
 Cable length, shielding, connector quality, pin assignment,
@@ -311,12 +751,16 @@ grounding and mechanical installation can all influence system performance.
 </p>
 
 
-<h2>6. Signal Compatibility Is More Than Resolution</h2>
+<h2>
+6. Signal Compatibility Is More Than Resolution
+</h2>
+
 
 <p>
 A monitor may support the required resolution but still not work correctly
 with a particular camera or vehicle vision system.
 </p>
+
 
 <p>
 The system may need to consider video input type, signal format,
@@ -325,11 +769,15 @@ monitor and recording equipment.
 </p>
 
 
-<h2>7. Bench Testing Should Simulate the Real Application</h2>
+<h2>
+7. Bench Testing Should Simulate the Real Application
+</h2>
+
 
 <p>
 Instead of testing only the monitor by itself, test the complete system:
 </p>
+
 
 <ul>
 
@@ -344,34 +792,56 @@ Instead of testing only the monitor by itself, test the complete system:
 </ul>
 
 
-<h2>Practical Installation Checklist</h2>
+<h2>
+Practical Installation Checklist
+</h2>
+
 
 <div class="checklist">
 
 <ul>
 
-<li>Measure voltage directly at the monitor input.</li>
+<li>
+Measure voltage directly at the monitor input.
+</li>
 
-<li>Check voltage during engine start and normal operation.</li>
+<li>
+Check voltage during engine start and normal operation.
+</li>
 
-<li>Check grounding between camera and monitor.</li>
+<li>
+Check grounding between camera and monitor.
+</li>
 
-<li>Inspect connectors and pin assignments.</li>
+<li>
+Inspect connectors and pin assignments.
+</li>
 
-<li>Check cable length and cable construction.</li>
+<li>
+Check cable length and cable construction.
+</li>
 
-<li>Test the system with the engine running.</li>
+<li>
+Test the system with the engine running.
+</li>
 
-<li>Test other electrical equipment operating at the same time.</li>
+<li>
+Test other electrical equipment operating at the same time.
+</li>
 
-<li>Check whether the video signal remains stable.</li>
+<li>
+Check whether the video signal remains stable.
+</li>
 
 </ul>
 
 </div>
 
 
-<h2>The Main Lesson</h2>
+<h2>
+The Main Lesson
+</h2>
+
 
 <p>
 A vehicle monitor is not working alone.
@@ -379,20 +849,28 @@ Its real-world performance depends on the complete electrical
 and connection environment around it.
 </p>
 
+
 <div class="highlight">
 
-<strong>Bench testing tells you whether the product works.</strong>
+<strong>
+Bench testing tells you whether the product works.
+</strong>
 
 <br><br>
 
-<strong>Installation testing tells you whether the system works.</strong>
+<strong>
+Installation testing tells you whether the system works.
+</strong>
 
 </div>
 
 
 <div class="author">
 
-<strong>About Jacky Liu</strong>
+<strong>
+About Jacky Liu
+</strong>
+
 
 <p>
 I work in business development for vehicle electronics and safety products,
@@ -403,20 +881,469 @@ and low-voltage connectivity.
 </div>
 
 
-<a class="back" href="index.html">
+<a
+    class="back"
+    href="index.html"
+>
 ← Back to Home
 </a>
+
 
 </article>
 
 </main>
 
 
+<!-- =========================
+     FOOTER
+     ========================= -->
+
 <footer>
 
 © 2026 Jacky Liu. All rights reserved.
 
 </footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+     ========================= -->
+
+<script>
+
+/*
+ * Article grouping for the Insights dropdown.
+ *
+ * Existing article URLs are kept unchanged.
+ */
+
+const insightGroups = {
+
+    "Vehicle Monitors": [
+
+        "how-to-choose-vehicle-monitor.html",
+
+        "1920x1080-vs-1024x600.html",
+
+        "what-brightness-does-a-vehicle-monitor-need.html",
+
+        "why-vehicle-monitor-has-emi-problems.html",
+
+        "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
+
+        "why-vehicle-monitors-use-m12-connectors.html",
+
+        "bench-test-vs-installation.html"
+
+    ],
+
+
+    "SVM / AVM": [
+
+        "monitor-as-hmi-in-svm-system.html",
+
+        "svm-display-resolution-system-matching.html",
+
+        "why-svm-avm-needs-proper-display-interface.html",
+
+        "when-does-an-svm-monitor-need-touch.html",
+
+        "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html",
+
+        "hdmi-vs-ahd-vehicle-camera-system.html"
+
+    ],
+
+
+    "Vehicle Safety": [
+
+        "why-wiring-matters.html",
+
+        "why-vehicle-camera-image-quality-changes-after-installation.html"
+
+    ],
+
+
+    "Wiring & Connectivity": [
+
+        "why-cables-can-matter-more-than-power-supply.html"
+
+    ]
+
+};
+
+
+/*
+ * Build Insights dropdown
+ * from articles.json.
+ */
+
+async function loadInsightsMenu() {
+
+    const container =
+        document.getElementById(
+            "insights-dropdown-inner"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "articles.json",
+                {
+                    cache: "no-cache"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load articles.json"
+            );
+
+        }
+
+
+        const articles =
+            await response.json();
+
+
+        const articleMap = {};
+
+
+        articles.forEach(
+            article => {
+
+                articleMap[
+                    article.url
+                ] = article;
+
+            }
+        );
+
+
+        container.innerHTML = "";
+
+
+        Object.entries(
+            insightGroups
+        ).forEach(
+            ([groupName, urls]) => {
+
+
+                const group =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                group.className =
+                    "dropdown-group";
+
+
+                const title =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                title.className =
+                    "dropdown-group-title";
+
+
+                title.textContent =
+                    groupName;
+
+
+                group.appendChild(
+                    title
+                );
+
+
+                urls.forEach(
+                    url => {
+
+
+                        const article =
+                            articleMap[url];
+
+
+                        if (!article) {
+                            return;
+                        }
+
+
+                        const link =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        link.href =
+                            article.url;
+
+
+                        link.textContent =
+                            article.title;
+
+
+                        link.addEventListener(
+                            "click",
+                            closeMobileMenu
+                        );
+
+
+                        group.appendChild(
+                            link
+                        );
+
+                    }
+                );
+
+
+                container.appendChild(
+                    group
+                );
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <div class="dropdown-group">
+
+                <div class="dropdown-group-title">
+                    Insights
+                </div>
+
+                <a href="index.html#insights">
+                    View all articles
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/*
+ * Mobile menu.
+ */
+
+const mobileMenuToggle =
+    document.getElementById(
+        "mobile-menu-toggle"
+    );
+
+
+const mainNav =
+    document.getElementById(
+        "main-nav"
+    );
+
+
+mobileMenuToggle.addEventListener(
+    "click",
+    () => {
+
+
+        const isOpen =
+            mainNav.classList.toggle(
+                "mobile-open"
+            );
+
+
+        mobileMenuToggle.setAttribute(
+            "aria-expanded",
+            isOpen
+                ? "true"
+                : "false"
+        );
+
+
+        mobileMenuToggle.setAttribute(
+            "aria-label",
+            isOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+        );
+
+    }
+);
+
+
+/*
+ * Mobile Insights dropdown.
+ */
+
+const insightsNavItem =
+    document.getElementById(
+        "insights-nav-item"
+    );
+
+
+const insightsToggle =
+    document.getElementById(
+        "insights-toggle"
+    );
+
+
+insightsToggle.addEventListener(
+    "click",
+    event => {
+
+
+        event.stopPropagation();
+
+
+        if (
+            window.innerWidth <= 800
+        ) {
+
+
+            const isOpen =
+                insightsNavItem.classList.toggle(
+                    "mobile-open"
+                );
+
+
+            insightsToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+                    ? "true"
+                    : "false"
+            );
+
+        }
+
+    }
+);
+
+
+/*
+ * Close menu after clicking
+ * normal navigation links.
+ */
+
+document
+    .querySelectorAll(
+        "#main-nav > a"
+    )
+    .forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                closeMobileMenu
+            );
+
+        }
+    );
+
+
+function closeMobileMenu() {
+
+
+    if (
+        window.innerWidth <= 800
+    ) {
+
+
+        mainNav.classList.remove(
+            "mobile-open"
+        );
+
+
+        insightsNavItem.classList.remove(
+            "mobile-open"
+        );
+
+
+        mobileMenuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+
+        mobileMenuToggle.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+        );
+
+
+        insightsToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+}
+
+
+/*
+ * Reset mobile state when switching
+ * back to desktop.
+ */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+
+        if (
+            window.innerWidth > 800
+        ) {
+
+
+            mainNav.classList.remove(
+                "mobile-open"
+            );
+
+
+            insightsNavItem.classList.remove(
+                "mobile-open"
+            );
+
+
+            mobileMenuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            insightsToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
+
+
+/*
+ * Start.
+ */
+
+loadInsightsMenu();
+
+</script>
+
 
 </body>
 </html>
