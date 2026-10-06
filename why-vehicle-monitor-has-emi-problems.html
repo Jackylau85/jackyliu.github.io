@@ -162,20 +162,141 @@
 
 <body>
 
-<header>
-    <div class="header-inner">
+<header class="site-header">
 
-        <div class="category">
-            Technical Insight · Vehicle Monitor / EMI
+    <div class="site-nav">
+
+        <div class="site-logo">
+            JACKY LIU
         </div>
 
-        <h1>Why Does a Vehicle Monitor Have EMI Problems?</h1>
+        <nav class="desktop-nav">
 
-        <div class="meta">
-            By Jacky Liu · September 29, 2026
-        </div>
+            <a href="index.html" class="site-nav-link">
+                Focus
+            </a>
+
+            <div class="site-insights">
+
+                <button class="site-insights-button">
+                    Insights <span>▼</span>
+                </button>
+
+                <div class="site-dropdown">
+
+                    <div class="site-dropdown-inner">
+
+                        <div class="site-dropdown-group">
+                            <div class="site-dropdown-title">
+                                Vehicle Monitors
+                            </div>
+                            <div id="vehicle-monitors-menu"></div>
+                        </div>
+
+                        <div class="site-dropdown-group">
+                            <div class="site-dropdown-title">
+                                SVM / AVM
+                            </div>
+                            <div id="svm-avm-menu"></div>
+                        </div>
+
+                        <div class="site-dropdown-group">
+                            <div class="site-dropdown-title">
+                                Vehicle Safety
+                            </div>
+                            <div id="vehicle-safety-menu"></div>
+                        </div>
+
+                        <div class="site-dropdown-group">
+                            <div class="site-dropdown-title">
+                                Wiring & Connectivity
+                            </div>
+                            <div id="wiring-menu"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <a href="index.html#problems" class="site-nav-link">
+                Problems
+            </a>
+
+            <a href="index.html#about" class="site-nav-link">
+                About
+            </a>
+
+            <a href="index.html#contact" class="site-nav-link">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <button
+            class="mobile-menu-toggle"
+            onclick="toggleArticleMobileMenu()"
+            aria-label="Open navigation menu">
+            ☰
+        </button>
 
     </div>
+
+
+    <div class="mobile-article-menu" id="mobileArticleMenu">
+
+        <a href="index.html">
+            Focus
+        </a>
+
+        <div class="mobile-section-title">
+            Insights
+        </div>
+
+        <div class="mobile-submenu">
+
+            <div class="mobile-group-title">
+                Vehicle Monitors
+            </div>
+
+            <div id="mobile-vehicle-monitors-menu"></div>
+
+            <div class="mobile-group-title">
+                SVM / AVM
+            </div>
+
+            <div id="mobile-svm-avm-menu"></div>
+
+            <div class="mobile-group-title">
+                Vehicle Safety
+            </div>
+
+            <div id="mobile-vehicle-safety-menu"></div>
+
+            <div class="mobile-group-title">
+                Wiring & Connectivity
+            </div>
+
+            <div id="mobile-wiring-menu"></div>
+
+        </div>
+
+        <a href="index.html#problems">
+            Problems
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="index.html#contact">
+            Contact
+        </a>
+
+    </div>
+
 </header>
 
 <main>
@@ -679,6 +800,224 @@ This is why a reliable vehicle monitor should be evaluated not only by its displ
 <footer>
     © 2026 Jacky Liu · Vehicle Monitor · Vehicle Safety · SVM / AVM · Camera Systems
 </footer>
+
+<script>
+
+const articleInsightGroups = {
+{
+    "Vehicle Monitors": [
+        "how-to-choose-vehicle-monitor.html",
+        "1920x1080-vs-1024x600.html",
+        "what-brightness-does-a-vehicle-monitor-need.html",
+        "why-vehicle-monitor-has-emi-problems.html",
+        "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
+        "why-vehicle-monitors-use-m12-connectors.html",
+        "bench-test-vs-installation.html"
+    ],
+    "SVM / AVM": [
+        "monitor-as-hmi-in-svm-system.html",
+        "svm-display-resolution-system-matching.html",
+        "why-svm-avm-needs-proper-display-interface.html",
+        "when-does-an-svm-monitor-need-touch.html",
+        "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html",
+        "hdmi-vs-ahd-vehicle-camera-system.html"
+    ],
+    "Vehicle Safety": [
+        "why-wiring-matters.html",
+        "why-vehicle-camera-image-quality-changes-after-installation.html"
+    ],
+    "Wiring & Connectivity": [
+        "why-cables-can-matter-more-than-power-supply.html"
+    ]
+}
+};
+
+
+async function loadArticleInsightsMenu() {
+
+    try {
+
+        const response = await fetch("articles.json");
+
+        if (!response.ok) {
+            throw new Error("Unable to load articles.json");
+        }
+
+        const articles = await response.json();
+
+        const articleMap = {};
+
+        articles.forEach(article => {
+            articleMap[article.url] = article.title;
+        });
+
+
+        Object.entries(articleInsightGroups).forEach(
+            ([group, urls]) => {
+
+                let desktopHTML = "";
+                let mobileHTML = "";
+
+                urls.forEach(url => {
+
+                    const title = articleMap[url];
+
+                    if (!title) {
+                        return;
+                    }
+
+                    desktopHTML += `
+                        <a
+                            class="site-dropdown-link"
+                            href="${url}">
+                            ${title}
+                        </a>
+                    `;
+
+                    mobileHTML += `
+                        <a href="${url}">
+                            ${title}
+                        </a>
+                    `;
+
+                });
+
+
+                if (group === "Vehicle Monitors") {
+
+                    const desktop =
+                        document.getElementById(
+                            "vehicle-monitors-menu"
+                        );
+
+                    const mobile =
+                        document.getElementById(
+                            "mobile-vehicle-monitors-menu"
+                        );
+
+                    if (desktop) {
+                        desktop.innerHTML = desktopHTML;
+                    }
+
+                    if (mobile) {
+                        mobile.innerHTML = mobileHTML;
+                    }
+
+                }
+
+
+                if (group === "SVM / AVM") {
+
+                    const desktop =
+                        document.getElementById(
+                            "svm-avm-menu"
+                        );
+
+                    const mobile =
+                        document.getElementById(
+                            "mobile-svm-avm-menu"
+                        );
+
+                    if (desktop) {
+                        desktop.innerHTML = desktopHTML;
+                    }
+
+                    if (mobile) {
+                        mobile.innerHTML = mobileHTML;
+                    }
+
+                }
+
+
+                if (group === "Vehicle Safety") {
+
+                    const desktop =
+                        document.getElementById(
+                            "vehicle-safety-menu"
+                        );
+
+                    const mobile =
+                        document.getElementById(
+                            "mobile-vehicle-safety-menu"
+                        );
+
+                    if (desktop) {
+                        desktop.innerHTML = desktopHTML;
+                    }
+
+                    if (mobile) {
+                        mobile.innerHTML = mobileHTML;
+                    }
+
+                }
+
+
+                if (group === "Wiring & Connectivity") {
+
+                    const desktop =
+                        document.getElementById(
+                            "wiring-menu"
+                        );
+
+                    const mobile =
+                        document.getElementById(
+                            "mobile-wiring-menu"
+                        );
+
+                    if (desktop) {
+                        desktop.innerHTML = desktopHTML;
+                    }
+
+                    if (mobile) {
+                        mobile.innerHTML = mobileHTML;
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Article Insights menu error:",
+            error
+        );
+
+    }
+
+}
+
+
+function toggleArticleMobileMenu() {
+
+    const menu =
+        document.getElementById(
+            "mobileArticleMenu"
+        );
+
+    if (!menu) {
+        return;
+    }
+
+    if (menu.style.display === "block") {
+
+        menu.style.display = "none";
+
+    } else {
+
+        menu.style.display = "block";
+
+    }
+
+}
+
+
+loadArticleInsightsMenu();
+
+</script>
 
 </body>
 </html>

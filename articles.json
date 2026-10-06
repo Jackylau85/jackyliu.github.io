@@ -1,24 +1,10 @@
 [
   {
-    "title": "Why Is the Monitor More Than a Display Device in an SVM System?",
-    "description": "In an SVM system, the monitor is more than a device for displaying images. It is the HMI between the camera system, SVM box and driver, combining video display, touch interaction, alerts and system control.",
-    "category": "Technical Insight · SVM / AVM · HMI",
-    "date": "September 29, 2026",
-    "url": "monitor-as-hmi-in-svm-system.html"
-  },
-  {
     "title": "Why Is an Automotive Touchscreen Different from a Normal Tablet?",
     "description": "Why is an automotive touchscreen different from a normal tablet? Compare vehicle touchscreens and consumer tablets in terms of environment, temperature, vibration, power, EMI, gloves, wet fingers and HMI requirements.",
     "category": "Technical Insight · Vehicle Monitor · Touchscreen / HMI",
     "date": "September 29, 2026",
     "url": "Why Is an Automotive Touchscreen Different from a Normal Tablet.html"
-  },
-  {
-    "title": "Why Does a Vehicle Monitor Have EMI Problems?",
-    "description": "Why do vehicle monitors sometimes experience EMI problems after installation? Learn how power supply, grounding, wiring, switching devices, video cables and vehicle electrical environments affect display stability.",
-    "category": "Technical Insight · Vehicle Monitor / EMI",
-    "date": "September 29, 2026",
-    "url": "why-vehicle-monitor-has-emi-problems.html"
   },
   {
     "title": "SVM Display Resolution: Why Does System Matching Matter More Than Pixels?",
@@ -70,13 +56,6 @@
     "url": "hdmi-vs-ahd-vehicle-camera-system.html"
   },
   {
-    "title": "Why Do Vehicle Monitors Use M12 Connectors?",
-    "description": "Why do vehicle monitors and camera systems use M12 connectors? Learn how M12 connectors provide reliable locking, vibration resistance, environmental protection, power and signal connectivity for vehicle applications.",
-    "category": "Technical Guide · Vehicle Monitor / Connectivity",
-    "date": "September 29, 2026",
-    "url": "why-vehicle-monitors-use-m12-connectors.html"
-  },
-  {
     "title": "What Brightness Does a Vehicle Monitor Really Need for Outdoor Use?",
     "description": "What brightness does a vehicle monitor really need for outdoor use? A practical look at sunlight, viewing angle, screen reflection, installation position and real-world vehicle applications.",
     "category": "Technical Guide · Vehicle Monitor",
@@ -91,11 +70,18 @@
     "url": "why-vehicle-camera-image-quality-changes-after-installation.html"
   },
   {
-    "title": "Why Can Cables Matter More Than the Power Supply in a Vehicle Monitor?",
-    "description": "In vehicle monitor systems, the power supply is important, but cables, connectors, voltage drop, grounding, shielding and cable routing can sometimes have an even greater impact on system stability.",
-    "category": "Technical Insight · Vehicle Monitor / Wiring",
-    "date": "September 29, 2026",
-    "url": "why-cables-can-matter-more-than-power-supply.html"
+    "title": "Why Is the Monitor More Than a Display Device in an SVM System?",
+    "description": "In an SVM system, the monitor is more than a device for displaying images. It is the HMI between the camera system, SVM box and driver, combining video display, touch interaction, alerts and system control.",
+    "category": "Technical Insight",
+    "date": "",
+    "url": "monitor-as-hmi-in-svm-system.html"
+  },
+  {
+    "title": "Why Does a Vehicle Monitor Have EMI Problems?",
+    "description": "Why do vehicle monitors sometimes experience EMI problems after installation? Learn how power supply, grounding, wiring, switching devices, video cables and vehicle electrical environments affect display stability.",
+    "category": "Technical Insight",
+    "date": "",
+    "url": "why-vehicle-monitor-has-emi-problems.html"
   },
   {
     "title": "How to Choose a Vehicle Monitor for SVM / AVM Systems?",
@@ -110,5 +96,19 @@
     "category": "Technical Insight · Vehicle Safety",
     "date": "",
     "url": "why-wiring-matters.html"
+  },
+  {
+    "title": "Why Do Vehicle Monitors Use M12 Connectors?",
+    "description": "Why do vehicle monitors and camera systems use M12 connectors? Learn how M12 connectors provide reliable locking, vibration resistance, environmental protection, power and signal connectivity for vehicle applications.",
+    "category": "Technical Insight",
+    "date": "",
+    "url": "why-vehicle-monitors-use-m12-connectors.html"
+  },
+  {
+    "title": "Why Can Cables Matter More Than the Power Supply in a Vehicle Monitor?",
+    "description": "In vehicle monitor systems, the power supply is important, but cables, connectors, voltage drop, grounding, shielding and cable routing can sometimes have an even greater impact on system stability.",
+    "category": "Technical Insight",
+    "date": "",
+    "url": "why-cables-can-matter-more-than-power-supply.html"
   }
 ]
