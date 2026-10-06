@@ -29,12 +29,17 @@ footer {
     color: white;
 }
 
+/* =========================
+   NAVIGATION
+   ========================= */
+
 .nav {
     max-width: 1100px;
     margin: auto;
     padding: 20px 24px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
@@ -42,12 +47,132 @@ footer {
     letter-spacing: 2px;
 }
 
-.nav a {
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.nav-item {
     color: white;
-    margin-left: 24px;
     text-decoration: none;
     font-size: 14px;
+    position: relative;
 }
+
+.nav-item:hover {
+    color: #ccc;
+}
+
+/* Insights dropdown */
+
+.insights-item {
+    position: relative;
+}
+
+.insights-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+.insights-button span {
+    font-size: 10px;
+    margin-left: 4px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 28px;
+    right: 0;
+    width: 360px;
+    background: #111;
+    border: 1px solid #333;
+    padding: 18px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.insights-item:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.dropdown-group-title {
+    color: #999;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.dropdown-link {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 6px 0;
+}
+
+.dropdown-link:hover {
+    color: #ccc;
+}
+
+/* Mobile menu */
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+    background: #111;
+    padding: 0 24px 20px;
+}
+
+.mobile-menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.mobile-insights-title {
+    color: white;
+    font-size: 14px;
+    padding: 10px 0 5px;
+}
+
+.mobile-submenu {
+    padding-left: 15px;
+}
+
+.mobile-submenu a {
+    color: #bbb;
+    font-size: 13px;
+    padding: 7px 0;
+}
+
+/* =========================
+   HERO
+   ========================= */
 
 .hero {
     background: #171717;
@@ -81,6 +206,10 @@ h1 {
     font-size: 19px;
     max-width: 750px;
 }
+
+/* =========================
+   ARTICLE
+   ========================= */
 
 .content {
     max-width: 900px;
@@ -122,26 +251,45 @@ p {
     font-weight: bold;
 }
 
+/* =========================
+   FOOTER
+   ========================= */
+
 footer {
     text-align: center;
     padding: 30px;
     color: #888;
 }
 
+/* =========================
+   RESPONSIVE
+   ========================= */
+
 @media (max-width: 700px) {
 
-h1 {
-    font-size: 34px;
-}
+    h1 {
+        font-size: 34px;
+    }
 
-article {
-    padding: 28px 22px;
-}
+    article {
+        padding: 28px 22px;
+    }
 
-.nav {
-    flex-direction: column;
-    gap: 15px;
-}
+    .nav {
+        padding: 18px 24px;
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .dropdown-menu {
+        display: none !important;
+    }
 
 }
 
@@ -159,14 +307,139 @@ article {
 JACKY LIU
 </div>
 
-<div>
+<div class="main-nav">
 
-<a href="index.html">Home</a>
-<a href="index.html#insights">Insights</a>
-<a href="index.html#about">About</a>
-<a href="index.html#contact">Contact</a>
+<a href="index.html" class="nav-item">
+Focus
+</a>
+
+<div class="insights-item">
+
+<button class="insights-button">
+Insights <span>▼</span>
+</button>
+
+<div class="dropdown-menu">
+
+<div class="dropdown-inner">
+
+<div class="dropdown-group">
+
+<div class="dropdown-group-title">
+Vehicle Monitors
+</div>
+
+<div id="vehicle-monitors-menu"></div>
 
 </div>
+
+<div class="dropdown-group">
+
+<div class="dropdown-group-title">
+SVM / AVM
+</div>
+
+<div id="svm-avm-menu"></div>
+
+</div>
+
+<div class="dropdown-group">
+
+<div class="dropdown-group-title">
+Vehicle Safety
+</div>
+
+<div id="vehicle-safety-menu"></div>
+
+</div>
+
+<div class="dropdown-group">
+
+<div class="dropdown-group-title">
+Wiring & Connectivity
+</div>
+
+<div id="wiring-menu"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<a href="index.html#problems" class="nav-item">
+Problems
+</a>
+
+<a href="index.html#about" class="nav-item">
+About
+</a>
+
+<a href="index.html#contact" class="nav-item">
+Contact
+</a>
+
+</div>
+
+
+<button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+☰
+</button>
+
+</div>
+
+
+<div class="mobile-menu" id="mobileMenu">
+
+<a href="index.html">
+Focus
+</a>
+
+<div class="mobile-insights-title">
+Insights
+</div>
+
+<div class="mobile-submenu">
+
+<div class="mobile-insights-title">
+Vehicle Monitors
+</div>
+
+<div id="mobile-vehicle-monitors-menu"></div>
+
+<div class="mobile-insights-title">
+SVM / AVM
+</div>
+
+<div id="mobile-svm-avm-menu"></div>
+
+<div class="mobile-insights-title">
+Vehicle Safety
+</div>
+
+<div id="mobile-vehicle-safety-menu"></div>
+
+<div class="mobile-insights-title">
+Wiring & Connectivity
+</div>
+
+<div id="mobile-wiring-menu"></div>
+
+</div>
+
+<a href="index.html#problems">
+Problems
+</a>
+
+<a href="index.html#about">
+About
+</a>
+
+<a href="index.html#contact">
+Contact
+</a>
 
 </div>
 
@@ -323,6 +596,171 @@ and low-voltage connectivity.
 © 2026 Jacky Liu. All rights reserved.
 
 </footer>
+
+
+<script>
+
+/* =========================
+   INSIGHTS MENU
+   ========================= */
+
+const insightGroups = {
+
+    "Vehicle Monitors": [
+        "how-to-choose-vehicle-monitor.html",
+        "1920x1080-vs-1024x600.html",
+        "what-brightness-does-a-vehicle-monitor-need.html",
+        "why-vehicle-monitor-has-emi-problems.html",
+        "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
+        "why-vehicle-monitors-use-m12-connectors.html",
+        "bench-test-vs-installation.html"
+    ],
+
+    "SVM / AVM": [
+        "monitor-as-hmi-in-svm-system.html",
+        "svm-display-resolution-system-matching.html",
+        "why-svm-avm-needs-proper-display-interface.html",
+        "when-does-an-svm-monitor-need-touch.html",
+        "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html",
+        "hdmi-vs-ahd-vehicle-camera-system.html"
+    ],
+
+    "Vehicle Safety": [
+        "why-wiring-matters.html",
+        "why-vehicle-camera-image-quality-changes-after-installation.html"
+    ],
+
+    "Wiring & Connectivity": [
+        "why-cables-can-matter-more-than-power-supply.html"
+    ]
+
+};
+
+
+/* =========================
+   LOAD ARTICLE TITLES
+   ========================= */
+
+async function loadInsightsMenu() {
+
+    try {
+
+        const response = await fetch("articles.json");
+
+        if (!response.ok) {
+            throw new Error("Unable to load articles.json");
+        }
+
+        const articles = await response.json();
+
+        const articleMap = {};
+
+        articles.forEach(article => {
+            articleMap[article.url] = article.title;
+        });
+
+
+        Object.entries(insightGroups).forEach(([group, urls]) => {
+
+            let desktopHTML = "";
+            let mobileHTML = "";
+
+            urls.forEach(url => {
+
+                const title = articleMap[url];
+
+                if (!title) {
+                    return;
+                }
+
+                desktopHTML += `
+                    <a class="dropdown-link" href="${url}">
+                        ${title}
+                    </a>
+                `;
+
+                mobileHTML += `
+                    <a href="${url}">
+                        ${title}
+                    </a>
+                `;
+
+            });
+
+
+            if (group === "Vehicle Monitors") {
+
+                document.getElementById("vehicle-monitors-menu").innerHTML = desktopHTML;
+
+                document.getElementById("mobile-vehicle-monitors-menu").innerHTML = mobileHTML;
+
+            }
+
+            if (group === "SVM / AVM") {
+
+                document.getElementById("svm-avm-menu").innerHTML = desktopHTML;
+
+                document.getElementById("mobile-svm-avm-menu").innerHTML = mobileHTML;
+
+            }
+
+            if (group === "Vehicle Safety") {
+
+                document.getElementById("vehicle-safety-menu").innerHTML = desktopHTML;
+
+                document.getElementById("mobile-vehicle-safety-menu").innerHTML = mobileHTML;
+
+            }
+
+            if (group === "Wiring & Connectivity") {
+
+                document.getElementById("wiring-menu").innerHTML = desktopHTML;
+
+                document.getElementById("mobile-wiring-menu").innerHTML = mobileHTML;
+
+            }
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error("Insights menu error:", error);
+
+    }
+
+}
+
+
+/* =========================
+   MOBILE MENU
+   ========================= */
+
+function toggleMobileMenu() {
+
+    const menu = document.getElementById("mobileMenu");
+
+    if (menu.style.display === "block") {
+
+        menu.style.display = "none";
+
+    } else {
+
+        menu.style.display = "block";
+
+    }
+
+}
+
+
+/* =========================
+   START
+   ========================= */
+
+loadInsightsMenu();
+
+</script>
 
 </body>
 </html>
