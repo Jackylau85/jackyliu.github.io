@@ -1,1033 +1,1655 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="google-site-verification"
-          content="abnIQ4DbnXRIUjk7ZIBuCqvfxGSKfjfWziwOYjHces4">
+  <meta name="google-site-verification" content="abnIQ4DbnXRIUjk7ZIBuCqvfxGSKfjfWziwOYjHces4">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacky Liu | Vehicle Monitor, Vehicle Safety & SVM / AVM</title>
 
-    <title>Jacky Liu | Vehicle Monitor, Vehicle Safety & SVM / AVM</title>
+  <meta name="description" content="Jacky Liu shares practical knowledge and real-world experience in vehicle monitors, SVM / AVM systems, vehicle safety, camera systems, wiring and connectivity.">
 
-    <meta name="description"
-          content="Jacky Liu shares practical knowledge about vehicle monitors, SVM / AVM systems, vehicle safety, camera systems, wiring and connectivity.">
+  <meta name="keywords" content="vehicle monitor, vehicle display, SVM, AVM, vehicle safety, vehicle camera system, automotive monitor, M12, AHD, HDMI, vehicle wiring">
 
-    <meta name="keywords"
-          content="vehicle monitor, vehicle display, SVM, AVM, vehicle safety, vehicle camera system, AHD monitor, HDMI monitor, wiring harness">
+  <meta name="author" content="Jacky Liu">
+  <meta name="robots" content="index, follow">
 
-    <meta name="author" content="Jacky Liu">
+  <link rel="canonical" href="https://jackylau85.github.io/jackyliu.github.io/">
 
-    <meta name="robots" content="index, follow">
+  <style>
 
-    <link rel="canonical"
-          href="https://jackylau85.github.io/jackyliu.github.io/">
+    * {
+      box-sizing: border-box;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f8fa;
-            color: #222;
-            line-height: 1.7;
-        }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f8fa;
+      color: #111827;
+      line-height: 1.6;
+    }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+    a {
+      text-decoration: none;
+    }
 
-        .container {
-            width: min(1120px, 92%);
-            margin: auto;
-        }
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
 
-        header {
-            background: #111827;
-            color: white;
-            padding: 18px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    /* =========================
+       HEADER
+       ========================= */
 
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 30px;
-        }
+    header {
+      background: #111827;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #1f2937;
+    }
 
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: .3px;
-        }
+    .nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-        nav {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+    }
 
-        nav a {
-            color: #d1d5db;
-            font-size: 14px;
-        }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
 
-        nav a:hover {
-            color: white;
-        }
+    nav > a,
+    .nav-link {
+      color: #d1d5db;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
 
-        .hero {
-            background: #111827;
-            color: white;
-            padding: 90px 0 100px;
-        }
+    nav > a:hover,
+    .nav-link:hover {
+      color: #fff;
+    }
 
-        .hero h1 {
-            font-size: clamp(38px, 6vw, 64px);
-            line-height: 1.1;
-            margin: 0 0 25px;
-            max-width: 850px;
-        }
+    /* =========================
+       INSIGHTS DROPDOWN
+       ========================= */
 
-        .hero p {
-            max-width: 760px;
-            font-size: 19px;
-            color: #d1d5db;
-            margin-bottom: 32px;
-        }
+    .nav-item {
+      position: relative;
+    }
 
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
+    .nav-link {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-        .button {
-            display: inline-block;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-        }
+    .dropdown-arrow {
+      font-size: 11px;
+      transition: transform 0.2s ease;
+    }
 
-        .button-primary {
-            background: white;
-            color: #111827;
-        }
+    .nav-item:hover .dropdown-arrow,
+    .nav-item:focus-within .dropdown-arrow {
+      transform: rotate(180deg);
+    }
 
-        .button-secondary {
-            border: 1px solid #4b5563;
-            color: white;
-        }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 18px);
+      right: 0;
+      width: 720px;
+      max-width: 80vw;
+      max-height: 75vh;
+      overflow-y: auto;
 
-        section {
-            padding: 80px 0;
-        }
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 18px;
 
-        .section-title {
-            font-size: 34px;
-            margin: 0 0 12px;
-        }
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
 
-        .section-intro {
-            max-width: 750px;
-            color: #6b7280;
-            margin-bottom: 40px;
-        }
+      display: none;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
+    .dropdown-menu::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      right: 35px;
+      width: 15px;
+      height: 15px;
+      background: #1f2937;
+      border-left: 1px solid #374151;
+      border-top: 1px solid #374151;
+      transform: rotate(45deg);
+    }
 
-        .card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 26px;
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
+    .nav-item:hover .dropdown-menu,
+    .nav-item:focus-within .dropdown-menu {
+      display: block;
+    }
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,.08);
-        }
+    .dropdown-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px 28px;
+    }
 
-        .card h3 {
-            margin-top: 0;
-            font-size: 21px;
-            line-height: 1.35;
-        }
+    .dropdown-group {
+      min-width: 0;
+    }
 
-        .card p {
-            color: #6b7280;
-            font-size: 15px;
-        }
+    .dropdown-group-title {
+      color: #9ca3af;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+      padding: 0 8px;
+    }
 
-        .card-link {
-            margin-top: 20px;
-            font-weight: 600;
-            font-size: 14px;
-        }
+    .dropdown-group a {
+      display: block;
+      color: #e5e7eb;
+      font-size: 13px;
+      line-height: 1.45;
+      padding: 7px 8px;
+      border-radius: 6px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
 
-        .tag {
-            display: inline-block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #4b5563;
-            margin-bottom: 14px;
-        }
+    .dropdown-group a:hover {
+      background: #374151;
+      color: #fff;
+    }
 
-        .date {
-            color: #9ca3af;
-            font-size: 13px;
-            margin-top: 14px;
-        }
+    .dropdown-all {
+      display: block;
+      color: #93c5fd;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 8px 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #374151;
+    }
 
-        .dark-section {
-            background: #111827;
-            color: white;
-        }
+    .dropdown-all:hover {
+      color: #bfdbfe;
+    }
 
-        .dark-section .section-intro {
-            color: #cbd5e1;
-        }
+    /* =========================
+       MOBILE MENU BUTTON
+       ========================= */
 
-        .dark-section .card {
-            background: #1f2937;
-            border-color: #374151;
-        }
+    .mobile-menu-toggle {
+      display: none;
+      border: 1px solid #374151;
+      background: #1f2937;
+      color: #fff;
+      border-radius: 7px;
+      padding: 7px 10px;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
 
-        .dark-section .card p {
-            color: #cbd5e1;
-        }
+    /* =========================
+       HERO
+       ========================= */
 
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: start;
-        }
+    .hero {
+      background: #111827;
+      color: #fff;
+      padding: 90px 0 85px;
+    }
 
-        .two-column h3 {
-            margin-top: 0;
-            font-size: 23px;
-        }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 62px);
+      line-height: 1.08;
+      margin: 0 0 22px;
+      max-width: 900px;
+      letter-spacing: -0.03em;
+    }
 
-        .contact-box {
-            background: #111827;
-            color: white;
-            border-radius: 14px;
-            padding: 40px;
-        }
+    .hero p {
+      color: #d1d5db;
+      max-width: 820px;
+      font-size: 18px;
+      margin: 0 0 30px;
+    }
 
-        .contact-box a {
-            text-decoration: underline;
-        }
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-        footer {
-            background: #0b1120;
-            color: #9ca3af;
-            padding: 30px 0;
-            font-size: 13px;
-        }
+    .btn {
+      display: inline-block;
+      padding: 11px 18px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
 
-        /* Article expand / collapse button */
+    .btn-primary {
+      background: #fff;
+      color: #111827;
+    }
 
-        .article-toggle-wrapper {
-            text-align: center;
-            margin-top: 35px;
-        }
+    .btn-primary:hover {
+      background: #e5e7eb;
+    }
 
-        .article-toggle {
-            display: inline-block;
-            padding: 11px 22px;
-            border: 1px solid #4b5563;
-            border-radius: 8px;
-            background: transparent;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background .2s ease, border-color .2s ease;
-        }
+    .btn-secondary {
+      border: 1px solid #4b5563;
+      color: #fff;
+    }
 
-        .article-toggle:hover {
-            background: #1f2937;
-            border-color: #6b7280;
-        }
+    .btn-secondary:hover {
+      background: #1f2937;
+    }
 
-        .article-hidden {
-            display: none;
-        }
+    /* =========================
+       SECTIONS
+       ========================= */
 
-        @media (max-width: 800px) {
+    section {
+      padding: 80px 0;
+    }
 
-            .grid {
-                grid-template-columns: 1fr;
-            }
+    section h2 {
+      font-size: 34px;
+      line-height: 1.2;
+      margin: 0 0 15px;
+      letter-spacing: -0.02em;
+    }
 
-            .two-column {
-                grid-template-columns: 1fr;
-            }
+    .section-intro {
+      max-width: 760px;
+      color: #6b7280;
+      margin-bottom: 40px;
+    }
 
-            nav {
-                display: none;
-            }
+    /* =========================
+       CARDS
+       ========================= */
 
-            .hero {
-                padding: 70px 0;
-            }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
 
-            section {
-                padding: 60px 0;
-            }
-        }
-    </style>
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 25px;
+      color: #111827;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .card p {
+      color: #6b7280;
+      margin: 0;
+    }
+
+    .card small {
+      color: #6b7280;
+    }
+
+    .category {
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 9px;
+    }
+
+    .article-meta {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .article-link {
+      display: inline-block;
+      margin-top: 13px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #2563eb;
+    }
+
+    /* =========================
+       DARK SECTION
+       ========================= */
+
+    .dark-section {
+      background: #111827;
+      color: #fff;
+    }
+
+    .dark-section .section-intro {
+      color: #9ca3af;
+    }
+
+    .dark-section .card {
+      background: #1f2937;
+      border-color: #374151;
+      color: #fff;
+    }
+
+    .dark-section .card p {
+      color: #9ca3af;
+    }
+
+    .dark-section .article-meta {
+      color: #6b7280;
+    }
+
+    .dark-section .article-link {
+      color: #93c5fd;
+    }
+
+    /* =========================
+       ARTICLE LIMIT
+       ========================= */
+
+    .article-hidden {
+      display: none;
+    }
+
+    .view-more-wrapper {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .view-more-btn {
+      border: 1px solid #4b5563;
+      background: transparent;
+      color: #fff;
+      border-radius: 7px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .view-more-btn:hover {
+      background: #1f2937;
+    }
+
+    /* =========================
+       PROBLEMS
+       ========================= */
+
+    .problem-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .problem {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 25px;
+    }
+
+    .problem h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .problem p {
+      margin: 0;
+      color: #6b7280;
+    }
+
+    /* =========================
+       TWO COLUMN
+       ========================= */
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: start;
+    }
+
+    .two-column h3 {
+      font-size: 23px;
+      margin-top: 0;
+    }
+
+    .two-column p {
+      color: #6b7280;
+    }
+
+    /* =========================
+       ABOUT
+       ========================= */
+
+    .about-box {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 30px;
+    }
+
+    .about-box p {
+      color: #6b7280;
+    }
+
+    /* =========================
+       CONTACT
+       ========================= */
+
+    .contact-box {
+      background: #111827;
+      color: #fff;
+      border-radius: 14px;
+      padding: 35px;
+    }
+
+    .contact-box p {
+      color: #d1d5db;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .contact-links a {
+      color: #fff;
+      border: 1px solid #4b5563;
+      padding: 9px 14px;
+      border-radius: 7px;
+      font-size: 14px;
+    }
+
+    .contact-links a:hover {
+      background: #1f2937;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    footer {
+      background: #0b1120;
+      color: #9ca3af;
+      padding: 30px 0;
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+
+    @media (max-width: 900px) {
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .dropdown-menu {
+        width: 600px;
+      }
+
+    }
+
+    @media (max-width: 800px) {
+
+      .nav {
+        min-height: 62px;
+        flex-wrap: wrap;
+      }
+
+      .mobile-menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 0 15px;
+      }
+
+      nav.mobile-open {
+        display: flex;
+      }
+
+      nav > a {
+        display: block;
+        padding: 11px 4px;
+      }
+
+      .nav-item {
+        width: 100%;
+      }
+
+      .nav-link {
+        width: 100%;
+        justify-content: space-between;
+        padding: 11px 4px;
+        color: #d1d5db;
+      }
+
+      .dropdown-menu {
+        position: static;
+        width: 100%;
+        max-width: none;
+        max-height: none;
+
+        display: none;
+
+        background: #1f2937;
+        border: 1px solid #374151;
+        border-radius: 8px;
+
+        margin: 4px 0 8px;
+        padding: 12px;
+        box-shadow: none;
+      }
+
+      .dropdown-menu::before {
+        display: none;
+      }
+
+      .nav-item.mobile-open .dropdown-menu {
+        display: block;
+      }
+
+      .dropdown-inner {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .dropdown-group a {
+        padding: 8px;
+      }
+
+      .hero {
+        padding: 65px 0 60px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-list {
+        grid-template-columns: 1fr;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section h2 {
+        font-size: 29px;
+      }
+
+      .contact-box {
+        padding: 25px;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
 
-<header>
+  <!-- =========================
+       HEADER
+       ========================= -->
+
+  <header>
     <div class="container nav">
 
-        <div class="logo">
-            Jacky Liu
+      <div class="logo">
+        Jacky Liu
+      </div>
+
+      <button
+        class="mobile-menu-toggle"
+        id="mobile-menu-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        ☰
+      </button>
+
+      <nav id="main-nav">
+
+        <a href="#focus">Focus</a>
+
+        <div class="nav-item" id="insights-nav-item">
+
+          <button
+            class="nav-link"
+            id="insights-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="insights-dropdown"
+          >
+            Insights
+            <span class="dropdown-arrow">▼</span>
+          </button>
+
+          <div
+            class="dropdown-menu"
+            id="insights-dropdown"
+          >
+            <a class="dropdown-all" href="#insights">
+              View All Insights →
+            </a>
+
+            <div
+              class="dropdown-inner"
+              id="insights-dropdown-inner"
+            >
+              <div class="dropdown-group">
+                <div class="dropdown-group-title">
+                  Loading...
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
-        <nav>
-            <a href="#focus">Focus</a>
-            <a href="#insights">Insights</a>
-            <a href="#problems">Problems</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </nav>
+        <a href="#problems">Problems</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+
+      </nav>
 
     </div>
-</header>
+  </header>
 
 
-<section class="hero">
+  <!-- =========================
+       HERO
+       ========================= -->
+
+  <section class="hero">
 
     <div class="container">
 
-        <h1>
-            Vehicle Monitor, Vehicle Safety
-            & SVM / AVM
-        </h1>
+      <h1>
+        Vehicle Electronics · Safety · Connectivity
+      </h1>
+
+      <p>
+        Practical knowledge and real-world experience in vehicle monitors,
+        SVM / AVM systems, vehicle safety, camera systems, wiring and connectivity.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a
+          class="btn btn-primary"
+          href="#insights"
+        >
+          Explore Insights
+        </a>
+
+        <a
+          class="btn btn-secondary"
+          href="#contact"
+        >
+          Contact Jacky
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOCUS
+       ========================= -->
+
+  <section id="focus">
+
+    <div class="container">
+
+      <h2>Focus</h2>
+
+      <p class="section-intro">
+        My work focuses on practical vehicle electronics and the problems
+        that appear when products move from the laboratory to real vehicles.
+      </p>
+
+      <div class="grid">
+
+        <div class="card">
+          <div class="category">Vehicle Monitor</div>
+          <h3>Vehicle Displays</h3>
+          <p>
+            Display selection, resolution, brightness, touch,
+            interfaces, environmental requirements and installation issues.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="category">SVM / AVM</div>
+          <h3>Surround View Systems</h3>
+          <p>
+            Practical understanding of cameras, SVM boxes,
+            displays, HMI, video interfaces and system matching.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="category">Vehicle Safety</div>
+          <h3>Safety Systems</h3>
+          <p>
+            Vehicle camera systems, blind-spot visibility,
+            monitoring and practical safety applications.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="category">Connectivity</div>
+          <h3>Wiring & Cables</h3>
+          <p>
+            Low-voltage wiring, connectors, signal transmission,
+            cable selection and vehicle connectivity.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="category">Engineering</div>
+          <h3>Real-World Problems</h3>
+          <p>
+            EMI, grounding, installation conditions,
+            camera image quality and issues that bench testing cannot reveal.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="category">Manufacturing</div>
+          <h3>From Product to Application</h3>
+          <p>
+            Connecting product design, manufacturing experience
+            and real customer applications.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       INSIGHTS
+       ========================= -->
+
+  <section
+    id="insights"
+    class="dark-section"
+  >
+
+    <div class="container">
+
+      <h2>Insights</h2>
+
+      <p class="section-intro">
+        Practical articles about vehicle monitors, SVM / AVM,
+        vehicle safety, camera systems, wiring and connectivity.
+      </p>
+
+      <div
+        id="article-list"
+        class="grid"
+      >
+        <div class="card">
+          Loading articles...
+        </div>
+      </div>
+
+      <div
+        id="view-more-wrapper"
+        class="view-more-wrapper"
+        style="display:none;"
+      >
+
+        <button
+          id="view-more-btn"
+          class="view-more-btn"
+          type="button"
+        >
+          View More Articles
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PROBLEMS
+       ========================= -->
+
+  <section id="problems">
+
+    <div class="container">
+
+      <h2>Problems I Look At</h2>
+
+      <p class="section-intro">
+        Many vehicle electronics problems are not caused by one component.
+        They appear when the complete system is installed on a real vehicle.
+      </p>
+
+      <div class="problem-list">
+
+        <div class="problem">
+
+          <h3>Why does the monitor work on the bench but fail in the vehicle?</h3>
+
+          <p>
+            Installation environment, grounding, power supply,
+            wiring and EMI can completely change system behavior.
+          </p>
+
+        </div>
+
+        <div class="problem">
+
+          <h3>Why does the camera image look different after installation?</h3>
+
+          <p>
+            Cable length, connectors, power, grounding and
+            the actual vehicle environment can affect image quality.
+          </p>
+
+        </div>
+
+        <div class="problem">
+
+          <h3>Why is a higher resolution not always the better solution?</h3>
+
+          <p>
+            The camera, SVM box, display interface and processing chain
+            must be matched as a complete system.
+          </p>
+
+        </div>
+
+        <div class="problem">
+
+          <h3>Why can wiring become the weak point?</h3>
+
+          <p>
+            Signal integrity, connector reliability,
+            shielding and installation conditions all matter.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FROM PRODUCT TO REAL APPLICATION
+       ========================= -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="two-column">
+
+        <div>
+
+          <h3>
+            From Product to Real Application
+          </h3>
+
+          <p>
+            A product specification is only the beginning.
+            In vehicle electronics, the final result depends on
+            how the monitor, camera, SVM box, wiring, connectors,
+            power supply and vehicle environment work together.
+          </p>
+
+          <p>
+            My focus is on understanding these connections
+            and identifying practical problems before they become
+            expensive problems during mass production.
+          </p>
+
+        </div>
+
+        <div>
+
+          <h3>
+            Practical Experience
+          </h3>
+
+          <p>
+            My background combines international logistics and freight export,
+            wiring and cable experience, and several years working with
+            vehicle electronics.
+          </p>
+
+          <p>
+            This combination helps me look at vehicle projects not only
+            from a product perspective, but also from manufacturing,
+            sourcing, logistics and customer application perspectives.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ABOUT
+       ========================= -->
+
+  <section id="about">
+
+    <div class="container">
+
+      <h2>About Jacky Liu</h2>
+
+      <div class="about-box">
 
         <p>
-            Practical insights from real vehicle electronics applications —
-            covering vehicle displays, camera systems, SVM / AVM,
-            safety systems, wiring and connectivity.
+          I work in international B2B sales and business development,
+          with experience across vehicle electronics, wiring and international trade.
         </p>
 
-        <div class="hero-buttons">
-
-            <a class="button button-primary"
-               href="#insights">
-                Read Technical Insights
-            </a>
-
-            <a class="button button-secondary"
-               href="#contact">
-                Contact Jacky
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section id="focus">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            What I Focus On
-        </h2>
-
-        <p class="section-intro">
-            My work is mainly connected with vehicle displays,
-            camera-based safety systems and the electrical interfaces
-            that make these systems work reliably in real vehicles.
+        <p>
+          I have around 8 years of experience in international logistics
+          and freight export, around 8 years of experience in wiring
+          and cable-related business, and about 3 years of experience
+          in vehicle electronics.
         </p>
 
-        <div class="grid">
-
-            <div class="card">
-
-                <h3>
-                    Vehicle Monitors
-                </h3>
-
-                <p>
-                    Vehicle displays for commercial vehicles,
-                    construction equipment, buses and industrial
-                    applications.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    SVM / AVM Systems
-                </h3>
-
-                <p>
-                    Practical considerations for surround view,
-                    multi-camera systems, image display,
-                    switching and HMI interfaces.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Vehicle Safety
-                </h3>
-
-                <p>
-                    Camera systems, blind-spot visibility,
-                    monitoring and other technologies used
-                    to improve vehicle operating safety.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Wiring & Connectivity
-                </h3>
-
-                <p>
-                    Connectors, cable assemblies, power supply,
-                    signal transmission, shielding and installation
-                    conditions.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Display Interfaces
-                </h3>
-
-                <p>
-                    HDMI, AHD, CVBS, USB, UART and other interfaces
-                    used between vehicle cameras, displays and
-                    control systems.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    OEM / ODM Applications
-                </h3>
-
-                <p>
-                    Product customization, display integration,
-                    housing, connectors and application-specific
-                    vehicle electronics.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section id="insights" class="dark-section">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            Technical Insights
-        </h2>
-
-        <p class="section-intro">
-            Practical articles about vehicle monitors, vehicle safety,
-            SVM / AVM and the technical problems that often appear
-            after products are installed in real vehicles.
+        <p>
+          My vehicle experience is the newest part of my background,
+          so I prefer to focus on practical problems, real applications
+          and continuous learning rather than presenting myself as
+          a purely technical engineer.
         </p>
 
-
-        <div id="article-list" class="grid">
-
-            <div class="card">
-
-                <p>
-                    Loading articles...
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div id="article-toggle-wrapper"
-             class="article-toggle-wrapper"
-             style="display: none;">
-
-            <button id="article-toggle"
-                    class="article-toggle"
-                    type="button">
-
-                View More Articles
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section id="problems">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            Technical Problems I Pay Attention To
-        </h2>
-
-        <p class="section-intro">
-            Many vehicle electronics problems are not caused by the
-            main product itself. They often appear because the complete
-            system is not considered together.
+        <p>
+          Today, my main interests are vehicle monitors,
+          SVM / AVM systems, vehicle safety, camera systems,
+          wiring and connectivity.
         </p>
 
-
-        <div class="grid">
-
-            <div class="card">
-
-                <h3>
-                    Power Supply
-                </h3>
-
-                <p>
-                    Vehicle voltage is not always as clean or stable
-                    as a laboratory power supply.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Signal Compatibility
-                </h3>
-
-                <p>
-                    Camera resolution, video format and display input
-                    need to match the complete system.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    EMI & Grounding
-                </h3>
-
-                <p>
-                    Electrical noise and grounding can affect image
-                    stability and system reliability.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Installation
-                </h3>
-
-                <p>
-                    A product that works perfectly on the bench may
-                    behave differently after installation.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Cables & Connectors
-                </h3>
-
-                <p>
-                    Cable length, shielding, connector quality and
-                    signal integrity can affect the complete system.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Human Interface
-                </h3>
-
-                <p>
-                    Touch, buttons, camera switching and display
-                    visibility all influence practical usability.
-                </p>
-
-            </div>
-
-        </div>
+      </div>
 
     </div>
 
-</section>
+  </section>
 
 
-<section>
+  <!-- =========================
+       CONTACT
+       ========================= -->
 
-    <div class="container">
-
-        <div class="two-column">
-
-            <div>
-
-                <h2 class="section-title">
-                    From Product to Real Application
-                </h2>
-
-                <p>
-                    I am interested not only in product specifications,
-                    but also in what happens when a vehicle electronics
-                    product is actually installed on a vehicle.
-                </p>
-
-                <p>
-                    A display, camera, cable, connector and power supply
-                    are part of the same system. Understanding their
-                    relationship is often more useful than looking at
-                    one specification independently.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    My Practical Approach
-                </h3>
-
-                <p>
-                    <strong>
-                        Product → Wiring → Installation → Logistics → Application
-                    </strong>
-                </p>
-
-                <p>
-                    Instead of starting with a product specification,
-                    I prefer to understand the vehicle application first,
-                    then determine the technical requirements.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section id="about" class="dark-section">
+  <section id="contact">
 
     <div class="container">
 
-        <h2 class="section-title">
-            About Jacky
-        </h2>
+      <div class="contact-box">
 
-        <p class="section-intro">
-            My experience is built across international logistics,
-            wiring and vehicle electronics. I am now focusing more
-            deeply on vehicle applications and the practical problems
-            that appear when products are integrated into real vehicles.
+        <h2>Let's Talk</h2>
+
+        <p>
+          If you are working on vehicle monitors, SVM / AVM,
+          vehicle safety or related vehicle electronics projects,
+          feel free to contact me.
         </p>
 
+        <div class="contact-links">
 
-        <div class="two-column">
+          <a href="mailto:jacky@anlisz.com">
+            Email
+          </a>
 
-            <div>
+          <a href="tel:+8618933916054">
+            Phone
+          </a>
 
-                <h3>
-                    My Experience
-                </h3>
-
-                <p>
-                    <strong>
-                        8 years in international logistics and shipping
-                    </strong>
-                </p>
-
-                <p>
-                    I have worked with international shipments,
-                    freight arrangements, export documentation and
-                    delivery coordination. This experience helps me
-                    understand the practical side of moving products
-                    from factory to customer.
-                </p>
-
-
-                <p>
-                    <strong>
-                        8 years in wiring and cable-related products
-                    </strong>
-                </p>
-
-                <p>
-                    My experience includes cable assemblies,
-                    connectors, signal transmission, shielding,
-                    wire specifications and cost considerations.
-                    Wiring is often a small part of a vehicle system,
-                    but it can have a major impact on installation
-                    and reliability.
-                </p>
-
-
-                <p>
-                    <strong>
-                        3 years in vehicle electronics
-                    </strong>
-                </p>
-
-                <p>
-                    Over the past three years, I have been working
-                    more closely with vehicle monitors, camera systems,
-                    SVM / AVM applications and vehicle safety products.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Why I Share These Topics
-                </h3>
-
-                <p>
-                    My vehicle electronics experience is still
-                    developing. Rather than presenting myself as
-                    someone who knows everything about automotive
-                    electronics, I prefer to learn from real projects,
-                    real installations and real customer requirements.
-                </p>
-
-                <p>
-                    My background gives me a practical view across
-                    several parts of a project:
-                </p>
-
-                <p>
-                    <strong>
-                        Product → Wiring → Vehicle Installation
-                        → Logistics → Customer Application
-                    </strong>
-                </p>
-
-                <p>
-                    A vehicle display does not work alone. Cameras,
-                    cables, connectors, power supply, mounting and
-                    the vehicle environment all affect the final result.
-                </p>
-
-                <p>
-                    That is what I am interested in exploring here:
-                    not just product specifications, but what happens
-                    when those products are actually used in the field.
-                </p>
-
-            </div>
+          <a
+            href="https://wa.me/8618933916054"
+            target="_blank"
+            rel="noopener"
+          >
+            WhatsApp
+          </a>
 
         </div>
 
+      </div>
+
     </div>
 
-</section>
+  </section>
 
 
-<section id="contact">
+  <!-- =========================
+       FOOTER
+       ========================= -->
+
+  <footer>
 
     <div class="container">
 
-        <div class="contact-box">
-
-            <h2>
-                Let's Talk
-            </h2>
-
-            <p>
-                If you are working on vehicle monitors,
-                SVM / AVM, vehicle safety or related vehicle
-                electronics projects, feel free to contact me.
-            </p>
-
-            <p>
-                Email:
-                <a href="mailto:jacky@anlisz.com">
-                    jacky@anlisz.com
-                </a>
-            </p>
-
-            <p>
-                Mobile / WhatsApp:
-                <a href="tel:+8618933916054">
-                    +86 189 3391 6054
-                </a>
-            </p>
-
-            <p>
-                WeChat: redstar85
-            </p>
-
-        </div>
+      © 2026 Jacky Liu. Vehicle Electronics · Safety · Connectivity.
 
     </div>
 
-</section>
+  </footer>
 
 
-<footer>
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
 
-    <div class="container">
+  <script>
 
-        © 2026 Jacky Liu. All rights reserved.
+    /*
+     * Primary category assignment for the Insights dropdown.
+     *
+     * Article URLs are kept exactly as they are in articles.json.
+     * This is important because we do not want to change existing
+     * article URLs unnecessarily.
+     */
 
-    </div>
+    const insightGroups = {
 
-</footer>
+      "Vehicle Monitors": [
+        "how-to-choose-vehicle-monitor.html",
+        "1920x1080-vs-1024x600.html",
+        "what-brightness-does-a-vehicle-monitor-need.html",
+        "why-vehicle-monitor-has-emi-problems.html",
+        "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
+        "why-vehicle-monitors-use-m12-connectors.html",
+        "bench-test-vs-installation.html"
+      ],
+
+      "SVM / AVM": [
+        "monitor-as-hmi-in-svm-system.html",
+        "svm-display-resolution-system-matching.html",
+        "why-svm-avm-needs-proper-display-interface.html",
+        "when-does-an-svm-monitor-need-touch.html",
+        "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html",
+        "hdmi-vs-ahd-vehicle-camera-system.html"
+      ],
+
+      "Vehicle Safety": [
+        "why-wiring-matters.html",
+        "why-vehicle-camera-image-quality-changes-after-installation.html"
+      ],
+
+      "Wiring & Connectivity": [
+        "why-cables-can-matter-more-than-power-supply.html"
+      ]
+
+    };
 
 
-<script>
-async function loadArticles() {
+    /*
+     * Build the Insights dropdown from articles.json.
+     */
 
-    const articleList =
-        document.getElementById("article-list");
+    function buildInsightsDropdown(articles) {
 
-    const toggleWrapper =
-        document.getElementById("article-toggle-wrapper");
+      const container = document.getElementById(
+        "insights-dropdown-inner"
+      );
 
-    const toggleButton =
-        document.getElementById("article-toggle");
+      if (!container) {
+        return;
+      }
+
+      container.innerHTML = "";
+
+      const articleMap = {};
+
+      articles.forEach(article => {
+        articleMap[article.url] = article;
+      });
 
 
-    try {
+      Object.entries(insightGroups).forEach(
+        ([groupName, urls]) => {
 
-        const response =
-            await fetch("articles.json");
+          const group = document.createElement("div");
+
+          group.className = "dropdown-group";
+
+          const title = document.createElement("div");
+
+          title.className = "dropdown-group-title";
+
+          title.textContent = groupName;
+
+          group.appendChild(title);
+
+
+          urls.forEach(url => {
+
+            const article = articleMap[url];
+
+            if (!article) {
+              return;
+            }
+
+            const link = document.createElement("a");
+
+            link.href = article.url;
+
+            link.textContent = article.title;
+
+            link.addEventListener(
+              "click",
+              closeMobileMenu
+            );
+
+            group.appendChild(link);
+
+          });
+
+
+          container.appendChild(group);
+
+        }
+      );
+
+    }
+
+
+    /*
+     * Load article cards.
+     */
+
+    async function loadArticles() {
+
+      const articleList = document.getElementById(
+        "article-list"
+      );
+
+      const viewMoreWrapper = document.getElementById(
+        "view-more-wrapper"
+      );
+
+      const viewMoreBtn = document.getElementById(
+        "view-more-btn"
+      );
+
+
+      try {
+
+        const response = await fetch(
+          "articles.json",
+          {
+            cache: "no-cache"
+          }
+        );
 
 
         if (!response.ok) {
-
-            throw new Error(
-                "Unable to load articles.json"
-            );
-
+          throw new Error(
+            "Unable to load articles.json"
+          );
         }
 
 
-        const articles =
-            await response.json();
+        const articles = await response.json();
 
+
+        /*
+         * Build navigation dropdown.
+         */
+
+        buildInsightsDropdown(articles);
+
+
+        /*
+         * Build article cards.
+         */
 
         articleList.innerHTML = "";
 
 
-        if (!articles.length) {
+        articles.forEach(
+          (article, index) => {
 
-            articleList.innerHTML = `
-                <div class="card">
-                    <p>
-                        No articles available yet.
-                    </p>
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        articles.forEach((article, index) => {
-
-            const card =
-                document.createElement("a");
-
+            const card = document.createElement("a");
 
             card.className = "card";
-
-
-            /*
-                Show only the newest 3 articles by default.
-                Older articles remain hidden until the visitor
-                clicks "View More Articles".
-            */
-
-            if (index >= 3) {
-
-                card.classList.add(
-                    "article-hidden"
-                );
-
-            }
-
 
             card.href = article.url;
 
 
-            const dateHTML =
-                article.date
-                    ? `<div class="date">${article.date}</div>`
-                    : "";
+            if (index >= 3) {
+              card.classList.add(
+                "article-hidden"
+              );
+            }
 
 
-            card.innerHTML = `
+            const category = document.createElement(
+              "div"
+            );
 
-                <div class="tag">
-                    ${article.category || "Technical Insight"}
-                </div>
+            category.className = "category";
 
-                <h3>
-                    ${article.title}
-                </h3>
+            category.textContent =
+              article.category || "Insight";
 
-                <p>
-                    ${article.description || ""}
-                </p>
 
-                ${dateHTML}
+            const title = document.createElement(
+              "h3"
+            );
 
-                <div class="card-link">
-                    Read Article →
-                </div>
+            title.textContent =
+              article.title;
 
-            `;
+
+            const description = document.createElement(
+              "p"
+            );
+
+            description.textContent =
+              article.description || "";
+
+
+            const meta = document.createElement(
+              "div"
+            );
+
+            meta.className = "article-meta";
+
+            if (article.date) {
+              meta.textContent =
+                article.date;
+            }
+
+
+            const linkText = document.createElement(
+              "span"
+            );
+
+            linkText.className =
+              "article-link";
+
+            linkText.textContent =
+              "Read Article →";
+
+
+            card.appendChild(category);
+            card.appendChild(title);
+            card.appendChild(description);
+
+            if (article.date) {
+              card.appendChild(meta);
+            }
+
+            card.appendChild(linkText);
 
 
             articleList.appendChild(card);
 
-        });
+          }
+        );
 
 
         /*
-            Only show the toggle button when there
-            are more than 3 articles.
-        */
+         * Show View More button only when
+         * there are more than three articles.
+         */
 
         if (articles.length > 3) {
 
-            toggleWrapper.style.display =
-                "block";
+          viewMoreWrapper.style.display =
+            "block";
+
+          let expanded = false;
 
 
-            let expanded = false;
+          viewMoreBtn.addEventListener(
+            "click",
+            () => {
+
+              expanded = !expanded;
 
 
-            toggleButton.addEventListener(
-                "click",
-                function () {
-
-                    const hiddenArticles =
-                        articleList.querySelectorAll(
-                            ".article-hidden"
-                        );
+              const hiddenArticles =
+                document.querySelectorAll(
+                  ".article-hidden"
+                );
 
 
-                    expanded = !expanded;
+              hiddenArticles.forEach(
+                article => {
 
-
-                    hiddenArticles.forEach(
-                        article => {
-
-                            article.style.display =
-                                expanded
-                                    ? "block"
-                                    : "none";
-
-                        }
-                    );
-
-
-                    toggleButton.textContent =
-                        expanded
-                            ? "Show Less"
-                            : "View More Articles";
+                  article.style.display =
+                    expanded
+                      ? "block"
+                      : "none";
 
                 }
-            );
+              );
+
+
+              viewMoreBtn.textContent =
+                expanded
+                  ? "Show Fewer Articles"
+                  : "View More Articles";
+
+            }
+          );
 
         }
 
-    } catch (error) {
 
-        console.error(error);
+      } catch (error) {
 
+        console.error(
+          error
+        );
 
         articleList.innerHTML = `
-
-            <div class="card">
-
-                <h3>
-                    Technical Insights
-                </h3>
-
-                <p>
-                    Articles are temporarily unavailable.
-                    Please refresh the page.
-                </p>
-
-            </div>
-
+          <div class="card">
+            <h3>Articles unavailable</h3>
+            <p>
+              Please check articles.json.
+            </p>
+          </div>
         `;
+
+      }
 
     }
 
-}
+
+    /*
+     * Mobile navigation.
+     */
+
+    const mobileMenuToggle =
+      document.getElementById(
+        "mobile-menu-toggle"
+      );
+
+    const mainNav =
+      document.getElementById(
+        "main-nav"
+      );
 
 
-loadArticles();
-</script>
+    mobileMenuToggle.addEventListener(
+      "click",
+      () => {
+
+        const isOpen =
+          mainNav.classList.toggle(
+            "mobile-open"
+          );
+
+
+        mobileMenuToggle.setAttribute(
+          "aria-expanded",
+          isOpen
+            ? "true"
+            : "false"
+        );
+
+
+        mobileMenuToggle.setAttribute(
+          "aria-label",
+          isOpen
+            ? "Close navigation menu"
+            : "Open navigation menu"
+        );
+
+      }
+    );
+
+
+    /*
+     * Mobile Insights dropdown.
+     */
+
+    const insightsNavItem =
+      document.getElementById(
+        "insights-nav-item"
+      );
+
+    const insightsToggle =
+      document.getElementById(
+        "insights-toggle"
+      );
+
+
+    insightsToggle.addEventListener(
+      "click",
+      event => {
+
+        event.stopPropagation();
+
+
+        if (
+          window.innerWidth <= 800
+        ) {
+
+          const isOpen =
+            insightsNavItem.classList.toggle(
+              "mobile-open"
+            );
+
+
+          insightsToggle.setAttribute(
+            "aria-expanded",
+            isOpen
+              ? "true"
+              : "false"
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+     * Close mobile menu after clicking
+     * normal navigation links.
+     */
+
+    document
+      .querySelectorAll(
+        "#main-nav > a"
+      )
+      .forEach(
+        link => {
+
+          link.addEventListener(
+            "click",
+            closeMobileMenu
+          );
+
+        }
+      );
+
+
+    function closeMobileMenu() {
+
+      if (
+        window.innerWidth <= 800
+      ) {
+
+        mainNav.classList.remove(
+          "mobile-open"
+        );
+
+        insightsNavItem.classList.remove(
+          "mobile-open"
+        );
+
+        mobileMenuToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        mobileMenuToggle.setAttribute(
+          "aria-label",
+          "Open navigation menu"
+        );
+
+        insightsToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+
+    }
+
+
+    /*
+     * If the browser changes from mobile
+     * to desktop size, reset the mobile state.
+     */
+
+    window.addEventListener(
+      "resize",
+      () => {
+
+        if (
+          window.innerWidth > 800
+        ) {
+
+          mainNav.classList.remove(
+            "mobile-open"
+          );
+
+          insightsNavItem.classList.remove(
+            "mobile-open"
+          );
+
+          mobileMenuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          insightsToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+     * Start loading articles.
+     */
+
+    loadArticles();
+
+  </script>
 
 </body>
 </html>
