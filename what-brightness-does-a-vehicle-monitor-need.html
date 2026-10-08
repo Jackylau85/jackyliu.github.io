@@ -176,142 +176,300 @@
 
 <body>
 
-<header class="site-header">
+<header>
 
-    <div class="site-nav">
+```
+<div class="container nav">
 
-        <div class="site-logo">
-            JACKY LIU
-        </div>
+  <div class="logo">
+    Jacky Liu
+  </div>
 
-        <nav class="desktop-nav">
 
-            <a href="index.html" class="site-nav-link">
-                Focus
-            </a>
+  <button
+    class="mobile-menu-toggle"
+    id="mobile-menu-toggle"
+    type="button"
+    aria-label="Open navigation menu"
+    aria-expanded="false"
+    aria-controls="main-nav"
+  >
+    ☰
+  </button>
 
-            <div class="site-insights">
 
-                <button class="site-insights-button">
-                    Insights <span>▼</span>
-                </button>
+  <nav id="main-nav">
 
-                <div class="site-dropdown">
 
-                    <div class="site-dropdown-inner">
+    <!-- =====================
+         CASE
+         ===================== -->
 
-                        <div class="site-dropdown-group">
-                            <div class="site-dropdown-title">
-                                Vehicle Monitors
-                            </div>
-                            <div id="vehicle-monitors-menu"></div>
-                        </div>
+    <div class="nav-item">
 
-                        <div class="site-dropdown-group">
-                            <div class="site-dropdown-title">
-                                SVM / AVM
-                            </div>
-                            <div id="svm-avm-menu"></div>
-                        </div>
+      <button
+        class="nav-link"
+        type="button"
+        aria-expanded="false"
+      >
+        CASE
 
-                        <div class="site-dropdown-group">
-                            <div class="site-dropdown-title">
-                                Vehicle Safety
-                            </div>
-                            <div id="vehicle-safety-menu"></div>
-                        </div>
+        <span class="dropdown-arrow">
+          ▼
+        </span>
 
-                        <div class="site-dropdown-group">
-                            <div class="site-dropdown-title">
-                                Wiring & Connectivity
-                            </div>
-                            <div id="wiring-menu"></div>
-                        </div>
+      </button>
 
-                    </div>
 
-                </div>
+      <div class="dropdown-menu">
 
+        <div class="dropdown-inner">
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Vehicle Monitor
             </div>
 
-            <a href="index.html#problems" class="site-nav-link">
-                Problems
+            <a href="#case">
+              Vehicle Monitor
             </a>
 
-            <a href="index.html#about" class="site-nav-link">
-                About
+          </div>
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              SVM / AVM
+            </div>
+
+            <a href="#case">
+              SVM / AVM
             </a>
 
-            <a href="index.html#contact" class="site-nav-link">
-                Contact
+          </div>
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Vehicle Safety
+            </div>
+
+            <a href="#case">
+              Vehicle Safety
             </a>
 
-        </nav>
+          </div>
 
 
-        <button
-            class="mobile-menu-toggle"
-            onclick="toggleArticleMobileMenu()"
-            aria-label="Open navigation menu">
-            ☰
-        </button>
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Camera System
+            </div>
+
+            <a href="#case">
+              Camera System
+            </a>
+
+          </div>
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Wiring &amp; Connectivity
+            </div>
+
+            <a href="#case">
+              Wiring &amp; Connectivity
+            </a>
+
+          </div>
+
+
+        </div>
+
+      </div>
 
     </div>
 
 
-    <div class="mobile-article-menu" id="mobileArticleMenu">
+    <!-- =====================
+         INSIGHTS
+         ===================== -->
 
-        <a href="index.html">
-            Focus
+    <div
+      class="nav-item"
+      id="insights-nav-item"
+    >
+
+      <button
+        class="nav-link"
+        id="insights-toggle"
+        type="button"
+        aria-expanded="false"
+      >
+
+        INSIGHTS
+
+        <span class="dropdown-arrow">
+          ▼
+        </span>
+
+      </button>
+
+
+      <div
+        class="dropdown-menu"
+        id="insights-dropdown"
+      >
+
+        <a
+          class="dropdown-all"
+          href="#insights"
+        >
+          View All Insights →
         </a>
 
-        <div class="mobile-section-title">
-            Insights
+
+        <div
+          class="dropdown-inner"
+          id="insights-dropdown-inner"
+        >
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Loading...
+            </div>
+
+          </div>
+
         </div>
 
-        <div class="mobile-submenu">
-
-            <div class="mobile-group-title">
-                Vehicle Monitors
-            </div>
-
-            <div id="mobile-vehicle-monitors-menu"></div>
-
-            <div class="mobile-group-title">
-                SVM / AVM
-            </div>
-
-            <div id="mobile-svm-avm-menu"></div>
-
-            <div class="mobile-group-title">
-                Vehicle Safety
-            </div>
-
-            <div id="mobile-vehicle-safety-menu"></div>
-
-            <div class="mobile-group-title">
-                Wiring & Connectivity
-            </div>
-
-            <div id="mobile-wiring-menu"></div>
-
-        </div>
-
-        <a href="index.html#problems">
-            Problems
-        </a>
-
-        <a href="index.html#about">
-            About
-        </a>
-
-        <a href="index.html#contact">
-            Contact
-        </a>
+      </div>
 
     </div>
 
-</header>
+
+    <!-- =====================
+         SOLUTION
+         ===================== -->
+
+    <div class="nav-item">
+
+      <button
+        class="nav-link"
+        type="button"
+        aria-expanded="false"
+      >
+
+        SOLUTION
+
+        <span class="dropdown-arrow">
+          ▼
+        </span>
+
+      </button>
+
+
+      <div class="dropdown-menu">
+
+        <div class="dropdown-inner">
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Vehicle Display &amp; HMI
+            </div>
+
+            <a href="index.html#solution">
+              Vehicle Display &amp; HMI
+            </a>
+
+          </div>
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              SVM / AVM Integration
+            </div>
+
+            <a href="index.html#solution">
+              SVM / AVM Integration
+            </a>
+
+          </div>
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Vehicle Safety Systems
+            </div>
+
+            <a href="index.html#solution">
+              Vehicle Safety Systems
+            </a>
+
+          </div>
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Camera Systems
+            </div>
+
+            <a href="index.html#solution">
+              Camera Systems
+            </a>
+
+          </div>
+
+
+          <div class="dropdown-group">
+
+            <div class="dropdown-group-title">
+              Wiring &amp; Connectivity
+            </div>
+
+            <a href="index.html#solution">
+              Wiring &amp; Connectivity
+            </a>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <a href="index.html#about">
+      ABOUT
+    </a>
+
+
+    <a href="index.html#contact">
+      CONTACT
+    </a>
+
+
+  </nav>
+
+</div>
+```
+
+  </header>
 
 
 <main class="container">
