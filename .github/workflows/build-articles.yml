@@ -16,81 +16,154 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Unify article navigation from index.html
+      - name: Fix article navigation
         run: |
           python3 <<'PY'
-          import re
           from pathlib import Path
-
-          index_file = Path("index.html")
-
-          if not index_file.exists():
-              raise SystemExit("index.html not found")
-
-          index_text = index_file.read_text(
-              encoding="utf-8",
-              errors="ignore"
-          )
-
-          # Get the homepage header
-          header_match = re.search(
-              r'<header\b[^>]*>.*?</header>',
-              index_text,
-              re.I | re.S
-          )
-
-          if not header_match:
-              raise SystemExit(
-                  "Could not find <header>...</header> in index.html"
-              )
-
-          homepage_header = header_match.group(0)
-
-          # Article pages need homepage anchors to point back to index.html
-          article_header = homepage_header
-
-          article_header = re.sub(
-              r'href=["\']#about["\']',
-              'href="index.html#about"',
-              article_header,
-              flags=re.I
-          )
-
-          article_header = re.sub(
-              r'href=["\']#contact["\']',
-              'href="index.html#contact"',
-              article_header,
-              flags=re.I
-          )
-
-          article_header = re.sub(
-              r'href=["\']#solutions["\']',
-              'href="index.html#solutions"',
-              article_header,
-              flags=re.I
-          )
-
-          article_header = re.sub(
-              r'href=["\']#solution["\']',
-              'href="index.html#solution"',
-              article_header,
-              flags=re.I
-          )
-
-          # Make sure article pages go back to the homepage correctly
-          article_header = re.sub(
-              r'href=["\']#focus["\']',
-              'href="index.html#focus"',
-              article_header,
-              flags=re.I
-          )
+          import re
 
           excluded = {
               "index.html",
               "404.html"
           }
 
-          changed = []
+          navigation_css = r"""
+          /* =========================
+             UNIFIED ARTICLE NAVIGATION
+             ========================= */
+
+          .nav {
+              max-width: 1100px;
+              margin: auto;
+              padding: 20px 24px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+
+          .logo {
+              font-weight: bold;
+              letter-spacing: 2px;
+              color: white;
+              white-space: nowrap;
+          }
+
+          #main-nav {
+              display: flex;
+              align-items: center;
+              gap: 24px;
+          }
+
+          #main-nav > a {
+              color: white;
+              text-decoration: none;
+              font-size: 14px;
+              white-space: nowrap;
+          }
+
+          #main-nav > a:hover {
+              color: #ccc;
+          }
+
+          #main-nav > .nav-item {
+              position: relative;
+          }
+
+          #main-nav .nav-link {
+              background: none;
+              border: none;
+              color: white;
+              font-size: 14px;
+              font-family: inherit;
+              cursor: pointer;
+              padding: 0;
+              white-space: nowrap;
+          }
+
+          #main-nav .nav-link:hover {
+              color: #ccc;
+          }
+
+          #main-nav .dropdown-arrow {
+              font-size: 9px;
+              margin-left: 4px;
+          }
+
+          #main-nav .dropdown-menu {
+              display: none;
+              position: absolute;
+              top: 28px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 360px;
+              background: #111;
+              border: 1px solid #333;
+              padding: 18px;
+              z-index: 1000;
+              box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+          }
+
+          #main-nav > .nav-item:hover > .dropdown-menu {
+              display: block;
+          }
+
+          #main-nav .dropdown-inner {
+              display: flex;
+              flex-direction: column;
+              gap: 18px;
+          }
+
+          #main-nav .dropdown-group-title {
+              color: #999;
+              font-size: 12px;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              margin-bottom: 6px;
+          }
+
+          #main-nav .dropdown-link,
+          #main-nav .dropdown-inner a {
+              display: block;
+              color: white;
+              text-decoration: none;
+              font-size: 13px;
+              line-height: 1.5;
+              margin: 6px 0;
+          }
+
+          #main-nav .dropdown-link:hover,
+          #main-nav .dropdown-inner a:hover {
+              color: #ccc;
+          }
+
+          .mobile-menu-toggle {
+              display: none;
+              background: none;
+              border: none;
+              color: white;
+              font-size: 25px;
+              cursor: pointer;
+          }
+
+          @media (max-width: 700px) {
+
+              #main-nav {
+                  display: none;
+              }
+
+              .mobile-menu-toggle {
+                  display: block;
+              }
+
+              .nav {
+                  padding: 18px 24px;
+              }
+
+              #main-nav .dropdown-menu {
+                  display: none !important;
+              }
+          }
+          """
 
           for file in Path(".").glob("*.html"):
 
@@ -102,33 +175,61 @@ jobs:
                   errors="ignore"
               )
 
-              # Replace the complete old article header
-              new_text, count = re.subn(
-                  r'<header\b[^>]*>.*?</header>',
-                  article_header,
+              original = text
+
+              # Remove accidental Markdown fences inside HTML
+              text = re.sub(
+                  r'^\s*```html\s*$',
+                  '',
                   text,
-                  count=1,
+                  flags=re.I | re.M
+              )
+
+              text = re.sub(
+                  r'^\s*```\s*$',
+                  '',
+                  text,
+                  flags=re.M
+              )
+
+              # Remove the old article navigation CSS
+              text = re.sub(
+                  r'/\*\s*=+\s*NAVIGATION\s*=+\s*\*/.*?(?=/\*\s*=+\s*HERO)',
+                  '',
+                  text,
                   flags=re.I | re.S
               )
 
-              if count == 0:
-                  print(f"Skipped: {file.name} (no header found)")
-                  continue
+              # Insert unified navigation CSS before </style>
+              if "UNIFIED ARTICLE NAVIGATION" not in text:
+                  text = text.replace(
+                      "</style>",
+                      navigation_css + "\n</style>",
+                      1
+                  )
 
-              if new_text != text:
+              # Fix common navigation class mismatch
+              text = text.replace(
+                  'class="main-nav"',
+                  'id="main-nav"'
+              )
+
+              # Fix the broken JavaScript declaration
+              text = re.sub(
+                  r'const articleInsightGroups\s*=\s*\{\s*\{',
+                  'const articleInsightGroups = {',
+                  text
+              )
+
+              if text != original:
                   file.write_text(
-                      new_text,
+                      text,
                       encoding="utf-8"
                   )
 
-                  changed.append(file.name)
-                  print(f"Updated navigation: {file.name}")
+                  print(f"Fixed: {file.name}")
               else:
-                  print(f"Already up to date: {file.name}")
-
-          print("")
-          print("Article navigation update completed.")
-          print(f"Updated files: {len(changed)}")
+                  print(f"No change: {file.name}")
 
           PY
 
@@ -241,11 +342,13 @@ jobs:
               encoding="utf-8"
           )
 
-          print(f"Generated articles.json with {len(articles)} articles.")
+          print(
+              f"Generated articles.json with {len(articles)} articles."
+          )
 
           PY
 
-      - name: Commit updated articles and index
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
