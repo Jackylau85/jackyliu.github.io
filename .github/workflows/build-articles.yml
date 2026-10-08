@@ -18,26 +18,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Create shared navigation files
-        shell: bash
+        shell: python
         run: |
-          cat > nav.html <<'EOF'
-          <div class="shared-nav-header">
+          from pathlib import Path
+
+          Path("nav.html").write_text(r'''<div class="shared-nav-header">
             <div class="shared-nav-inner">
 
-              <a class="shared-logo" href="index.html">
-                Jacky Liu
-              </a>
+              <a class="shared-logo" href="index.html">Jacky Liu</a>
 
               <nav id="main-nav" class="shared-main-nav">
 
@@ -59,9 +54,7 @@ jobs:
                   </button>
 
                   <div id="shared-insights-dropdown" class="shared-dropdown-menu">
-                    <div class="shared-dropdown-loading">
-                      Loading...
-                    </div>
+                    <div class="shared-dropdown-loading">Loading...</div>
                   </div>
                 </div>
 
@@ -78,13 +71,8 @@ jobs:
                   </div>
                 </div>
 
-                <a class="shared-nav-link" href="index.html#about">
-                  ABOUT
-                </a>
-
-                <a class="shared-nav-link" href="index.html#contact">
-                  CONTACT
-                </a>
+                <a class="shared-nav-link" href="index.html#about">ABOUT</a>
+                <a class="shared-nav-link" href="index.html#contact">CONTACT</a>
 
               </nav>
 
@@ -93,16 +81,13 @@ jobs:
                 class="shared-mobile-toggle"
                 type="button"
                 aria-label="Open menu"
-              >
-                ☰
-              </button>
+              >☰</button>
 
             </div>
           </div>
-          EOF
+          ''', encoding="utf-8")
 
-          cat > nav.css <<'EOF'
-          #site-nav {
+          Path("nav.css").write_text(r'''#site-nav {
             position: sticky;
             top: 0;
             z-index: 9999;
@@ -120,7 +105,6 @@ jobs:
             min-height: 64px;
             margin: 0 auto;
             padding: 0 24px;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -152,17 +136,13 @@ jobs:
             align-items: center;
             gap: 5px;
             padding: 10px 0;
-
             border: 0;
             background: transparent;
-
             color: #ffffff;
             text-decoration: none;
-
             font-family: inherit;
             font-size: 14px;
             font-weight: 600;
-
             cursor: pointer;
             white-space: nowrap;
           }
@@ -176,18 +156,13 @@ jobs:
             top: calc(100% + 8px);
             left: 50%;
             transform: translateX(-50%);
-
             min-width: 280px;
             max-width: 380px;
-
             padding: 10px;
-
             background: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 10px;
-
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-
             display: none;
           }
 
@@ -199,13 +174,10 @@ jobs:
           #site-nav .shared-dropdown-menu a {
             display: block;
             padding: 10px 12px;
-
             color: #111827;
             text-decoration: none;
-
             font-size: 13px;
             line-height: 1.4;
-
             border-radius: 7px;
           }
 
@@ -221,13 +193,10 @@ jobs:
 
           #site-nav .shared-mobile-toggle {
             display: none;
-
             border: 0;
             background: transparent;
-
             color: #ffffff;
             font-size: 25px;
-
             cursor: pointer;
           }
 
@@ -240,20 +209,15 @@ jobs:
 
             #site-nav #main-nav {
               display: none !important;
-
               position: absolute;
               top: 60px;
               left: 0;
               right: 0;
-
               padding: 16px 20px;
-
               background: #111827;
-
               flex-direction: column !important;
               align-items: flex-start !important;
               gap: 8px;
-
               border-top: 1px solid #1f2937;
             }
 
@@ -273,12 +237,9 @@ jobs:
             #site-nav .shared-dropdown-menu {
               position: static;
               transform: none;
-
               width: 100%;
               max-width: none;
-
               margin-top: 4px;
-
               box-shadow: none;
             }
 
@@ -286,19 +247,16 @@ jobs:
               display: block;
             }
           }
-          EOF
+          ''', encoding="utf-8")
 
-          cat > nav.js <<'EOF'
-          (function () {
+          Path("nav.js").write_text(r'''(function () {
 
             function loadCSS() {
-
               if (document.querySelector('link[data-shared-nav-css]')) {
                 return;
               }
 
               const link = document.createElement('link');
-
               link.rel = 'stylesheet';
               link.href = 'nav.css';
               link.dataset.sharedNavCss = 'true';
@@ -310,8 +268,7 @@ jobs:
 
               loadCSS();
 
-              const container =
-                document.getElementById('site-nav');
+              const container = document.getElementById('site-nav');
 
               if (!container) {
                 return;
@@ -319,17 +276,15 @@ jobs:
 
               try {
 
-                const response =
-                  await fetch('nav.html', {
-                    cache: 'no-store'
-                  });
+                const response = await fetch('nav.html', {
+                  cache: 'no-store'
+                });
 
                 if (!response.ok) {
                   throw new Error('Failed to load nav.html');
                 }
 
-                container.innerHTML =
-                  await response.text();
+                container.innerHTML = await response.text();
 
                 setupDropdowns();
                 setupMobileMenu();
@@ -347,10 +302,9 @@ jobs:
 
             function setupDropdowns() {
 
-              const buttons =
-                document.querySelectorAll(
-                  '#site-nav .shared-dropdown-toggle'
-                );
+              const buttons = document.querySelectorAll(
+                '#site-nav .shared-dropdown-toggle'
+              );
 
               buttons.forEach(function (button) {
 
@@ -362,9 +316,7 @@ jobs:
                     event.stopPropagation();
 
                     const item =
-                      button.closest(
-                        '.shared-nav-item'
-                      );
+                      button.closest('.shared-nav-item');
 
                     document
                       .querySelectorAll(
@@ -502,14 +454,9 @@ jobs:
 
                 const articleMap = {};
 
-                articles.forEach(
-                  function (article) {
-
-                    articleMap[article.file] =
-                      article;
-
-                  }
-                );
+                articles.forEach(function (article) {
+                  articleMap[article.file] = article;
+                });
 
                 container.innerHTML = '';
 
@@ -519,57 +466,37 @@ jobs:
                   function ([groupName, files]) {
 
                     const title =
-                      document.createElement(
-                        'div'
-                      );
+                      document.createElement('div');
 
-                    title.style.fontWeight =
-                      '700';
+                    title.style.fontWeight = '700';
+                    title.style.padding = '8px 12px 5px';
+                    title.style.color = '#111827';
+                    title.style.fontSize = '12px';
 
-                    title.style.padding =
-                      '8px 12px 5px';
+                    title.textContent = groupName;
 
-                    title.style.color =
-                      '#111827';
+                    container.appendChild(title);
 
-                    title.style.fontSize =
-                      '12px';
+                    files.forEach(function (fileName) {
 
-                    title.textContent =
-                      groupName;
+                      const article =
+                        articleMap[fileName];
 
-                    container.appendChild(
-                      title
-                    );
-
-                    files.forEach(
-                      function (fileName) {
-
-                        const article =
-                          articleMap[fileName];
-
-                        if (!article) {
-                          return;
-                        }
-
-                        const link =
-                          document.createElement(
-                            'a'
-                          );
-
-                        link.href =
-                          fileName;
-
-                        link.textContent =
-                          article.title ||
-                          fileName;
-
-                        container.appendChild(
-                          link
-                        );
-
+                      if (!article) {
+                        return;
                       }
-                    );
+
+                      const link =
+                        document.createElement('a');
+
+                      link.href = fileName;
+
+                      link.textContent =
+                        article.title || fileName;
+
+                      container.appendChild(link);
+
+                    });
 
                   }
                 );
@@ -591,9 +518,13 @@ jobs:
             loadNavigation();
 
           })();
-          EOF
+          ''', encoding="utf-8")
 
-      - name: Update HTML pages to use shared navigation
+          print("nav.html created")
+          print("nav.css created")
+          print("nav.js created")
+
+      - name: Update HTML pages
         shell: python
         run: |
           import re
@@ -607,11 +538,8 @@ jobs:
               if path.name == "404.html":
                   continue
 
-              text = path.read_text(
-                  encoding="utf-8"
-              )
+              text = path.read_text(encoding="utf-8")
 
-              # Replace old header with shared navigation.
               text = re.sub(
                   r"<header\b[^>]*>.*?</header>",
                   placeholder,
@@ -619,21 +547,17 @@ jobs:
                   flags=re.IGNORECASE | re.DOTALL
               )
 
-              # Add shared navigation if missing.
               if 'id="site-nav"' not in text:
 
                   text = re.sub(
                       r"<body\b[^>]*>",
                       lambda m:
-                          m.group(0)
-                          + "\n"
-                          + placeholder,
+                          m.group(0) + "\n" + placeholder,
                       text,
                       count=1,
                       flags=re.IGNORECASE
                   )
 
-              # Clean old homepage navigation JavaScript.
               if path.name == "index.html":
 
                   text = re.sub(
@@ -655,30 +579,42 @@ jobs:
                   encoding="utf-8"
               )
 
-      - name: Check generated navigation
-        shell: bash
+          print("HTML pages updated successfully.")
+
+      - name: Check files
+        shell: python
         run: |
-          echo "Checking shared navigation files..."
+          from pathlib import Path
 
-          test -f nav.html
-          test -f nav.css
-          test -f nav.js
+          required = [
+              "nav.html",
+              "nav.css",
+              "nav.js"
+          ]
 
-          echo "Shared navigation files exist."
+          for file in required:
+              if not Path(file).exists():
+                  raise SystemExit(
+                      f"Missing required file: {file}"
+                  )
 
-          echo "Checking old navigation code..."
+          index = Path("index.html").read_text(
+              encoding="utf-8"
+          )
 
-          if grep -q "INSIGHTS CATEGORY GROUPS" index.html; then
-            echo "ERROR: old INSIGHTS navigation block still exists."
-            exit 1
-          fi
+          if "INSIGHTS CATEGORY GROUPS" in index:
+              raise SystemExit(
+                  "Old INSIGHTS navigation code still exists."
+              )
 
-          if grep -q "buildInsightsDropdown(articles)" index.html; then
-            echo "ERROR: old buildInsightsDropdown call still exists."
-            exit 1
-          fi
+          if "buildInsightsDropdown(articles)" in index:
+              raise SystemExit(
+                  "Old buildInsightsDropdown call still exists."
+              )
 
-          echo "Old navigation code successfully removed."
+          print(
+              "Old homepage navigation code successfully removed."
+          )
 
       - name: Build articles.json
         shell: python
@@ -741,15 +677,17 @@ jobs:
                   "description": description
               })
 
-          Path(
-              "articles.json"
-          ).write_text(
+          Path("articles.json").write_text(
               json.dumps(
                   articles,
                   ensure_ascii=False,
                   indent=2
               ),
               encoding="utf-8"
+          )
+
+          print(
+              f"Generated articles.json with {len(articles)} articles."
           )
 
       - name: Commit changes
