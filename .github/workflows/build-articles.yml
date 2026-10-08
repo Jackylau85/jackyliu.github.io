@@ -16,154 +16,687 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Fix article navigation
+      # ============================================================
+      # 1. Create ONE shared navigation
+      # ============================================================
+      - name: Create shared navigation files
+        run: |
+          cat > nav.html <<'EOF'
+          <div class="shared-nav-header">
+            <div class="shared-nav-container">
+
+              <a class="shared-logo" href="index.html">
+                Jacky Liu
+              </a>
+
+              <button
+                class="shared-mobile-toggle"
+                id="shared-mobile-toggle"
+                type="button"
+                aria-label="Open menu"
+                aria-expanded="false">
+                ☰
+              </button>
+
+              <nav id="main-nav" class="shared-main-nav">
+
+                <!-- CASE -->
+                <div class="shared-nav-item">
+                  <button class="shared-nav-link" type="button">
+                    CASE <span>▼</span>
+                  </button>
+
+                  <div class="shared-dropdown shared-case-dropdown">
+
+                    <a href="index.html#case">
+                      Vehicle Monitors
+                    </a>
+
+                    <a href="index.html#case">
+                      SVM / AVM
+                    </a>
+
+                    <a href="index.html#case">
+                      Vehicle Safety
+                    </a>
+
+                    <a href="index.html#case">
+                      Camera Systems
+                    </a>
+
+                    <a href="index.html#case">
+                      Wiring &amp; Connectivity
+                    </a>
+
+                  </div>
+                </div>
+
+
+                <!-- INSIGHTS -->
+                <div class="shared-nav-item">
+                  <button
+                    class="shared-nav-link"
+                    id="shared-insights-toggle"
+                    type="button">
+                    INSIGHTS <span>▼</span>
+                  </button>
+
+                  <div
+                    class="shared-dropdown shared-insights-dropdown"
+                    id="shared-insights-dropdown">
+                  </div>
+                </div>
+
+
+                <!-- SOLUTION -->
+                <div class="shared-nav-item">
+                  <button class="shared-nav-link" type="button">
+                    SOLUTION <span>▼</span>
+                  </button>
+
+                  <div class="shared-dropdown shared-solution-dropdown">
+
+                    <a href="index.html#solution">
+                      Vehicle Display &amp; HMI
+                    </a>
+
+                    <a href="index.html#solution">
+                      SVM / AVM Integration
+                    </a>
+
+                    <a href="index.html#solution">
+                      Vehicle Safety Systems
+                    </a>
+
+                    <a href="index.html#solution">
+                      Camera Systems
+                    </a>
+
+                    <a href="index.html#solution">
+                      Wiring &amp; Connectivity
+                    </a>
+
+                  </div>
+                </div>
+
+
+                <!-- ABOUT -->
+                <a
+                  class="shared-nav-link shared-simple-link"
+                  href="index.html#about">
+                  ABOUT
+                </a>
+
+
+                <!-- CONTACT -->
+                <a
+                  class="shared-nav-link shared-simple-link"
+                  href="index.html#contact">
+                  CONTACT
+                </a>
+
+              </nav>
+            </div>
+
+
+            <!-- MOBILE MENU -->
+            <div
+              class="shared-mobile-menu"
+              id="shared-mobile-menu">
+
+              <a href="index.html#case">CASE</a>
+
+              <a href="index.html#insights">INSIGHTS</a>
+
+              <a href="index.html#solution">SOLUTION</a>
+
+              <a href="index.html#about">ABOUT</a>
+
+              <a href="index.html#contact">CONTACT</a>
+
+            </div>
+
+          </div>
+          EOF
+
+
+          cat > nav.css <<'EOF'
+          /* =========================================================
+             SHARED SITE NAVIGATION
+             One navigation for the entire website
+             ========================================================= */
+
+          #site-nav {
+            width: 100%;
+            position: relative;
+            z-index: 9999;
+          }
+
+
+          /* HEADER */
+
+          #site-nav .shared-nav-header {
+            width: 100%;
+            background: #111;
+            color: #fff;
+          }
+
+
+          #site-nav .shared-nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-sizing: border-box;
+          }
+
+
+          /* LOGO */
+
+          #site-nav .shared-logo {
+            color: #fff;
+            text-decoration: none;
+
+            font-weight: 700;
+            letter-spacing: 2px;
+
+            white-space: nowrap;
+          }
+
+
+          /* =========================================================
+             DESKTOP NAV
+             THIS IS THE IMPORTANT PART:
+             display:flex keeps everything HORIZONTAL
+             ========================================================= */
+
+          #site-nav #main-nav {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+
+            gap: 24px;
+
+            margin: 0;
+            padding: 0;
+          }
+
+
+          #site-nav .shared-nav-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+          }
+
+
+          #site-nav .shared-nav-link {
+            appearance: none;
+            border: 0;
+            background: transparent;
+
+            color: #fff;
+
+            font: inherit;
+            font-size: 14px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            padding: 6px 0;
+            margin: 0;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+          }
+
+
+          #site-nav .shared-nav-link span {
+            font-size: 9px;
+            margin-left: 4px;
+          }
+
+
+          #site-nav .shared-simple-link {
+            display: inline-flex;
+            align-items: center;
+          }
+
+
+          /* =========================================================
+             DROPDOWN
+             ========================================================= */
+
+          #site-nav .shared-dropdown {
+            display: none;
+
+            position: absolute;
+
+            top: calc(100% + 8px);
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            min-width: 250px;
+
+            padding: 10px 0;
+
+            background: #111;
+
+            border: 1px solid #333;
+
+            box-shadow:
+              0 10px 30px rgba(0, 0, 0, 0.35);
+
+            box-sizing: border-box;
+          }
+
+
+          #site-nav .shared-nav-item:hover > .shared-dropdown {
+            display: block;
+          }
+
+
+          #site-nav .shared-dropdown a {
+            display: block;
+
+            padding: 10px 18px;
+
+            color: #fff;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+
+            text-decoration: none;
+
+            white-space: normal;
+          }
+
+
+          #site-nav .shared-dropdown a:hover {
+            background: #222;
+          }
+
+
+          /* INSIGHTS */
+
+          #site-nav .shared-insights-dropdown {
+            min-width: 330px;
+          }
+
+
+          #site-nav .shared-insights-group {
+            padding: 5px 0;
+          }
+
+
+          #site-nav .shared-insights-title {
+            padding: 8px 18px 5px;
+
+            color: #aaa;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+
+
+          #site-nav .shared-insights-link {
+            display: block;
+
+            padding: 7px 18px;
+
+            color: #fff;
+
+            font-size: 13px;
+
+            text-decoration: none;
+          }
+
+
+          #site-nav .shared-insights-link:hover {
+            background: #222;
+          }
+
+
+          #site-nav .shared-view-all {
+            margin-top: 5px;
+
+            border-top: 1px solid #333;
+
+            padding-top: 10px !important;
+
+            font-weight: 600;
+          }
+
+
+          /* =========================================================
+             MOBILE
+             ========================================================= */
+
+          #site-nav .shared-mobile-toggle {
+            display: none;
+
+            border: 0;
+            background: transparent;
+
+            color: #fff;
+
+            font-size: 24px;
+
+            cursor: pointer;
+          }
+
+
+          #site-nav .shared-mobile-menu {
+            display: none;
+
+            padding: 10px 24px 20px;
+
+            background: #111;
+          }
+
+
+          #site-nav .shared-mobile-menu.open {
+            display: block;
+          }
+
+
+          #site-nav .shared-mobile-menu a {
+            display: block;
+
+            padding: 12px 0;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            border-bottom: 1px solid #333;
+          }
+
+
+          @media (max-width: 800px) {
+
+            #site-nav #main-nav {
+              display: none !important;
+            }
+
+            #site-nav .shared-mobile-toggle {
+              display: block;
+            }
+
+            #site-nav .shared-nav-container {
+              padding: 18px 20px;
+            }
+
+          }
+          EOF
+
+
+          cat > nav.js <<'EOF'
+          /* =========================================================
+             SHARED NAVIGATION LOADER
+             ========================================================= */
+
+          (async function () {
+
+            const container = document.getElementById("site-nav");
+
+            if (!container) {
+              return;
+            }
+
+
+            /* -------------------------------------------------------
+               Load shared CSS
+               ------------------------------------------------------- */
+
+            if (!document.getElementById("shared-nav-css")) {
+
+              const link = document.createElement("link");
+
+              link.id = "shared-nav-css";
+              link.rel = "stylesheet";
+              link.href = "nav.css";
+
+              document.head.appendChild(link);
+            }
+
+
+            /* -------------------------------------------------------
+               Load shared navigation HTML
+               ------------------------------------------------------- */
+
+            try {
+
+              const response = await fetch("nav.html", {
+                cache: "no-cache"
+              });
+
+              if (!response.ok) {
+                throw new Error("Unable to load nav.html");
+              }
+
+              const html = await response.text();
+
+              container.innerHTML = html;
+
+            } catch (error) {
+
+              console.error(
+                "Shared navigation failed:",
+                error
+              );
+
+              return;
+            }
+
+
+            /* -------------------------------------------------------
+               INSIGHTS
+               ------------------------------------------------------- */
+
+            const insightGroups = {
+
+              "Vehicle Monitors": [
+                "how-to-choose-vehicle-monitor.html",
+                "what-brightness-does-a-vehicle-monitor-need.html",
+                "bench-test-vs-installation.html",
+                "1920x1080-vs-1024x600.html",
+                "svm-display-resolution-system-matching.html",
+                "Why Is an Automotive Touchscreen Different from a Normal Tablet.html"
+              ],
+
+              "SVM / AVM": [
+                "monitor-as-hmi-in-svm-system.html",
+                "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html",
+                "when-does-an-svm-monitor-need-touch.html",
+                "why-svm-avm-needs-proper-display-interface.html",
+                "hdmi-vs-ahd-vehicle-camera-system.html"
+              ],
+
+              "Vehicle Safety": [
+                "why-vehicle-camera-image-quality-changes-after-installation.html",
+                "why-vehicle-monitor-has-emi-problems.html"
+              ],
+
+              "Wiring & Connectivity": [
+                "why-cables-can-matter-more-than-power-supply.html",
+                "why-vehicle-monitors-use-m12-connectors.html",
+                "why-wiring-matters.html"
+              ]
+
+            };
+
+
+            const dropdown =
+              document.getElementById(
+                "shared-insights-dropdown"
+              );
+
+
+            if (dropdown) {
+
+              dropdown.innerHTML = "";
+
+
+              Object.entries(insightGroups).forEach(
+                ([groupName, files]) => {
+
+                  const group =
+                    document.createElement("div");
+
+                  group.className =
+                    "shared-insights-group";
+
+
+                  const title =
+                    document.createElement("div");
+
+                  title.className =
+                    "shared-insights-title";
+
+                  title.textContent = groupName;
+
+
+                  group.appendChild(title);
+
+
+                  files.forEach((fileName) => {
+
+                    const link =
+                      document.createElement("a");
+
+                    link.className =
+                      "shared-insights-link";
+
+                    link.href = fileName;
+
+
+                    const article =
+                      fileName
+                        .replace(".html", "")
+                        .replace(/-/g, " ");
+
+
+                    link.textContent = article;
+
+
+                    group.appendChild(link);
+
+                  });
+
+
+                  dropdown.appendChild(group);
+
+                }
+              );
+
+
+              const viewAll =
+                document.createElement("a");
+
+              viewAll.className =
+                "shared-insights-link shared-view-all";
+
+              viewAll.href =
+                "index.html#insights";
+
+              viewAll.textContent =
+                "View All Insights →";
+
+
+              dropdown.appendChild(viewAll);
+            }
+
+
+            /* -------------------------------------------------------
+               MOBILE MENU
+               ------------------------------------------------------- */
+
+            const toggle =
+              document.getElementById(
+                "shared-mobile-toggle"
+              );
+
+            const mobileMenu =
+              document.getElementById(
+                "shared-mobile-menu"
+              );
+
+
+            if (toggle && mobileMenu) {
+
+              toggle.addEventListener(
+                "click",
+                function () {
+
+                  const isOpen =
+                    mobileMenu.classList.toggle(
+                      "open"
+                    );
+
+                  toggle.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                  );
+
+                }
+              );
+
+
+              mobileMenu
+                .querySelectorAll("a")
+                .forEach((link) => {
+
+                  link.addEventListener(
+                    "click",
+                    function () {
+
+                      mobileMenu.classList.remove(
+                        "open"
+                      );
+
+                      toggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                      );
+
+                    }
+                  );
+
+                });
+
+            }
+
+          })();
+          EOF
+
+
+      # ============================================================
+      # 2. Replace old navigation in ALL HTML pages
+      # ============================================================
+      - name: Convert all pages to shared navigation
         run: |
           python3 <<'PY'
-          from pathlib import Path
           import re
+          from pathlib import Path
 
           excluded = {
-              "index.html",
               "404.html"
           }
 
-          navigation_css = r"""
-          /* =========================
-             UNIFIED ARTICLE NAVIGATION
-             ========================= */
-
-          .nav {
-              max-width: 1100px;
-              margin: auto;
-              padding: 20px 24px;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-          }
-
-          .logo {
-              font-weight: bold;
-              letter-spacing: 2px;
-              color: white;
-              white-space: nowrap;
-          }
-
-          #main-nav {
-              display: flex;
-              align-items: center;
-              gap: 24px;
-          }
-
-          #main-nav > a {
-              color: white;
-              text-decoration: none;
-              font-size: 14px;
-              white-space: nowrap;
-          }
-
-          #main-nav > a:hover {
-              color: #ccc;
-          }
-
-          #main-nav > .nav-item {
-              position: relative;
-          }
-
-          #main-nav .nav-link {
-              background: none;
-              border: none;
-              color: white;
-              font-size: 14px;
-              font-family: inherit;
-              cursor: pointer;
-              padding: 0;
-              white-space: nowrap;
-          }
-
-          #main-nav .nav-link:hover {
-              color: #ccc;
-          }
-
-          #main-nav .dropdown-arrow {
-              font-size: 9px;
-              margin-left: 4px;
-          }
-
-          #main-nav .dropdown-menu {
-              display: none;
-              position: absolute;
-              top: 28px;
-              left: 50%;
-              transform: translateX(-50%);
-              width: 360px;
-              background: #111;
-              border: 1px solid #333;
-              padding: 18px;
-              z-index: 1000;
-              box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-          }
-
-          #main-nav > .nav-item:hover > .dropdown-menu {
-              display: block;
-          }
-
-          #main-nav .dropdown-inner {
-              display: flex;
-              flex-direction: column;
-              gap: 18px;
-          }
-
-          #main-nav .dropdown-group-title {
-              color: #999;
-              font-size: 12px;
-              letter-spacing: 1px;
-              text-transform: uppercase;
-              margin-bottom: 6px;
-          }
-
-          #main-nav .dropdown-link,
-          #main-nav .dropdown-inner a {
-              display: block;
-              color: white;
-              text-decoration: none;
-              font-size: 13px;
-              line-height: 1.5;
-              margin: 6px 0;
-          }
-
-          #main-nav .dropdown-link:hover,
-          #main-nav .dropdown-inner a:hover {
-              color: #ccc;
-          }
-
-          .mobile-menu-toggle {
-              display: none;
-              background: none;
-              border: none;
-              color: white;
-              font-size: 25px;
-              cursor: pointer;
-          }
-
-          @media (max-width: 700px) {
-
-              #main-nav {
-                  display: none;
-              }
-
-              .mobile-menu-toggle {
-                  display: block;
-              }
-
-              .nav {
-                  padding: 18px 24px;
-              }
-
-              #main-nav .dropdown-menu {
-                  display: none !important;
-              }
-          }
-          """
+          placeholder = '''
+          <div id="site-nav"></div>
+          <script src="nav.js"></script>
+          '''
 
           for file in Path(".").glob("*.html"):
 
@@ -177,62 +710,62 @@ jobs:
 
               original = text
 
-              # Remove accidental Markdown fences inside HTML
-              text = re.sub(
-                  r'^\s*```html\s*$',
-                  '',
-                  text,
-                  flags=re.I | re.M
-              )
-
+              # Remove accidental Markdown fences that may have
+              # been pasted into HTML pages.
               text = re.sub(
                   r'^\s*```\s*$',
                   '',
                   text,
-                  flags=re.M
+                  flags=re.MULTILINE
               )
 
-              # Remove the old article navigation CSS
+              # Remove old nav.js loader if this workflow
+              # has already run before.
               text = re.sub(
-                  r'/\*\s*=+\s*NAVIGATION\s*=+\s*\*/.*?(?=/\*\s*=+\s*HERO)',
+                  r'<script[^>]+src=["\']nav\.js["\'][^>]*></script>',
                   '',
+                  text,
+                  flags=re.I
+              )
+
+              # Replace the existing header.
+              text = re.sub(
+                  r'<header\b[^>]*>.*?</header\s*>',
+                  placeholder,
                   text,
                   flags=re.I | re.S
               )
 
-              # Insert unified navigation CSS before </style>
-              if "UNIFIED ARTICLE NAVIGATION" not in text:
-                  text = text.replace(
-                      "</style>",
-                      navigation_css + "\n</style>",
-                      1
+              # If there was no header, make sure the shared nav
+              # still exists after <body>.
+              if 'id="site-nav"' not in text:
+
+                  text = re.sub(
+                      r'(<body\b[^>]*>)',
+                      r'\1' + placeholder,
+                      text,
+                      count=1,
+                      flags=re.I
                   )
 
-              # Fix common navigation class mismatch
-              text = text.replace(
-                  'class="main-nav"',
-                  'id="main-nav"'
-              )
-
-              # Fix the broken JavaScript declaration
-              text = re.sub(
-                  r'const articleInsightGroups\s*=\s*\{\s*\{',
-                  'const articleInsightGroups = {',
-                  text
-              )
-
               if text != original:
+
                   file.write_text(
                       text,
                       encoding="utf-8"
                   )
 
-                  print(f"Fixed: {file.name}")
-              else:
-                  print(f"No change: {file.name}")
+                  print(
+                      "Updated:",
+                      file.name
+                  )
 
           PY
 
+
+      # ============================================================
+      # 3. Generate articles.json
+      # ============================================================
       - name: Generate articles.json
         run: |
           python3 <<'PY'
@@ -300,6 +833,7 @@ jobs:
               description = ""
 
               if description_match:
+
                   description = re.sub(
                       r"\s+",
                       " ",
@@ -309,6 +843,7 @@ jobs:
               category = "Technical Insight"
 
               if category_match:
+
                   category = re.sub(
                       r"\s+",
                       " ",
@@ -328,10 +863,12 @@ jobs:
                   "url": file.name
               })
 
+
           articles.sort(
               key=lambda x: x.get("date", ""),
               reverse=True
           )
+
 
           Path("articles.json").write_text(
               json.dumps(
@@ -342,20 +879,25 @@ jobs:
               encoding="utf-8"
           )
 
-          print(
-              f"Generated articles.json with {len(articles)} articles."
-          )
-
           PY
 
+
+      # ============================================================
+      # 4. Commit everything
+      # ============================================================
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add "*.html" articles.json
+          git add \
+            "*.html" \
+            articles.json \
+            nav.html \
+            nav.css \
+            nav.js
 
           git diff --cached --quiet || \
-            git commit -m "Unify article navigation and update article index"
+            git commit -m "Create shared site navigation"
 
           git push
