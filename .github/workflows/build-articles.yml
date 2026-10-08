@@ -16,6 +16,122 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Unify article navigation from index.html
+        run: |
+          python3 <<'PY'
+          import re
+          from pathlib import Path
+
+          index_file = Path("index.html")
+
+          if not index_file.exists():
+              raise SystemExit("index.html not found")
+
+          index_text = index_file.read_text(
+              encoding="utf-8",
+              errors="ignore"
+          )
+
+          # Get the homepage header
+          header_match = re.search(
+              r'<header\b[^>]*>.*?</header>',
+              index_text,
+              re.I | re.S
+          )
+
+          if not header_match:
+              raise SystemExit(
+                  "Could not find <header>...</header> in index.html"
+              )
+
+          homepage_header = header_match.group(0)
+
+          # Article pages need homepage anchors to point back to index.html
+          article_header = homepage_header
+
+          article_header = re.sub(
+              r'href=["\']#about["\']',
+              'href="index.html#about"',
+              article_header,
+              flags=re.I
+          )
+
+          article_header = re.sub(
+              r'href=["\']#contact["\']',
+              'href="index.html#contact"',
+              article_header,
+              flags=re.I
+          )
+
+          article_header = re.sub(
+              r'href=["\']#solutions["\']',
+              'href="index.html#solutions"',
+              article_header,
+              flags=re.I
+          )
+
+          article_header = re.sub(
+              r'href=["\']#solution["\']',
+              'href="index.html#solution"',
+              article_header,
+              flags=re.I
+          )
+
+          # Make sure article pages go back to the homepage correctly
+          article_header = re.sub(
+              r'href=["\']#focus["\']',
+              'href="index.html#focus"',
+              article_header,
+              flags=re.I
+          )
+
+          excluded = {
+              "index.html",
+              "404.html"
+          }
+
+          changed = []
+
+          for file in Path(".").glob("*.html"):
+
+              if file.name in excluded:
+                  continue
+
+              text = file.read_text(
+                  encoding="utf-8",
+                  errors="ignore"
+              )
+
+              # Replace the complete old article header
+              new_text, count = re.subn(
+                  r'<header\b[^>]*>.*?</header>',
+                  article_header,
+                  text,
+                  count=1,
+                  flags=re.I | re.S
+              )
+
+              if count == 0:
+                  print(f"Skipped: {file.name} (no header found)")
+                  continue
+
+              if new_text != text:
+                  file.write_text(
+                      new_text,
+                      encoding="utf-8"
+                  )
+
+                  changed.append(file.name)
+                  print(f"Updated navigation: {file.name}")
+              else:
+                  print(f"Already up to date: {file.name}")
+
+          print("")
+          print("Article navigation update completed.")
+          print(f"Updated files: {len(changed)}")
+
+          PY
+
       - name: Generate articles.json
         run: |
           python3 <<'PY'
@@ -31,10 +147,14 @@ jobs:
           }
 
           for file in Path(".").glob("*.html"):
+
               if file.name in excluded:
                   continue
 
-              text = file.read_text(encoding="utf-8", errors="ignore")
+              text = file.read_text(
+                  encoding="utf-8",
+                  errors="ignore"
+              )
 
               title_match = re.search(
                   r"<title[^>]*>(.*?)</title>",
@@ -63,7 +183,11 @@ jobs:
               if not title_match:
                   continue
 
-              title = re.sub(r"\s+", " ", title_match.group(1)).strip()
+              title = re.sub(
+                  r"\s+",
+                  " ",
+                  title_match.group(1)
+              ).strip()
 
               title = re.sub(
                   r"\s*\|\s*Jacky Liu\s*$",
@@ -73,6 +197,7 @@ jobs:
               )
 
               description = ""
+
               if description_match:
                   description = re.sub(
                       r"\s+",
@@ -81,6 +206,7 @@ jobs:
                   ).strip()
 
               category = "Technical Insight"
+
               if category_match:
                   category = re.sub(
                       r"\s+",
@@ -89,6 +215,7 @@ jobs:
                   ).strip()
 
               date = ""
+
               if date_match:
                   date = date_match.group(0)
 
@@ -113,16 +240,19 @@ jobs:
               ),
               encoding="utf-8"
           )
+
+          print(f"Generated articles.json with {len(articles)} articles.")
+
           PY
 
-      - name: Commit articles.json
+      - name: Commit updated articles and index
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add articles.json
+          git add "*.html" articles.json
 
           git diff --cached --quiet || \
-            git commit -m "Automatically update article index"
+            git commit -m "Unify article navigation and update article index"
 
           git push
