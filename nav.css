@@ -1,0 +1,276 @@
+/* =========================================================
+   SHARED SITE NAVIGATION
+   One navigation for the entire website
+   ========================================================= */
+
+#site-nav {
+  width: 100%;
+  position: relative;
+  z-index: 9999;
+}
+
+
+/* HEADER */
+
+#site-nav .shared-nav-header {
+  width: 100%;
+  background: #111;
+  color: #fff;
+}
+
+
+#site-nav .shared-nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+}
+
+
+/* LOGO */
+
+#site-nav .shared-logo {
+  color: #fff;
+  text-decoration: none;
+
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   DESKTOP NAV
+   THIS IS THE IMPORTANT PART:
+   display:flex keeps everything HORIZONTAL
+   ========================================================= */
+
+#site-nav #main-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+
+  gap: 24px;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+#site-nav .shared-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+#site-nav .shared-nav-link {
+  appearance: none;
+  border: 0;
+  background: transparent;
+
+  color: #fff;
+
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  padding: 6px 0;
+  margin: 0;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+
+#site-nav .shared-nav-link span {
+  font-size: 9px;
+  margin-left: 4px;
+}
+
+
+#site-nav .shared-simple-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+/* =========================================================
+   DROPDOWN
+   ========================================================= */
+
+#site-nav .shared-dropdown {
+  display: none;
+
+  position: absolute;
+
+  top: calc(100% + 8px);
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  min-width: 250px;
+
+  padding: 10px 0;
+
+  background: #111;
+
+  border: 1px solid #333;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35);
+
+  box-sizing: border-box;
+}
+
+
+#site-nav .shared-nav-item:hover > .shared-dropdown {
+  display: block;
+}
+
+
+#site-nav .shared-dropdown a {
+  display: block;
+
+  padding: 10px 18px;
+
+  color: #fff;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  white-space: normal;
+}
+
+
+#site-nav .shared-dropdown a:hover {
+  background: #222;
+}
+
+
+/* INSIGHTS */
+
+#site-nav .shared-insights-dropdown {
+  min-width: 330px;
+}
+
+
+#site-nav .shared-insights-group {
+  padding: 5px 0;
+}
+
+
+#site-nav .shared-insights-title {
+  padding: 8px 18px 5px;
+
+  color: #aaa;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+#site-nav .shared-insights-link {
+  display: block;
+
+  padding: 7px 18px;
+
+  color: #fff;
+
+  font-size: 13px;
+
+  text-decoration: none;
+}
+
+
+#site-nav .shared-insights-link:hover {
+  background: #222;
+}
+
+
+#site-nav .shared-view-all {
+  margin-top: 5px;
+
+  border-top: 1px solid #333;
+
+  padding-top: 10px !important;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+#site-nav .shared-mobile-toggle {
+  display: none;
+
+  border: 0;
+  background: transparent;
+
+  color: #fff;
+
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+
+#site-nav .shared-mobile-menu {
+  display: none;
+
+  padding: 10px 24px 20px;
+
+  background: #111;
+}
+
+
+#site-nav .shared-mobile-menu.open {
+  display: block;
+}
+
+
+#site-nav .shared-mobile-menu a {
+  display: block;
+
+  padding: 12px 0;
+
+  color: #fff;
+
+  text-decoration: none;
+
+  border-bottom: 1px solid #333;
+}
+
+
+@media (max-width: 800px) {
+
+  #site-nav #main-nav {
+    display: none !important;
+  }
+
+  #site-nav .shared-mobile-toggle {
+    display: block;
+  }
+
+  #site-nav .shared-nav-container {
+    padding: 18px 20px;
+  }
+
+}
