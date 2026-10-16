@@ -1,8 +1,20 @@
-
 (function () {
   "use strict";
 
-  const groups = [
+  /*
+   * ============================================================
+   * INSIGHTS
+   * ============================================================
+   *
+   * These are knowledge/article categories.
+   *
+   * When you publish a new Insights article:
+   * 1. Add the HTML filename to the correct category.
+   * 2. The article title is taken automatically from articles.json.
+   *
+   */
+
+  const insightGroups = [
     {
       name: "International Logistics",
       files: []
@@ -49,6 +61,101 @@
     }
   ];
 
+
+  /*
+   * ============================================================
+   * CASE
+   * ============================================================
+   *
+   * Case categories.
+   *
+   * Later, when you create a Case page/article,
+   * put its HTML filename into the correct category.
+   *
+   */
+
+  const caseGroups = [
+    {
+      name: "Wire & Cable Applications",
+      files: []
+    },
+    {
+      name: "Forklift Safety Applications",
+      files: []
+    },
+    {
+      name: "Truck Safety Applications",
+      files: []
+    },
+    {
+      name: "Excavator Safety Applications",
+      files: []
+    },
+    {
+      name: "Bus Safety Applications",
+      files: []
+    },
+    {
+      name: "Mining Safety Applications",
+      files: []
+    },
+    {
+      name: "Marine Display Applications",
+      files: []
+    }
+  ];
+
+
+  /*
+   * ============================================================
+   * SOLUTION
+   * ============================================================
+   *
+   * Solution categories.
+   *
+   * Later, when you create a Solution page/article,
+   * put its HTML filename into the correct category.
+   *
+   */
+
+  const solutionGroups = [
+    {
+      name: "Forklift Safety Visualization",
+      files: []
+    },
+    {
+      name: "Truck Safety Visualization",
+      files: []
+    },
+    {
+      name: "Excavator Safety Visualization",
+      files: []
+    },
+    {
+      name: "Bus Safety Visualization",
+      files: []
+    },
+    {
+      name: "Mining Safety Visualization",
+      files: []
+    },
+    {
+      name: "Marine Display Solutions",
+      files: []
+    },
+    {
+      name: "Wire & Cable Solutions",
+      files: []
+    }
+  ];
+
+
+  /*
+   * ============================================================
+   * SITE BASE URL
+   * ============================================================
+   */
+
   function getSiteBaseUrl() {
     const script = document.querySelector(
       'script[src$="nav.js"], script[src*="/nav.js?"]'
@@ -57,12 +164,22 @@
     if (script) {
       return new URL(
         ".",
-        new URL(script.getAttribute("src"), window.location.href)
+        new URL(
+          script.getAttribute("src"),
+          window.location.href
+        )
       );
     }
 
     return new URL(".", window.location.href);
   }
+
+
+  /*
+   * ============================================================
+   * ARTICLE TITLE
+   * ============================================================
+   */
 
   function getArticleTitle(article, fileName) {
     if (
@@ -83,9 +200,18 @@
       });
   }
 
+
+  /*
+   * ============================================================
+   * MAIN NAVIGATION DROPDOWNS
+   * ============================================================
+   */
+
   function setupDropdowns(root) {
     const nav = root.querySelector(".shared-nav");
-    const mobileToggle = root.querySelector(".shared-mobile-toggle");
+    const mobileToggle = root.querySelector(
+      ".shared-mobile-toggle"
+    );
 
     if (nav && mobileToggle) {
       mobileToggle.addEventListener("click", function () {
@@ -98,74 +224,139 @@
       });
     }
 
+
     root
       .querySelectorAll(".shared-dropdown-trigger")
       .forEach(function (button) {
+
         button.addEventListener("click", function (event) {
           event.stopPropagation();
 
-          const item = button.closest(".shared-nav-item");
+          const item = button.closest(
+            ".shared-nav-item"
+          );
 
           if (!item) {
             return;
           }
 
-          const wasOpen = item.classList.contains("open");
+          const wasOpen =
+            item.classList.contains("open");
 
           root
-            .querySelectorAll(".shared-nav-item.open")
+            .querySelectorAll(
+              ".shared-nav-item.open"
+            )
             .forEach(function (openItem) {
+
               openItem.classList.remove("open");
 
               const trigger =
-                openItem.querySelector(".shared-dropdown-trigger");
+                openItem.querySelector(
+                  ".shared-dropdown-trigger"
+                );
 
               if (trigger) {
-                trigger.setAttribute("aria-expanded", "false");
+                trigger.setAttribute(
+                  "aria-expanded",
+                  "false"
+                );
               }
             });
 
+
           if (!wasOpen) {
             item.classList.add("open");
-            button.setAttribute("aria-expanded", "true");
+
+            button.setAttribute(
+              "aria-expanded",
+              "true"
+            );
           }
         });
       });
 
-    document.addEventListener("click", function (event) {
-      if (!root.contains(event.target)) {
-        root
-          .querySelectorAll(".shared-nav-item.open")
-          .forEach(function (item) {
-            item.classList.remove("open");
 
-            const trigger =
-              item.querySelector(".shared-dropdown-trigger");
+    document.addEventListener(
+      "click",
+      function (event) {
 
-            if (trigger) {
-              trigger.setAttribute("aria-expanded", "false");
-            }
-          });
+        if (!root.contains(event.target)) {
+
+          root
+            .querySelectorAll(
+              ".shared-nav-item.open"
+            )
+            .forEach(function (item) {
+
+              item.classList.remove("open");
+
+              const trigger =
+                item.querySelector(
+                  ".shared-dropdown-trigger"
+                );
+
+              if (trigger) {
+                trigger.setAttribute(
+                  "aria-expanded",
+                  "false"
+                );
+              }
+            });
+        }
       }
-    });
+    );
 
-    root.querySelectorAll(".shared-nav a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        if (nav) {
-          nav.classList.remove("mobile-open");
-        }
 
-        if (mobileToggle) {
-          mobileToggle.setAttribute("aria-expanded", "false");
-        }
+    root
+      .querySelectorAll(".shared-nav a")
+      .forEach(function (link) {
+
+        link.addEventListener(
+          "click",
+          function () {
+
+            if (nav) {
+              nav.classList.remove(
+                "mobile-open"
+              );
+            }
+
+            if (mobileToggle) {
+              mobileToggle.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+            }
+          }
+        );
       });
-    });
   }
 
-  function renderInsights(articles) {
-    const container = document.getElementById(
-      "shared-insights-content"
-    );
+
+  /*
+   * ============================================================
+   * RENDER CATEGORY GROUPS
+   * ============================================================
+   *
+   * This is used by:
+   *
+   * CASE
+   * SOLUTION
+   * INSIGHTS
+   *
+   * Every category has a + button.
+   *
+   */
+
+  function renderGroups(
+    containerId,
+    groups,
+    articles,
+    emptyMessage
+  ) {
+    const container =
+      document.getElementById(containerId);
 
     if (!container) {
       return;
@@ -173,103 +364,229 @@
 
     container.replaceChildren();
 
+
     const articleMap = new Map();
 
+
     if (Array.isArray(articles)) {
+
       articles.forEach(function (article) {
-        if (article && typeof article.file === "string") {
-          articleMap.set(article.file, article);
+
+        if (
+          article &&
+          typeof article.file === "string"
+        ) {
+          articleMap.set(
+            article.file,
+            article
+          );
         }
       });
     }
 
-    const siteBaseUrl = getSiteBaseUrl();
+
+    const siteBaseUrl =
+      getSiteBaseUrl();
+
 
     groups.forEach(function (group, index) {
-      const section = document.createElement("section");
-      section.className = "shared-insight-category";
 
-      const button = document.createElement("button");
+      const section =
+        document.createElement("section");
+
+      section.className =
+        "shared-insight-category";
+
+
+      const button =
+        document.createElement("button");
+
       button.type = "button";
-      button.className = "shared-insight-category-toggle";
-      button.setAttribute("aria-expanded", "false");
+
+      button.className =
+        "shared-insight-category-toggle";
+
       button.setAttribute(
-        "aria-controls",
-        "shared-insight-links-" + index
+        "aria-expanded",
+        "false"
       );
 
-      const label = document.createElement("span");
-      label.textContent = group.name;
+      button.setAttribute(
+        "aria-controls",
+        containerId +
+        "-links-" +
+        index
+      );
 
-      const indicator = document.createElement("span");
+
+      const label =
+        document.createElement("span");
+
+      label.textContent =
+        group.name;
+
+
+      const indicator =
+        document.createElement("span");
+
       indicator.className =
         "shared-insight-category-indicator";
-      indicator.setAttribute("aria-hidden", "true");
-      indicator.textContent = "+";
+
+      indicator.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      indicator.textContent =
+        "+";
+
 
       button.appendChild(label);
       button.appendChild(indicator);
 
-      const links = document.createElement("div");
-      links.className = "shared-insight-category-links";
-      links.id = "shared-insight-links-" + index;
+
+      const links =
+        document.createElement("div");
+
+      links.className =
+        "shared-insight-category-links";
+
+      links.id =
+        containerId +
+        "-links-" +
+        index;
+
       links.hidden = true;
 
-      const availableFiles = group.files.filter(function (fileName) {
-        return articleMap.has(fileName);
-      });
 
-      if (availableFiles.length === 0) {
-        const empty = document.createElement("div");
-        empty.className = "shared-insight-empty";
-        empty.textContent = "Articles coming soon.";
+      /*
+       * Only show files that actually exist
+       * in articles.json.
+       */
+
+      const availableFiles =
+        Array.isArray(group.files)
+          ? group.files.filter(
+              function (fileName) {
+                return articleMap.has(
+                  fileName
+                );
+              }
+            )
+          : [];
+
+
+      if (
+        availableFiles.length === 0
+      ) {
+
+        const empty =
+          document.createElement("div");
+
+        empty.className =
+          "shared-insight-empty";
+
+        empty.textContent =
+          emptyMessage;
+
         links.appendChild(empty);
+
       } else {
-        availableFiles.forEach(function (fileName) {
-          const article = articleMap.get(fileName);
-          const link = document.createElement("a");
 
-          link.className = "shared-insight-article";
-          link.href = new URL(fileName, siteBaseUrl).href;
-          link.textContent = getArticleTitle(
-            article,
-            fileName
-          );
+        availableFiles.forEach(
+          function (fileName) {
 
-          links.appendChild(link);
-        });
+            const article =
+              articleMap.get(
+                fileName
+              );
+
+            const link =
+              document.createElement("a");
+
+            link.className =
+              "shared-insight-article";
+
+            link.href =
+              new URL(
+                fileName,
+                siteBaseUrl
+              ).href;
+
+            link.textContent =
+              getArticleTitle(
+                article,
+                fileName
+              );
+
+            links.appendChild(link);
+          }
+        );
       }
 
-      button.addEventListener("click", function () {
-        const isExpanded =
-          button.getAttribute("aria-expanded") === "true";
 
-        button.setAttribute(
-          "aria-expanded",
-          String(!isExpanded)
-        );
+      /*
+       * Category + button
+       */
 
-        links.hidden = isExpanded;
-        indicator.textContent = isExpanded ? "+" : "−";
-      });
+      button.addEventListener(
+        "click",
+        function () {
+
+          const isExpanded =
+            button.getAttribute(
+              "aria-expanded"
+            ) === "true";
+
+          button.setAttribute(
+            "aria-expanded",
+            String(!isExpanded)
+          );
+
+          links.hidden =
+            isExpanded;
+
+          indicator.textContent =
+            isExpanded
+              ? "+"
+              : "−";
+        }
+      );
+
 
       section.appendChild(button);
       section.appendChild(links);
+
       container.appendChild(section);
     });
   }
 
+
+  /*
+   * ============================================================
+   * LOAD NAVIGATION
+   * ============================================================
+   */
+
   async function loadNavigation() {
-    const mount = document.getElementById("site-nav");
+
+    const mount =
+      document.getElementById(
+        "site-nav"
+      );
 
     if (!mount) {
       return;
     }
 
+
     try {
-      const script = document.querySelector(
-        'script[src$="nav.js"], script[src*="/nav.js?"]'
-      );
+
+      const script =
+        document.querySelector(
+          'script[src$="nav.js"], script[src*="/nav.js?"]'
+        );
+
 
       const baseUrl = script
         ? new URL(
@@ -279,41 +596,134 @@
               window.location.href
             )
           )
-        : new URL(".", window.location.href);
+        : new URL(
+            ".",
+            window.location.href
+          );
 
-      const navResponse = await fetch(
-        new URL("nav.html", baseUrl).href
-      );
+
+      /*
+       * Load nav.html
+       */
+
+      const navResponse =
+        await fetch(
+          new URL(
+            "nav.html",
+            baseUrl
+          ).href
+        );
+
 
       if (!navResponse.ok) {
-        throw new Error("Could not load nav.html");
+        throw new Error(
+          "Could not load nav.html"
+        );
       }
 
-      mount.innerHTML = await navResponse.text();
+
+      mount.innerHTML =
+        await navResponse.text();
+
 
       setupDropdowns(mount);
 
+
+      /*
+       * Load articles.json
+       */
+
       try {
-        const articlesResponse = await fetch(
-          new URL("articles.json", baseUrl).href
-        );
+
+        const articlesResponse =
+          await fetch(
+            new URL(
+              "articles.json",
+              baseUrl
+            ).href
+          );
+
 
         if (!articlesResponse.ok) {
-          throw new Error("Could not load articles.json");
+          throw new Error(
+            "Could not load articles.json"
+          );
         }
 
-        const articles = await articlesResponse.json();
 
-        renderInsights(articles);
+        const articles =
+          await articlesResponse.json();
+
+
+        /*
+         * Render INSIGHTS
+         */
+
+        renderGroups(
+          "shared-insights-content",
+          insightGroups,
+          articles,
+          "Articles coming soon."
+        );
+
+
+        /*
+         * Render CASE
+         */
+
+        renderGroups(
+          "shared-case-content",
+          caseGroups,
+          articles,
+          "Cases coming soon."
+        );
+
+
+        /*
+         * Render SOLUTION
+         */
+
+        renderGroups(
+          "shared-solution-content",
+          solutionGroups,
+          articles,
+          "Solutions coming soon."
+        );
+
       } catch (error) {
+
         console.error(
-          "Could not load the Insights article list:",
+          "Could not load the article list:",
           error
         );
 
-        renderInsights([]);
+
+        renderGroups(
+          "shared-insights-content",
+          insightGroups,
+          [],
+          "Articles coming soon."
+        );
+
+
+        renderGroups(
+          "shared-case-content",
+          caseGroups,
+          [],
+          "Cases coming soon."
+        );
+
+
+        renderGroups(
+          "shared-solution-content",
+          solutionGroups,
+          [],
+          "Solutions coming soon."
+        );
       }
+
     } catch (error) {
+
       console.error(
         "Could not load shared navigation:",
         error
@@ -321,12 +731,25 @@
     }
   }
 
-  if (document.readyState === "loading") {
+
+  /*
+   * ============================================================
+   * START
+   * ============================================================
+   */
+
+  if (
+    document.readyState === "loading"
+  ) {
+
     document.addEventListener(
       "DOMContentLoaded",
       loadNavigation
     );
+
   } else {
+
     loadNavigation();
   }
+
 })();
