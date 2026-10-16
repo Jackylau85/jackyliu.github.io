@@ -1,25 +1,6 @@
+
 (function () {
   "use strict";
-
-  // Load the shared navigation stylesheet.
-  function loadCSS() {
-    if (document.querySelector('link[data-shared-nav-css]')) {
-      return;
-    }
-
-    const script = document.querySelector('script[src$="nav.js"]');
-    const scriptURL = script
-      ? new URL(script.getAttribute("src"), window.location.href)
-      : new URL("nav.js", window.location.href);
-
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = new URL("nav.css", scriptURL).href;
-    link.dataset.sharedNavCss = "true";
-    document.head.appendChild(link);
-  }
-
-  loadCSS();
 
   const groups = [
     {
