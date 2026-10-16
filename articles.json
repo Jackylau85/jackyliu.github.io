@@ -35,11 +35,6 @@
     "description": "In an SVM system, the monitor is more than a device for displaying images. It is the HMI between the camera system, SVM box and driver, combining video display, touch interaction, alerts and system control."
   },
   {
-    "file": "nav.html",
-    "title": "Nav",
-    "description": ""
-  },
-  {
     "file": "svm-display-resolution-system-matching.html",
     "title": "SVM Display Resolution: Why Does System Matching Matter More Than Pixels? | Jacky Liu",
     "description": "How important is display resolution in an SVM system? Compare 1024×600, 1280×800 and 1920×1080 and learn why Camera → SVM Box → Display matching matters more than choosing the highest resolution."
