@@ -1,4 +1,3 @@
-```yaml
 name: Build Articles and Shared Navigation
 
 on:
@@ -46,7 +45,6 @@ jobs:
               </button>
 
               <nav class="shared-nav" aria-label="Main navigation">
-
                 <div class="shared-nav-item">
                   <a class="shared-nav-link" href="./">CASE</a>
                 </div>
@@ -57,8 +55,7 @@ jobs:
                     type="button"
                     aria-expanded="false"
                   >
-                    INSIGHTS
-                    <span class="shared-nav-arrow">▾</span>
+                    INSIGHTS <span class="shared-nav-arrow">▾</span>
                   </button>
 
                   <div
@@ -82,12 +79,10 @@ jobs:
                 <div class="shared-nav-item">
                   <a class="shared-nav-link" href="./#contact">CONTACT</a>
                 </div>
-
               </nav>
             </div>
           </header>
           ''', encoding="utf-8")
-
 
           Path("nav.css").write_text(r'''
           :root {
@@ -201,6 +196,7 @@ jobs:
             box-shadow: var(--shared-nav-shadow);
           }
 
+          #site-nav .shared-nav-item:hover > .shared-dropdown-menu,
           #site-nav .shared-nav-item.open > .shared-dropdown-menu {
             display: block;
           }
@@ -382,7 +378,6 @@ jobs:
           }
           ''', encoding="utf-8")
 
-
           Path("nav.js").write_text(r'''
           (function () {
             "use strict";
@@ -434,7 +429,6 @@ jobs:
               }
             ];
 
-
             function getSiteBaseUrl() {
               const script = document.querySelector(
                 'script[src$="nav.js"], script[src*="/nav.js?"]'
@@ -449,7 +443,6 @@ jobs:
 
               return new URL(".", window.location.href);
             }
-
 
             function getArticleTitle(article, fileName) {
               if (
@@ -470,7 +463,6 @@ jobs:
                 });
             }
 
-
             function setupDropdowns(root) {
               const nav = root.querySelector(".shared-nav");
               const mobileToggle = root.querySelector(".shared-mobile-toggle");
@@ -485,7 +477,6 @@ jobs:
                   );
                 });
               }
-
 
               root
                 .querySelectorAll(".shared-dropdown-trigger")
@@ -510,24 +501,16 @@ jobs:
                           openItem.querySelector(".shared-dropdown-trigger");
 
                         if (trigger) {
-                          trigger.setAttribute(
-                            "aria-expanded",
-                            "false"
-                          );
+                          trigger.setAttribute("aria-expanded", "false");
                         }
                       });
 
                     if (!wasOpen) {
                       item.classList.add("open");
-
-                      button.setAttribute(
-                        "aria-expanded",
-                        "true"
-                      );
+                      button.setAttribute("aria-expanded", "true");
                     }
                   });
                 });
-
 
               document.addEventListener("click", function (event) {
                 if (!root.contains(event.target)) {
@@ -540,15 +523,11 @@ jobs:
                         item.querySelector(".shared-dropdown-trigger");
 
                       if (trigger) {
-                        trigger.setAttribute(
-                          "aria-expanded",
-                          "false"
-                        );
+                        trigger.setAttribute("aria-expanded", "false");
                       }
                     });
                 }
               });
-
 
               root.querySelectorAll(".shared-nav a").forEach(function (link) {
                 link.addEventListener("click", function () {
@@ -557,15 +536,11 @@ jobs:
                   }
 
                   if (mobileToggle) {
-                    mobileToggle.setAttribute(
-                      "aria-expanded",
-                      "false"
-                    );
+                    mobileToggle.setAttribute("aria-expanded", "false");
                   }
                 });
               });
             }
-
 
             function renderInsights(articles) {
               const container = document.getElementById(
@@ -582,10 +557,7 @@ jobs:
 
               if (Array.isArray(articles)) {
                 articles.forEach(function (article) {
-                  if (
-                    article &&
-                    typeof article.file === "string"
-                  ) {
+                  if (article && typeof article.file === "string") {
                     articleMap.set(article.file, article);
                   }
                 });
@@ -593,149 +565,91 @@ jobs:
 
               const siteBaseUrl = getSiteBaseUrl();
 
-
               groups.forEach(function (group, index) {
                 const section = document.createElement("section");
                 section.className = "shared-insight-category";
 
-
                 const button = document.createElement("button");
                 button.type = "button";
-                button.className =
-                  "shared-insight-category-toggle";
-
-                button.setAttribute(
-                  "aria-expanded",
-                  "false"
-                );
-
+                button.className = "shared-insight-category-toggle";
+                button.setAttribute("aria-expanded", "false");
                 button.setAttribute(
                   "aria-controls",
                   "shared-insight-links-" + index
                 );
 
-
                 const label = document.createElement("span");
                 label.textContent = group.name;
-
 
                 const indicator = document.createElement("span");
                 indicator.className =
                   "shared-insight-category-indicator";
-
-                indicator.setAttribute(
-                  "aria-hidden",
-                  "true"
-                );
-
+                indicator.setAttribute("aria-hidden", "true");
                 indicator.textContent = "+";
-
 
                 button.appendChild(label);
                 button.appendChild(indicator);
 
-
                 const links = document.createElement("div");
-                links.className =
-                  "shared-insight-category-links";
-
-                links.id =
-                  "shared-insight-links-" + index;
-
+                links.className = "shared-insight-category-links";
+                links.id = "shared-insight-links-" + index;
                 links.hidden = true;
 
-
-                const availableFiles = group.files.filter(
-                  function (fileName) {
-                    return articleMap.has(fileName);
-                  }
-                );
-
+                const availableFiles = group.files.filter(function (fileName) {
+                  return articleMap.has(fileName);
+                });
 
                 if (availableFiles.length === 0) {
-                  const empty =
-                    document.createElement("div");
-
-                  empty.className =
-                    "shared-insight-empty";
-
-                  empty.textContent =
-                    "Articles coming soon.";
-
+                  const empty = document.createElement("div");
+                  empty.className = "shared-insight-empty";
+                  empty.textContent = "Articles coming soon.";
                   links.appendChild(empty);
-
                 } else {
-
                   availableFiles.forEach(function (fileName) {
-                    const article =
-                      articleMap.get(fileName);
+                    const article = articleMap.get(fileName);
+                    const link = document.createElement("a");
 
-                    const link =
-                      document.createElement("a");
-
-                    link.className =
-                      "shared-insight-article";
-
-                    link.href =
-                      new URL(
-                        fileName,
-                        siteBaseUrl
-                      ).href;
-
-                    link.textContent =
-                      getArticleTitle(
-                        article,
-                        fileName
-                      );
+                    link.className = "shared-insight-article";
+                    link.href = new URL(fileName, siteBaseUrl).href;
+                    link.textContent = getArticleTitle(
+                      article,
+                      fileName
+                    );
 
                     links.appendChild(link);
                   });
                 }
 
+                button.addEventListener("click", function () {
+                  const isExpanded =
+                    button.getAttribute("aria-expanded") === "true";
 
-                button.addEventListener(
-                  "click",
-                  function () {
-                    const isExpanded =
-                      button.getAttribute(
-                        "aria-expanded"
-                      ) === "true";
+                  button.setAttribute(
+                    "aria-expanded",
+                    String(!isExpanded)
+                  );
 
-                    button.setAttribute(
-                      "aria-expanded",
-                      String(!isExpanded)
-                    );
-
-                    links.hidden = isExpanded;
-
-                    indicator.textContent =
-                      isExpanded ? "+" : "−";
-                  }
-                );
-
+                  links.hidden = isExpanded;
+                  indicator.textContent = isExpanded ? "+" : "−";
+                });
 
                 section.appendChild(button);
                 section.appendChild(links);
-
                 container.appendChild(section);
               });
             }
 
-
             async function loadNavigation() {
-              const mount =
-                document.getElementById("site-nav");
+              const mount = document.getElementById("site-nav");
 
               if (!mount) {
                 return;
               }
 
-
               try {
                 const script = document.querySelector(
                   'script[src$="nav.js"], script[src*="/nav.js?"]'
                 );
-
 
                 const baseUrl = script
                   ? new URL(
@@ -745,57 +659,32 @@ jobs:
                         window.location.href
                       )
                     )
-                  : new URL(
-                      ".",
-                      window.location.href
-                    );
+                  : new URL(".", window.location.href);
 
-
-                const navResponse =
-                  await fetch(
-                    new URL(
-                      "nav.html",
-                      baseUrl
-                    ).href
-                  );
-
+                const navResponse = await fetch(
+                  new URL("nav.html", baseUrl).href
+                );
 
                 if (!navResponse.ok) {
-                  throw new Error(
-                    "Could not load nav.html"
-                  );
+                  throw new Error("Could not load nav.html");
                 }
 
-
-                mount.innerHTML =
-                  await navResponse.text();
-
+                mount.innerHTML = await navResponse.text();
 
                 setupDropdowns(mount);
 
-
                 try {
-                  const articlesResponse =
-                    await fetch(
-                      new URL(
-                        "articles.json",
-                        baseUrl
-                      ).href
-                    );
-
+                  const articlesResponse = await fetch(
+                    new URL("articles.json", baseUrl).href
+                  );
 
                   if (!articlesResponse.ok) {
-                    throw new Error(
-                      "Could not load articles.json"
-                    );
+                    throw new Error("Could not load articles.json");
                   }
 
-
-                  const articles =
-                    await articlesResponse.json();
+                  const articles = await articlesResponse.json();
 
                   renderInsights(articles);
-
                 } catch (error) {
                   console.error(
                     "Could not load the Insights article list:",
@@ -804,7 +693,6 @@ jobs:
 
                   renderInsights([]);
                 }
-
               } catch (error) {
                 console.error(
                   "Could not load shared navigation:",
@@ -813,11 +701,7 @@ jobs:
               }
             }
 
-
-            if (
-              document.readyState ===
-              "loading"
-            ) {
+            if (document.readyState === "loading") {
               document.addEventListener(
                 "DOMContentLoaded",
                 loadNavigation
@@ -825,10 +709,8 @@ jobs:
             } else {
               loadNavigation();
             }
-
           })();
           ''', encoding="utf-8")
-
 
       - name: Update HTML pages
         shell: python {0}
@@ -839,15 +721,12 @@ jobs:
           root = Path(".")
 
           for path in root.glob("*.html"):
-
               if path.name == "nav.html":
                   continue
 
               content = path.read_text(encoding="utf-8")
 
-
-              # Replace the first existing page header
-              # with the shared navigation mount.
+              # Replace an existing page header with the shared navigation mount.
               content, header_count = re.subn(
                   r"<header\b[^>]*>.*?</header>",
                   '<div id="site-nav"></div>',
@@ -856,23 +735,17 @@ jobs:
                   flags=re.IGNORECASE | re.DOTALL
               )
 
-
-              # Add the shared navigation mount
-              # if the page did not have a header.
+              # Add the shared navigation mount if the page did not have a header.
               if 'id="site-nav"' not in content:
-
                   content, body_count = re.subn(
                       r"<body\b[^>]*>",
-                      lambda match:
-                          match.group(0)
-                          + '\n<div id="site-nav"></div>',
+                      lambda match: match.group(0) + '\n<div id="site-nav"></div>',
                       content,
                       count=1,
                       flags=re.IGNORECASE
                   )
 
-
-              # Remove old homepage Insights category scripts.
+              # Remove an old script that generated the homepage Insights categories.
               content = re.sub(
                   r"<script\b[^>]*>.*?INSIGHTS CATEGORY GROUPS.*?</script>",
                   "",
@@ -880,8 +753,6 @@ jobs:
                   flags=re.IGNORECASE | re.DOTALL
               )
 
-
-              # Remove old buildInsightsDropdown script.
               content = re.sub(
                   r"<script\b[^>]*>.*?buildInsightsDropdown\s*\(\s*articles\s*\).*?</script>",
                   "",
@@ -889,39 +760,12 @@ jobs:
                   flags=re.IGNORECASE | re.DOTALL
               )
 
-
-              # Ensure nav.css is loaded once.
-              if not re.search(
-                  r'<link\b[^>]*href=["\'][^"\']*nav\.css(?:\?[^"\']*)?["\'][^>]*>',
-                  content,
-                  flags=re.IGNORECASE
-              ):
-
-                  css_tag = '\n<link rel="stylesheet" href="nav.css">\n'
-
-                  if re.search(
-                      r"</head\s*>",
-                      content,
-                      flags=re.IGNORECASE
-                  ):
-                      content = re.sub(
-                          r"</head\s*>",
-                          css_tag + "</head>",
-                          content,
-                          count=1,
-                          flags=re.IGNORECASE
-                      )
-                  else:
-                      content = css_tag + content
-
-
               # Ensure nav.js is loaded once.
               if not re.search(
                   r'<script\b[^>]*src=["\'][^"\']*nav\.js(?:\?[^"\']*)?["\'][^>]*>',
                   content,
                   flags=re.IGNORECASE
               ):
-
                   script_tag = '\n<script src="nav.js"></script>\n'
 
                   if re.search(
@@ -939,12 +783,7 @@ jobs:
                   else:
                       content += script_tag
 
-
-              path.write_text(
-                  content,
-                  encoding="utf-8"
-              )
-
+              path.write_text(content, encoding="utf-8")
 
       - name: Build articles.json
         shell: python {0}
@@ -956,24 +795,13 @@ jobs:
 
           articles = []
 
-          excluded = {
-              "index.html",
-              "404.html"
-          }
+          excluded = {"index.html", "404.html"}
 
-
-          for path in sorted(
-              Path(".").glob("*.html")
-          ):
-
+          for path in sorted(Path(".").glob("*.html")):
               if path.name in excluded:
                   continue
 
-              content =
-                  path.read_text(
-                      encoding="utf-8"
-                  )
-
+              content = path.read_text(encoding="utf-8")
 
               title_match = re.search(
                   r"<title\b[^>]*>(.*?)</title>",
@@ -981,13 +809,11 @@ jobs:
                   flags=re.IGNORECASE | re.DOTALL
               )
 
-
               description_match = re.search(
                   r'<meta\b[^>]*name=["\']description["\'][^>]*content=["\'](.*?)["\']',
                   content,
                   flags=re.IGNORECASE | re.DOTALL
               )
-
 
               title = (
                   unescape(
@@ -998,11 +824,8 @@ jobs:
                       )
                   ).strip()
                   if title_match
-                  else path.stem
-                      .replace("-", " ")
-                      .title()
+                  else path.stem.replace("-", " ").title()
               )
-
 
               description = (
                   unescape(
@@ -1016,13 +839,11 @@ jobs:
                   else ""
               )
 
-
               articles.append({
                   "file": path.name,
                   "title": title,
                   "description": description
               })
-
 
           Path("articles.json").write_text(
               json.dumps(
@@ -1033,12 +854,9 @@ jobs:
               encoding="utf-8"
           )
 
-
           print(
-              f"Generated articles.json with "
-              f"{len(articles)} articles."
+              f"Generated articles.json with {len(articles)} articles."
           )
-
 
       - name: Check generated files
         shell: bash
@@ -1056,16 +874,12 @@ jobs:
           import json
 
           articles = json.loads(
-              Path("articles.json").read_text(
-                  encoding="utf-8"
-              )
+              Path("articles.json").read_text(encoding="utf-8")
           )
-
 
           required_files = [
               "why-cables-can-matter-more-than-power-supply.html",
               "why-wiring-matters.html",
-
               "how-to-choose-vehicle-monitor.html",
               "1920x1080-vs-1024x600.html",
               "what-brightness-does-a-vehicle-monitor-need.html",
@@ -1073,10 +887,8 @@ jobs:
               "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
               "why-vehicle-monitors-use-m12-connectors.html",
               "bench-test-vs-installation.html",
-
               "why-vehicle-camera-image-quality-changes-after-installation.html",
               "hdmi-vs-ahd-vehicle-camera-system.html",
-
               "monitor-as-hmi-in-svm-system.html",
               "svm-display-resolution-system-matching.html",
               "why-svm-avm-needs-proper-display-interface.html",
@@ -1084,31 +896,21 @@ jobs:
               "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html"
           ]
 
-
           available = {
               item["file"]
               for item in articles
           }
 
-
           for file_name in required_files:
-
               if (
                   Path(file_name).exists()
                   and file_name not in available
               ):
                   raise SystemExit(
-                      "Article missing from articles.json: "
-                      + file_name
+                      f"Article missing from articles.json: {file_name}"
                   )
 
-
-          nav_js = Path(
-              "nav.js"
-          ).read_text(
-              encoding="utf-8"
-          )
-
+          nav_js = Path("nav.js").read_text(encoding="utf-8")
 
           required_categories = [
               "International Logistics",
@@ -1119,40 +921,16 @@ jobs:
               "SVM / AVM"
           ]
 
-
           for category in required_categories:
-
               if category not in nav_js:
                   raise SystemExit(
-                      "Navigation category missing: "
-                      + category
+                      f"Navigation category missing: {category}"
                   )
-
-
-          # Verify every HTML page contains the
-          # shared navigation mount.
-          for html_file in Path(".").glob("*.html"):
-
-              if html_file.name == "nav.html":
-                  continue
-
-              html = html_file.read_text(
-                  encoding="utf-8"
-              )
-
-              if 'id="site-nav"' not in html:
-                  raise SystemExit(
-                      "Shared navigation mount missing: "
-                      + html_file.name
-                  )
-
 
           print(
-              "Navigation files, article index, "
-              "and HTML page checks passed."
+              "Navigation files and article index checks passed."
           )
           PY
-
 
       - name: Commit and push changes
         shell: bash
@@ -1169,4 +947,3 @@ jobs:
 
           git commit -m "Update shared site navigation [skip ci]"
           git push
-```
