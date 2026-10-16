@@ -55,14 +55,21 @@
     );
 
     if (script) {
-      return new URL(".", new URL(script.getAttribute("src"), window.location.href));
+      return new URL(
+        ".",
+        new URL(script.getAttribute("src"), window.location.href)
+      );
     }
 
     return new URL(".", window.location.href);
   }
 
   function getArticleTitle(article, fileName) {
-    if (article && typeof article.title === "string" && article.title.trim()) {
+    if (
+      article &&
+      typeof article.title === "string" &&
+      article.title.trim()
+    ) {
       return article.title
         .replace(/\s*\|\s*Jacky Liu\s*$/i, "")
         .trim();
@@ -83,49 +90,71 @@
     if (nav && mobileToggle) {
       mobileToggle.addEventListener("click", function () {
         const isOpen = nav.classList.toggle("mobile-open");
-        mobileToggle.setAttribute("aria-expanded", String(isOpen));
+
+        mobileToggle.setAttribute(
+          "aria-expanded",
+          String(isOpen)
+        );
       });
     }
 
-    root.querySelectorAll(".shared-dropdown-trigger").forEach(function (button) {
-      button.addEventListener("click", function (event) {
-        event.stopPropagation();
+    root
+      .querySelectorAll(".shared-dropdown-trigger")
+      .forEach(function (button) {
+        button.addEventListener("click", function (event) {
+          event.stopPropagation();
 
-        const item = button.closest(".shared-nav-item");
-        if (!item) return;
+          const item = button.closest(".shared-nav-item");
 
-        const wasOpen = item.classList.contains("open");
+          if (!item) {
+            return;
+          }
 
-        root.querySelectorAll(".shared-nav-item.open").forEach(function (openItem) {
-          openItem.classList.remove("open");
-          const trigger = openItem.querySelector(".shared-dropdown-trigger");
-          if (trigger) {
-            trigger.setAttribute("aria-expanded", "false");
+          const wasOpen = item.classList.contains("open");
+
+          root
+            .querySelectorAll(".shared-nav-item.open")
+            .forEach(function (openItem) {
+              openItem.classList.remove("open");
+
+              const trigger =
+                openItem.querySelector(".shared-dropdown-trigger");
+
+              if (trigger) {
+                trigger.setAttribute("aria-expanded", "false");
+              }
+            });
+
+          if (!wasOpen) {
+            item.classList.add("open");
+            button.setAttribute("aria-expanded", "true");
           }
         });
-
-        if (!wasOpen) {
-          item.classList.add("open");
-          button.setAttribute("aria-expanded", "true");
-        }
       });
-    });
 
     document.addEventListener("click", function (event) {
       if (!root.contains(event.target)) {
-        root.querySelectorAll(".shared-nav-item.open").forEach(function (item) {
-          item.classList.remove("open");
-          const trigger = item.querySelector(".shared-dropdown-trigger");
-          if (trigger) {
-            trigger.setAttribute("aria-expanded", "false");
-          }
-        });
+        root
+          .querySelectorAll(".shared-nav-item.open")
+          .forEach(function (item) {
+            item.classList.remove("open");
+
+            const trigger =
+              item.querySelector(".shared-dropdown-trigger");
+
+            if (trigger) {
+              trigger.setAttribute("aria-expanded", "false");
+            }
+          });
       }
     });
 
     root.querySelectorAll(".shared-nav a").forEach(function (link) {
       link.addEventListener("click", function () {
-        if (nav) nav.classList.remove("mobile-open");
+        if (nav) {
+          nav.classList.remove("mobile-open");
+        }
+
         if (mobileToggle) {
           mobileToggle.setAttribute("aria-expanded", "false");
         }
@@ -134,8 +163,13 @@
   }
 
   function renderInsights(articles) {
-    const container = document.getElementById("shared-insights-content");
-    if (!container) return;
+    const container = document.getElementById(
+      "shared-insights-content"
+    );
+
+    if (!container) {
+      return;
+    }
 
     container.replaceChildren();
 
@@ -159,13 +193,17 @@
       button.type = "button";
       button.className = "shared-insight-category-toggle";
       button.setAttribute("aria-expanded", "false");
-      button.setAttribute("aria-controls", "shared-insight-links-" + index);
+      button.setAttribute(
+        "aria-controls",
+        "shared-insight-links-" + index
+      );
 
       const label = document.createElement("span");
       label.textContent = group.name;
 
       const indicator = document.createElement("span");
-      indicator.className = "shared-insight-category-indicator";
+      indicator.className =
+        "shared-insight-category-indicator";
       indicator.setAttribute("aria-hidden", "true");
       indicator.textContent = "+";
 
@@ -193,15 +231,24 @@
 
           link.className = "shared-insight-article";
           link.href = new URL(fileName, siteBaseUrl).href;
-          link.textContent = getArticleTitle(article, fileName);
+          link.textContent = getArticleTitle(
+            article,
+            fileName
+          );
 
           links.appendChild(link);
         });
       }
 
       button.addEventListener("click", function () {
-        const isExpanded = button.getAttribute("aria-expanded") === "true";
-        button.setAttribute("aria-expanded", String(!isExpanded));
+        const isExpanded =
+          button.getAttribute("aria-expanded") === "true";
+
+        button.setAttribute(
+          "aria-expanded",
+          String(!isExpanded)
+        );
+
         links.hidden = isExpanded;
         indicator.textContent = isExpanded ? "+" : "−";
       });
@@ -214,7 +261,10 @@
 
   async function loadNavigation() {
     const mount = document.getElementById("site-nav");
-    if (!mount) return;
+
+    if (!mount) {
+      return;
+    }
 
     try {
       const script = document.querySelector(
@@ -222,10 +272,18 @@
       );
 
       const baseUrl = script
-        ? new URL(".", new URL(script.getAttribute("src"), window.location.href))
+        ? new URL(
+            ".",
+            new URL(
+              script.getAttribute("src"),
+              window.location.href
+            )
+          )
         : new URL(".", window.location.href);
 
-      const navResponse = await fetch(new URL("nav.html", baseUrl).href);
+      const navResponse = await fetch(
+        new URL("nav.html", baseUrl).href
+      );
 
       if (!navResponse.ok) {
         throw new Error("Could not load nav.html");
@@ -245,18 +303,29 @@
         }
 
         const articles = await articlesResponse.json();
+
         renderInsights(articles);
       } catch (error) {
-        console.error("Could not load the Insights article list:", error);
+        console.error(
+          "Could not load the Insights article list:",
+          error
+        );
+
         renderInsights([]);
       }
     } catch (error) {
-      console.error("Could not load shared navigation:", error);
+      console.error(
+        "Could not load shared navigation:",
+        error
+      );
     }
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", loadNavigation);
+    document.addEventListener(
+      "DOMContentLoaded",
+      loadNavigation
+    );
   } else {
     loadNavigation();
   }

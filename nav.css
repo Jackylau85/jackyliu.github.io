@@ -90,8 +90,7 @@
   transition: transform 0.2s ease;
 }
 
-#site-nav .shared-nav-item.open > .shared-dropdown-trigger
-.shared-nav-arrow {
+#site-nav .shared-nav-item.open > .shared-dropdown-trigger .shared-nav-arrow {
   transform: rotate(180deg);
 }
 

@@ -1,4 +1,54 @@
 
-<div id="site-nav"></div>
+<header class="shared-site-header">
+  <div class="shared-nav-container">
+    <a class="shared-brand" href="./">Jacky Liu</a>
 
-<script src="nav.js"></script>
+    <button
+      class="shared-mobile-toggle"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="shared-nav" aria-label="Main navigation">
+      <div class="shared-nav-item">
+        <a class="shared-nav-link" href="./">CASE</a>
+      </div>
+
+      <div class="shared-nav-item shared-has-dropdown">
+        <button
+          class="shared-nav-link shared-dropdown-trigger"
+          type="button"
+          aria-expanded="false"
+        >
+          INSIGHTS <span class="shared-nav-arrow">▾</span>
+        </button>
+
+        <div
+          class="shared-dropdown-menu shared-insights-menu"
+          id="shared-insights-menu"
+        >
+          <div id="shared-insights-content">
+            <p class="shared-nav-loading">Loading articles...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="shared-nav-item">
+        <a class="shared-nav-link" href="./#solution">SOLUTION</a>
+      </div>
+
+      <div class="shared-nav-item">
+        <a class="shared-nav-link" href="./#about">ABOUT</a>
+      </div>
+
+      <div class="shared-nav-item">
+        <a class="shared-nav-link" href="./#contact">CONTACT</a>
+      </div>
+    </nav>
+  </div>
+</header>
