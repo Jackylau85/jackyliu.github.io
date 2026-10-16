@@ -5,13 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Jacky Liu | Vehicle Monitor, Vehicle Safety & SVM / AVM</title>
+  <meta name="description" content="Jacky Liu shares practical insights on vehicle monitors, vehicle safety, SVM and AVM systems, wiring, and vehicle electronics.">
+  <meta name="author" content="Jacky Liu">
 
-  <meta name="description" content="Jacky Liu shares practical insights on vehicle displays, SVM / AVM systems and heavy-duty vehicle safety, backed by experience in international logistics and wire and cable manufacturing.">
+  <title>Jacky Liu | Vehicle Monitor, Vehicle Safety & SVM / AVM</title>
 
   <link rel="stylesheet" href="nav.css">
 
   <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f5f7fa;
+      --bg-dark: #101820;
+      --text: #17212b;
+      --text-soft: #586575;
+      --accent: #1769aa;
+      --accent-dark: #105486;
+      --border: #e1e6ec;
+      --card: #ffffff;
+      --max-width: 1120px;
+      --radius: 14px;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -24,221 +39,353 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      color: #202936;
-      background: #fff;
+      color: var(--text);
+      background: var(--bg);
       line-height: 1.7;
     }
 
-    main {
-      max-width: 1160px;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
       margin: 0 auto;
-      padding: 0 24px;
     }
 
     section {
-      padding: 76px 0;
-      border-bottom: 1px solid #e8edf2;
+      padding: 84px 0;
     }
 
-    .hero {
-      padding: 110px 0 90px;
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 42px;
+      text-align: center;
     }
 
     .eyebrow {
-      color: #526b88;
+      margin: 0 0 10px;
+      color: var(--accent);
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    .hero h1 {
-      max-width: 850px;
-      margin: 18px 0 24px;
-      font-size: clamp(34px, 5vw, 54px);
-      line-height: 1.18;
-      letter-spacing: -1px;
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
     }
 
-    .hero p {
-      max-width: 780px;
-      color: #566273;
-      font-size: 18px;
+    h1 {
+      max-width: 850px;
+      margin: 0 auto 22px;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
     }
 
     h2 {
-      margin: 0 0 16px;
-      font-size: 32px;
-      line-height: 1.3;
+      margin-bottom: 14px;
+      font-size: clamp(28px, 3vw, 38px);
+      line-height: 1.25;
+      letter-spacing: -0.5px;
     }
 
-    .section-intro {
-      max-width: 780px;
-      margin: 0 0 32px;
-      color: #647184;
+    h3 {
+      margin-bottom: 12px;
+      font-size: 20px;
+      line-height: 1.35;
     }
 
-    .article-grid,
-    .experience-grid {
+    .section-heading p,
+    .muted {
+      color: var(--text-soft);
+    }
+
+    .hero {
+      padding: 112px 0 100px;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(23, 105, 170, 0.10),
+          transparent 58%
+        ),
+        linear-gradient(180deg, #f8fbfe 0%, #ffffff 100%);
+    }
+
+    .hero .intro {
+      max-width: 760px;
+      margin: 0 auto 30px;
+      color: var(--text-soft);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 11px 22px;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .button:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      color: var(--accent);
+      background: #ffffff;
+    }
+
+    .button-secondary:hover {
+      color: #ffffff;
+    }
+
+    .focus-grid,
+    .solution-grid,
+    .about-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 22px;
     }
 
-    .card,
-    .experience-card {
-      min-width: 0;
-      padding: 24px;
-      border: 1px solid #e0e6ed;
+    .content-card {
+      height: 100%;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: 0 5px 20px rgba(20, 35, 50, 0.035);
+    }
+
+    .card-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 18px;
       border-radius: 10px;
-      background: #fff;
-    }
-
-    .card {
-      display: block;
-      color: inherit;
-      text-decoration: none;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .card:hover {
-      border-color: #8297b0;
-      transform: translateY(-2px);
-    }
-
-    .category {
-      color: #526b88;
-      font-size: 12px;
+      background: #eaf3fb;
+      color: var(--accent);
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 1px;
     }
 
-    .card h3,
-    .experience-card h3 {
-      margin: 12px 0;
-      font-size: 20px;
-      line-height: 1.45;
+    .content-card p {
+      margin-bottom: 0;
+      color: var(--text-soft);
     }
 
-    .card p,
-    .experience-card p {
-      color: #647184;
+    .insights-section {
+      background: var(--bg-dark);
+      color: #ffffff;
+    }
+
+    .insights-section .eyebrow {
+      color: #8dc8fa;
+    }
+
+    .insights-section .section-heading p {
+      color: #c0cbd5;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .article-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 230px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .article-card:hover {
+      background: rgba(255, 255, 255, 0.10);
+      transform: translateY(-3px);
+    }
+
+    .article-card h3 {
+      color: #ffffff;
+    }
+
+    .article-card p {
+      margin-bottom: 18px;
+      color: #c0cbd5;
       font-size: 14px;
     }
 
     .article-link {
-      display: inline-block;
-      margin-top: 12px;
-      font-size: 14px;
+      margin-top: auto;
+      color: #8dc8fa;
       font-weight: 700;
     }
 
-    .experience-years {
-      color: #526b88;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .placeholder {
-      padding: 26px;
-      border-radius: 8px;
-      background: #f6f8fa;
-      color: #647184;
-    }
-
-    .view-more-wrapper {
-      margin-top: 32px;
+    .article-status {
+      grid-column: 1 / -1;
+      color: #c0cbd5;
       text-align: center;
     }
 
-    .view-more-btn {
-      padding: 12px 24px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      background: #fff;
-      color: #202936;
-      font-size: 15px;
-      cursor: pointer;
+    .insights-actions {
+      margin-top: 34px;
+      text-align: center;
     }
 
-    .view-more-btn:hover {
-      background: #f6f8fa;
+    .insights-section .button-secondary {
+      border-color: #8dc8fa;
+      color: #ffffff;
+      background: transparent;
+    }
+
+    .insights-section .button-secondary:hover {
+      background: var(--accent);
+    }
+
+    .about-section {
+      background: var(--bg-soft);
+    }
+
+    .about-intro {
+      max-width: 820px;
+      margin: 0 auto 38px;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    .about-card h3 {
+      color: var(--text);
+    }
+
+    .experience {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .contact-section {
+      text-align: center;
     }
 
     .contact-intro {
-      max-width: 740px;
-      color: #647184;
+      max-width: 650px;
+      margin: 0 auto 30px;
+      color: var(--text-soft);
     }
 
-    .contact-list {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 32px;
+    .contact-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 26px 0;
     }
 
-    .contact-item {
-      padding: 22px;
-      border: 1px solid #e0e6ed;
-      border-radius: 8px;
-      overflow-wrap: anywhere;
+    .contact-details {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+      margin-top: 24px;
+      color: var(--text-soft);
     }
 
-    .contact-label {
-      display: block;
-      margin-bottom: 6px;
-      color: #647184;
-      font-size: 13px;
+    .contact-details strong {
+      color: var(--text);
     }
 
-    .contact-item a {
-      color: #202936;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .contact-item a:hover {
-      text-decoration: underline;
+    .wechat-value {
+      user-select: text;
     }
 
     footer {
-      padding: 30px 20px;
-      color: #647184;
-      text-align: center;
+      padding: 24px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-soft);
       font-size: 13px;
+      text-align: center;
     }
 
-    @media (max-width: 850px) {
-      .article-grid,
-      .experience-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .contact-list {
-        grid-template-columns: 1fr;
+    @media (max-width: 800px) {
+      section {
+        padding: 66px 0;
       }
 
       .hero {
-        padding-top: 76px;
+        padding: 82px 0 72px;
+      }
+
+      .focus-grid,
+      .solution-grid,
+      .about-grid,
+      .article-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 560px) {
-      main {
-        padding: 0 18px;
+      .container {
+        width: calc(100% - 32px);
       }
 
-      section {
-        padding: 54px 0;
-      }
-
-      .article-grid,
-      .experience-grid {
+      .focus-grid,
+      .solution-grid,
+      .about-grid,
+      .article-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero h1 {
-        letter-spacing: -0.5px;
+      .content-card {
+        padding: 23px;
+      }
+
+      .hero .intro {
+        font-size: 16px;
+      }
+
+      .hero-actions .button,
+      .contact-actions .button {
+        width: 100%;
       }
     }
   </style>
@@ -246,289 +393,367 @@
 
 <body>
 
-  <!-- Shared navigation: keep nav.html, nav.css and nav.js -->
+  <!-- Shared website navigation -->
   <div id="site-nav"></div>
 
   <main>
 
-    <!-- HOME -->
+    <!-- HERO -->
     <section class="hero" id="home">
-      <div class="eyebrow">Vehicle Displays · Vehicle Safety · SVM / AVM</div>
+      <div class="container">
+        <p class="eyebrow">Vehicle Displays · Vehicle Safety · SVM / AVM</p>
 
-      <h1>Vehicle Displays for Real-World Applications</h1>
+        <h1>
+          Understanding Vehicle Displays Beyond the Screen
+        </h1>
 
-      <p>
-        I'm Jacky Liu. I work with vehicle display applications,
-        SVM / AVM systems and heavy-duty vehicle safety.
-        My background in international logistics and wire and cable
-        manufacturing also shapes how I approach product development,
-        manufacturing requirements and international business.
-      </p>
+        <p class="intro">
+          I work with vehicle monitors and vehicle electronics, exploring how
+          display technology, wiring, system integration, and real installation
+          conditions affect vehicle safety and reliability.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button" href="#insights">Explore Insights</a>
+          <a class="button button-secondary" href="#about">About My Experience</a>
+        </div>
+      </div>
     </section>
 
     <!-- CASE -->
     <section id="case">
-      <h2>CASE</h2>
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">CASE</p>
+          <h2>Practical Applications</h2>
+          <p>
+            Vehicle electronics need to work in real operating environments,
+            not just on a specification sheet.
+          </p>
+        </div>
 
-      <p class="section-intro">
-        Practical applications and project experience involving
-        vehicle displays, camera systems and vehicle safety.
-      </p>
+        <div class="focus-grid">
+          <article class="content-card">
+            <div class="card-number">01</div>
+            <h3>Heavy-Duty Vehicles</h3>
+            <p>
+              Display and camera considerations for construction equipment,
+              mining vehicles, and other demanding working environments.
+            </p>
+          </article>
 
-      <div class="placeholder">
-        Application cases will be organized here.
+          <article class="content-card">
+            <div class="card-number">02</div>
+            <h3>SVM / AVM Systems</h3>
+            <p>
+              How monitors connect with surround-view systems, camera inputs,
+              touch control, and system interfaces.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <div class="card-number">03</div>
+            <h3>Installation Challenges</h3>
+            <p>
+              Practical issues involving wiring, connectors, image quality,
+              electromagnetic interference, and vehicle power.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- INSIGHTS -->
-    <section id="insights">
-      <h2>INSIGHTS</h2>
+    <section class="insights-section" id="insights">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">INSIGHTS</p>
+          <h2>Technical Questions, Explained Practically</h2>
+          <p>
+            Articles about vehicle monitors, display interfaces, wiring,
+            installation, and vehicle safety systems.
+          </p>
+        </div>
 
-      <p class="section-intro">
-        Practical observations on vehicle monitor selection,
-        display interfaces, SVM / AVM integration and installation challenges.
-      </p>
+        <div class="article-grid" id="article-grid">
+          <p class="article-status">Loading articles...</p>
+        </div>
 
-      <div class="article-grid" id="article-list">
-        <p>Loading articles...</p>
-      </div>
-
-      <div
-        class="view-more-wrapper"
-        id="view-more-wrapper"
-        style="display: none;"
-      >
-        <button
-          class="view-more-btn"
-          id="view-more-btn"
-          type="button"
-        >
-          View More Articles
-        </button>
+        <div class="insights-actions">
+          <button
+            class="button button-secondary"
+            id="view-more-articles"
+            type="button"
+            hidden
+          >
+            View More Articles
+          </button>
+        </div>
       </div>
     </section>
 
     <!-- SOLUTION -->
     <section id="solution">
-      <h2>SOLUTION</h2>
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">SOLUTION</p>
+          <h2>What I Focus On</h2>
+          <p>
+            Looking at the complete application helps connect product
+            specifications with actual operating requirements.
+          </p>
+        </div>
 
-      <p class="section-intro">
-        Vehicle display solutions organized around application
-        requirements, camera interfaces, operating environments
-        and operator interaction.
-      </p>
+        <div class="solution-grid">
+          <article class="content-card">
+            <div class="card-number">01</div>
+            <h3>Display Selection</h3>
+            <p>
+              Resolution, brightness, viewing conditions, touch operation,
+              power input, and video signal compatibility.
+            </p>
+          </article>
 
-      <div class="placeholder">
-        Solutions will be organized by application and system requirements.
+          <article class="content-card">
+            <div class="card-number">02</div>
+            <h3>System Compatibility</h3>
+            <p>
+              Matching vehicle monitors with cameras, SVM / AVM boxes,
+              video interfaces, control signals, and wiring.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <div class="card-number">03</div>
+            <h3>Real-World Reliability</h3>
+            <p>
+              Considering vibration, moisture, electromagnetic interference,
+              connectors, and installation conditions.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section id="about">
-      <h2>ABOUT</h2>
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">ABOUT</p>
+          <h2>Three Industries, One Practical Perspective</h2>
+        </div>
 
-      <p class="section-intro">
-        My professional experience spans three industries:
-        international logistics, wire and cable manufacturing,
-        and vehicle electronics.
-      </p>
+        <p class="about-intro">
+          My experience spans international logistics, wire and cable products,
+          and vehicle electronics. Each has helped me understand a different
+          part of how products are developed, manufactured, delivered, and used.
+          I am continuing to deepen my knowledge of vehicle displays and vehicle
+          safety systems.
+        </p>
 
-      <div class="experience-grid">
+        <div class="about-grid">
+          <article class="content-card about-card">
+            <span class="experience">8 Years</span>
+            <h3>International Logistics</h3>
+            <p>
+              Experience with sea freight, air freight, express shipping,
+              and specialized cargo such as reefer containers, Ro-Ro,
+              and breakbulk shipments.
+            </p>
+          </article>
 
-        <article class="experience-card">
-          <div class="experience-years">8 YEARS</div>
+          <article class="content-card about-card">
+            <span class="experience">8 Years</span>
+            <h3>Wire &amp; Cable Industry</h3>
+            <p>
+              Experience with low-voltage cable products, materials,
+              manufacturing processes, and project development.
+            </p>
+          </article>
 
-          <h3>International Logistics</h3>
-
-          <p>
-            Eight years of experience in international freight
-            and logistics operations, covering sea freight,
-            air freight, express delivery and specialized cargo.
-          </p>
-
-          <p>
-            Familiar with the operational procedures and coordination
-            involved in reefer container shipments, Ro-Ro vessels
-            and breakbulk shipping.
-          </p>
-        </article>
-
-        <article class="experience-card">
-          <div class="experience-years">8 YEARS</div>
-
-          <h3>Wire &amp; Cable Industry</h3>
-
-          <p>
-            Eight years of experience in the wire and cable industry,
-            with knowledge of low-voltage cable materials,
-            manufacturing processes and project development.
-          </p>
-
-          <p>
-            Familiar with material selection, production requirements
-            and practical considerations in developing cable products
-            for different applications.
-          </p>
-        </article>
-
-        <article class="experience-card">
-          <div class="experience-years">3 YEARS</div>
-
-          <h3>Vehicle Electronics</h3>
-
-          <p>
-            Currently focused on heavy-duty vehicle safety and
-            vehicle electronics, particularly SVM (Surround View
-            Monitoring) systems, vehicle displays and cameras.
-          </p>
-
-          <p>
-            Continuing to deepen my understanding of vehicle electronics
-            manufacturing, product integration and display solutions
-            for demanding vehicle applications.
-          </p>
-        </article>
-
+          <article class="content-card about-card">
+            <span class="experience">3 Years</span>
+            <h3>Vehicle Electronics</h3>
+            <p>
+              Working with vehicle monitors and related electronics, while
+              building deeper expertise in heavy-duty vehicle safety,
+              SVM / AVM displays, cameras, and system integration.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact">
-      <h2>CONTACT</h2>
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">CONTACT</p>
+          <h2>Let's Talk About Your Application</h2>
+        </div>
 
-      <p class="contact-intro">
-        For business inquiries, product discussions or potential
-        cooperation in vehicle displays and vehicle safety systems,
-        feel free to get in touch.
-      </p>
+        <p class="contact-intro">
+          Working on a vehicle display, camera system, or SVM / AVM project?
+          You are welcome to get in touch to discuss your application and
+          technical requirements.
+        </p>
 
-      <div class="contact-list">
-
-        <div class="contact-item">
-          <span class="contact-label">Email</span>
-          <a href="mailto:jacky@anlisz.com">
-            jacky@anlisz.com
+        <div class="contact-actions">
+          <a
+            class="button"
+            id="email-button"
+            href="mailto:jacky@anlisz.com"
+          >
+            Email Me ↗
           </a>
         </div>
 
-        <div class="contact-item">
-          <span class="contact-label">Phone</span>
-          <a href="tel:+8618933916054">
-            +86 189 3391 6054
-          </a>
+        <div class="contact-details">
+          <span>
+            <strong>WeChat:</strong>
+            <span class="wechat-value">redstar85</span>
+          </span>
         </div>
-
-        <div class="contact-item">
-          <span class="contact-label">WeChat</span>
-          <span>redstar</span>
-        </div>
-
       </div>
     </section>
 
   </main>
 
   <footer>
-    © <span id="current-year"></span> Jacky Liu. All rights reserved.
+    <p>
+      © <span id="current-year"></span> Jacky Liu.
+      Vehicle Monitor · Vehicle Safety · SVM / AVM
+    </p>
   </footer>
 
-  <!-- Shared navigation behavior -->
+  <!-- Shared navigation script -->
   <script src="nav.js"></script>
 
-  <!-- Homepage article loader -->
   <script>
+    // Automatically update the copyright year.
     document.getElementById("current-year").textContent =
       new Date().getFullYear();
 
-    async function loadArticles() {
-      const articleList = document.getElementById("article-list");
-      const viewMoreWrapper =
-        document.getElementById("view-more-wrapper");
-      const viewMoreBtn =
-        document.getElementById("view-more-btn");
+    // Email button: use the visitor's default email application.
+    // The visitor's email client should open with the recipient prefilled.
+    document.getElementById("email-button").addEventListener("click", function () {
+      this.href = "mailto:jacky@anlisz.com";
+    });
 
-      try {
-        const response = await fetch("articles.json", {
-          cache: "no-cache"
-        });
+    // Load articles from articles.json.
+    // The JSON entries are expected to contain:
+    // file, title, and description.
+    const articleGrid = document.getElementById("article-grid");
+    const viewMoreButton = document.getElementById("view-more-articles");
 
-        if (!response.ok) {
-          throw new Error("Unable to load articles.json");
-        }
+    const INITIAL_ARTICLE_COUNT = 3;
+    let allArticles = [];
+    let showingAllArticles = false;
 
-        const articles = await response.json();
+    function createArticleCard(article) {
+      const card = document.createElement("a");
+      card.className = "article-card";
 
-        if (!Array.isArray(articles)) {
-          throw new Error("Article data must be an array.");
-        }
+      // Article links use the file name supplied by articles.json.
+      card.href = article.file;
 
-        const validArticles = articles.filter(article =>
-          article.file &&
-          article.file.toLowerCase() !== "nav.html"
-        );
+      const title = document.createElement("h3");
+      title.textContent = article.title || "Read Article";
 
-        articleList.innerHTML = "";
+      const description = document.createElement("p");
+      description.textContent = article.description || "";
 
-        validArticles.forEach((article, index) => {
-          const card = document.createElement("a");
-          card.className = "card";
-          card.href = encodeURI(article.file);
+      const linkLabel = document.createElement("span");
+      linkLabel.className = "article-link";
+      linkLabel.textContent = "Read Article →";
 
-          if (index >= 3) {
-            card.classList.add("article-hidden");
-            card.style.display = "none";
-          }
+      card.appendChild(title);
+      card.appendChild(description);
+      card.appendChild(linkLabel);
 
-          const category = document.createElement("div");
-          category.className = "category";
-          category.textContent = "INSIGHTS";
+      return card;
+    }
 
-          const title = document.createElement("h3");
-          title.textContent = article.title || "Untitled Article";
+    function renderArticles() {
+      articleGrid.replaceChildren();
 
-          const description = document.createElement("p");
-          description.textContent = article.description || "";
+      const visibleArticles = showingAllArticles
+        ? allArticles
+        : allArticles.slice(0, INITIAL_ARTICLE_COUNT);
 
-          const linkText = document.createElement("span");
-          linkText.className = "article-link";
-          linkText.textContent = "Read Article →";
+      if (visibleArticles.length === 0) {
+        const message = document.createElement("p");
+        message.className = "article-status";
+        message.textContent = "No articles are available yet.";
+        articleGrid.appendChild(message);
+        viewMoreButton.hidden = true;
+        return;
+      }
 
-          card.appendChild(category);
-          card.appendChild(title);
-          card.appendChild(description);
-          card.appendChild(linkText);
+      visibleArticles.forEach(function (article) {
+        articleGrid.appendChild(createArticleCard(article));
+      });
 
-          articleList.appendChild(card);
-        });
-
-        if (validArticles.length > 3) {
-          viewMoreWrapper.style.display = "block";
-
-          let expanded = false;
-
-          viewMoreBtn.addEventListener("click", () => {
-            expanded = !expanded;
-
-            document.querySelectorAll(".article-hidden")
-              .forEach(card => {
-                card.style.display = expanded ? "block" : "none";
-              });
-
-            viewMoreBtn.textContent = expanded
-              ? "Show Fewer Articles"
-              : "View More Articles";
-          });
-        }
-
-      } catch (error) {
-        console.error("Failed to load articles:", error);
-
-        articleList.innerHTML =
-          "<p>Articles could not be loaded. Please check articles.json.</p>";
+      if (allArticles.length > INITIAL_ARTICLE_COUNT) {
+        viewMoreButton.hidden = false;
+        viewMoreButton.textContent = showingAllArticles
+          ? "Show Fewer Articles"
+          : "View More Articles";
+      } else {
+        viewMoreButton.hidden = true;
       }
     }
 
-    loadArticles();
+    fetch("articles.json")
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Could not load articles.json");
+        }
+        return response.json();
+      })
+      .then(function (articles) {
+        if (!Array.isArray(articles)) {
+          throw new Error("The article index is not a valid list");
+        }
+
+        // Exclude navigation files or entries without an article file.
+        allArticles = articles.filter(function (article) {
+          return (
+            article &&
+            typeof article.file === "string" &&
+            article.file.trim() !== "" &&
+            article.file.toLowerCase() !== "nav.html" &&
+            typeof article.title === "string"
+          );
+        });
+
+        renderArticles();
+      })
+      .catch(function (error) {
+        console.error("Article loading error:", error);
+
+        articleGrid.replaceChildren();
+
+        const message = document.createElement("p");
+        message.className = "article-status";
+        message.textContent =
+          "Articles could not be loaded. Please try again later.";
+
+        articleGrid.appendChild(message);
+        viewMoreButton.hidden = true;
+      });
+
+    viewMoreButton.addEventListener("click", function () {
+      showingAllArticles = !showingAllArticles;
+      renderArticles();
+
+      if (!showingAllArticles) {
+        document.getElementById("insights").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    });
   </script>
 
 </body>
