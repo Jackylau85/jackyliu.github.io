@@ -8,7 +8,7 @@
   <meta name="description" content="Jacky Liu shares practical insights on vehicle monitors, vehicle safety, SVM and AVM systems, wiring, and vehicle electronics.">
   <meta name="author" content="Jacky Liu">
 
-  <title>Jacky Liu | Vehicle Monitor, Vehicle Safety & SVM / AVM</title>
+  <title>Jacky Liu | Vehicle Monitor, Vehicle Safety &amp; SVM / AVM</title>
 
   <link rel="stylesheet" href="nav.css">
 
@@ -334,7 +334,17 @@
       color: var(--text);
     }
 
+    .contact-details a {
+      color: var(--accent);
+      overflow-wrap: anywhere;
+    }
+
+    .contact-details a:hover {
+      text-decoration: underline;
+    }
+
     .wechat-value {
+      color: var(--accent);
       user-select: text;
     }
 
@@ -344,6 +354,10 @@
       color: var(--text-soft);
       font-size: 13px;
       text-align: center;
+    }
+
+    footer p {
+      margin: 0;
     }
 
     @media (max-width: 800px) {
@@ -415,7 +429,9 @@
 
         <div class="hero-actions">
           <a class="button" href="#insights">Explore Insights</a>
-          <a class="button button-secondary" href="#about">About My Experience</a>
+          <a class="button button-secondary" href="#about">
+            About My Experience
+          </a>
         </div>
       </div>
     </section>
@@ -610,6 +626,11 @@
 
         <div class="contact-details">
           <span>
+            <strong>Phone / WhatsApp:</strong>
+            <a href="tel:+8618933916054">+86 18933916054</a>
+          </span>
+
+          <span>
             <strong>WeChat:</strong>
             <span class="wechat-value">redstar85</span>
           </span>
@@ -634,15 +655,13 @@
     document.getElementById("current-year").textContent =
       new Date().getFullYear();
 
-    // Email button: use the visitor's default email application.
-    // The visitor's email client should open with the recipient prefilled.
-    document.getElementById("email-button").addEventListener("click", function () {
-      this.href = "mailto:jacky@anlisz.com";
-    });
+    // Use the visitor's default email application.
+    // No email address is displayed as plain text on the page.
+    document.getElementById("email-button").href =
+      "mailto:jacky@anlisz.com";
 
     // Load articles from articles.json.
-    // The JSON entries are expected to contain:
-    // file, title, and description.
+    // Each article entry should contain: file, title, description.
     const articleGrid = document.getElementById("article-grid");
     const viewMoreButton = document.getElementById("view-more-articles");
 
@@ -653,8 +672,6 @@
     function createArticleCard(article) {
       const card = document.createElement("a");
       card.className = "article-card";
-
-      // Article links use the file name supplied by articles.json.
       card.href = article.file;
 
       const title = document.createElement("h3");
@@ -709,6 +726,7 @@
         if (!response.ok) {
           throw new Error("Could not load articles.json");
         }
+
         return response.json();
       })
       .then(function (articles) {
@@ -716,7 +734,6 @@
           throw new Error("The article index is not a valid list");
         }
 
-        // Exclude navigation files or entries without an article file.
         allArticles = articles.filter(function (article) {
           return (
             article &&
