@@ -1,3 +1,4 @@
+```yaml
 name: Build Articles and Shared Navigation
 
 on:
@@ -23,694 +24,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create shared navigation files
-        shell: python {0}
+      # ---------------------------------------------------------
+      # IMPORTANT:
+      # nav.html, nav.css and nav.js are now manually maintained.
+      # This workflow must NEVER overwrite those three files.
+      # ---------------------------------------------------------
+
+      - name: Check shared navigation files
+        shell: bash
         run: |
-          from pathlib import Path
+          set -e
 
-          Path("nav.html").write_text(r'''
-          <header class="shared-site-header">
-            <div class="shared-nav-container">
-              <a class="shared-brand" href="./">Jacky Liu</a>
+          test -f nav.html
+          test -f nav.css
+          test -f nav.js
 
-              <button
-                class="shared-mobile-toggle"
-                type="button"
-                aria-label="Toggle navigation"
-                aria-expanded="false"
-              >
-                <span></span>
-                <span></span>
-                <span></span>
-              </button>
-
-              <nav class="shared-nav" aria-label="Main navigation">
-                <div class="shared-nav-item">
-                  <a class="shared-nav-link" href="./">CASE</a>
-                </div>
-
-                <div class="shared-nav-item shared-has-dropdown">
-                  <button
-                    class="shared-nav-link shared-dropdown-trigger"
-                    type="button"
-                    aria-expanded="false"
-                  >
-                    INSIGHTS <span class="shared-nav-arrow">▾</span>
-                  </button>
-
-                  <div
-                    class="shared-dropdown-menu shared-insights-menu"
-                    id="shared-insights-menu"
-                  >
-                    <div id="shared-insights-content">
-                      <p class="shared-nav-loading">Loading articles...</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="shared-nav-item">
-                  <a class="shared-nav-link" href="./#solution">SOLUTION</a>
-                </div>
-
-                <div class="shared-nav-item">
-                  <a class="shared-nav-link" href="./#about">ABOUT</a>
-                </div>
-
-                <div class="shared-nav-item">
-                  <a class="shared-nav-link" href="./#contact">CONTACT</a>
-                </div>
-              </nav>
-            </div>
-          </header>
-          ''', encoding="utf-8")
-
-          Path("nav.css").write_text(r'''
-          :root {
-            --shared-nav-bg: #ffffff;
-            --shared-nav-text: #172033;
-            --shared-nav-muted: #64748b;
-            --shared-nav-border: #e5e7eb;
-            --shared-nav-hover: #f1f5f9;
-            --shared-nav-accent: #2563eb;
-            --shared-nav-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
-          }
-
-          #site-nav {
-            position: relative;
-            z-index: 1000;
-          }
-
-          #site-nav *,
-          #site-nav *::before,
-          #site-nav *::after {
-            box-sizing: border-box;
-          }
-
-          #site-nav .shared-site-header {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            background: var(--shared-nav-bg);
-            border-bottom: 1px solid var(--shared-nav-border);
-            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
-            font-family: Arial, Helvetica, sans-serif;
-          }
-
-          #site-nav .shared-nav-container {
-            width: min(1200px, calc(100% - 40px));
-            min-height: 68px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 28px;
-          }
-
-          #site-nav .shared-brand {
-            flex-shrink: 0;
-            color: var(--shared-nav-text);
-            font-size: 21px;
-            font-weight: 750;
-            letter-spacing: -0.5px;
-            text-decoration: none;
-          }
-
-          #site-nav .shared-nav {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-          }
-
-          #site-nav .shared-nav-item {
-            position: relative;
-          }
-
-          #site-nav .shared-nav-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            min-height: 42px;
-            padding: 10px 13px;
-            border: 0;
-            border-radius: 7px;
-            background: transparent;
-            color: var(--shared-nav-text);
-            font-family: inherit;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.35px;
-            text-decoration: none;
-            white-space: nowrap;
-            cursor: pointer;
-          }
-
-          #site-nav .shared-nav-link:hover,
-          #site-nav .shared-nav-link:focus-visible {
-            background: var(--shared-nav-hover);
-            outline: none;
-          }
-
-          #site-nav .shared-nav-arrow {
-            font-size: 12px;
-            transition: transform 0.2s ease;
-          }
-
-          #site-nav .shared-nav-item.open > .shared-dropdown-trigger .shared-nav-arrow {
-            transform: rotate(180deg);
-          }
-
-          #site-nav .shared-dropdown-menu {
-            display: none;
-            position: absolute;
-            top: calc(100% + 2px);
-            left: 0;
-            min-width: 300px;
-            max-width: min(420px, 90vw);
-            max-height: min(75vh, 620px);
-            overflow-y: auto;
-            padding: 9px;
-            border: 1px solid var(--shared-nav-border);
-            border-radius: 12px;
-            background: #ffffff;
-            box-shadow: var(--shared-nav-shadow);
-          }
-
-          #site-nav .shared-nav-item:hover > .shared-dropdown-menu,
-          #site-nav .shared-nav-item.open > .shared-dropdown-menu {
-            display: block;
-          }
-
-          #site-nav .shared-insights-menu {
-            width: 350px;
-          }
-
-          #site-nav .shared-nav-loading {
-            margin: 0;
-            padding: 12px;
-            color: var(--shared-nav-muted);
-            font-size: 13px;
-          }
-
-          #site-nav .shared-insight-category {
-            margin: 0;
-            padding: 0;
-            border-bottom: 1px solid #eef2f7;
-          }
-
-          #site-nav .shared-insight-category:last-child {
-            border-bottom: 0;
-          }
-
-          #site-nav .shared-insight-category-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            width: 100%;
-            min-height: 43px;
-            padding: 11px 12px;
-            border: 0;
-            border-radius: 7px;
-            background: #ffffff;
-            color: #172033;
-            font-family: inherit;
-            font-size: 13px;
-            font-weight: 700;
-            text-align: left;
-            cursor: pointer;
-          }
-
-          #site-nav .shared-insight-category-toggle:hover,
-          #site-nav .shared-insight-category-toggle:focus-visible {
-            background: var(--shared-nav-hover);
-            outline: none;
-          }
-
-          #site-nav .shared-insight-category-indicator {
-            flex-shrink: 0;
-            color: var(--shared-nav-muted);
-            font-size: 17px;
-            font-weight: 400;
-            line-height: 1;
-          }
-
-          #site-nav .shared-insight-category-links {
-            padding: 0 5px 8px 10px;
-          }
-
-          #site-nav .shared-insight-category-links[hidden] {
-            display: none !important;
-          }
-
-          #site-nav .shared-insight-article {
-            display: block;
-            padding: 9px 10px;
-            border-radius: 6px;
-            color: #475569;
-            font-size: 12.5px;
-            line-height: 1.55;
-            text-decoration: none;
-            overflow-wrap: anywhere;
-          }
-
-          #site-nav .shared-insight-article:hover,
-          #site-nav .shared-insight-article:focus-visible {
-            background: #eff6ff;
-            color: var(--shared-nav-accent);
-            outline: none;
-          }
-
-          #site-nav .shared-insight-empty {
-            padding: 8px 10px 10px;
-            color: #94a3b8;
-            font-size: 12px;
-            line-height: 1.5;
-          }
-
-          #site-nav .shared-mobile-toggle {
-            display: none;
-            width: 42px;
-            height: 42px;
-            padding: 10px;
-            border: 1px solid var(--shared-nav-border);
-            border-radius: 8px;
-            background: #ffffff;
-            cursor: pointer;
-          }
-
-          #site-nav .shared-mobile-toggle span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            margin: 4px auto;
-            border-radius: 2px;
-            background: var(--shared-nav-text);
-          }
-
-          @media (max-width: 760px) {
-            #site-nav .shared-nav-container {
-              width: calc(100% - 28px);
-              min-height: 62px;
-              flex-wrap: wrap;
-              gap: 0;
-            }
-
-            #site-nav .shared-brand {
-              font-size: 20px;
-            }
-
-            #site-nav .shared-mobile-toggle {
-              display: block;
-            }
-
-            #site-nav .shared-nav {
-              display: none;
-              flex: 0 0 100%;
-              width: 100%;
-              padding: 8px 0 14px;
-              align-items: stretch;
-              flex-direction: column;
-              gap: 2px;
-            }
-
-            #site-nav .shared-nav.mobile-open {
-              display: flex;
-            }
-
-            #site-nav .shared-nav-item {
-              width: 100%;
-            }
-
-            #site-nav .shared-nav-link {
-              display: flex;
-              justify-content: space-between;
-              width: 100%;
-              min-height: 44px;
-              padding: 12px;
-            }
-
-            #site-nav .shared-dropdown-menu {
-              position: static;
-              display: none;
-              width: 100%;
-              min-width: 0;
-              max-width: none;
-              max-height: 55vh;
-              margin: 0 0 8px;
-              padding: 8px;
-              border-radius: 8px;
-              box-shadow: none;
-              background: #f8fafc;
-            }
-
-            #site-nav .shared-nav-item.open > .shared-dropdown-menu {
-              display: block;
-            }
-
-            #site-nav .shared-insights-menu {
-              width: 100%;
-            }
-
-            #site-nav .shared-insight-category-toggle {
-              min-height: 44px;
-            }
-          }
-          ''', encoding="utf-8")
-
-          Path("nav.js").write_text(r'''
-          (function () {
-            "use strict";
-
-            const groups = [
-              {
-                name: "International Logistics",
-                files: []
-              },
-              {
-                name: "Wire & Cable",
-                files: [
-                  "why-cables-can-matter-more-than-power-supply.html",
-                  "why-wiring-matters.html"
-                ]
-              },
-              {
-                name: "Monitors",
-                files: [
-                  "how-to-choose-vehicle-monitor.html",
-                  "1920x1080-vs-1024x600.html",
-                  "what-brightness-does-a-vehicle-monitor-need.html",
-                  "why-vehicle-monitor-has-emi-problems.html",
-                  "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
-                  "why-vehicle-monitors-use-m12-connectors.html",
-                  "bench-test-vs-installation.html"
-                ]
-              },
-              {
-                name: "Cameras",
-                files: [
-                  "why-vehicle-camera-image-quality-changes-after-installation.html",
-                  "hdmi-vs-ahd-vehicle-camera-system.html"
-                ]
-              },
-              {
-                name: "MDVR",
-                files: []
-              },
-              {
-                name: "SVM / AVM",
-                files: [
-                  "monitor-as-hmi-in-svm-system.html",
-                  "svm-display-resolution-system-matching.html",
-                  "why-svm-avm-needs-proper-display-interface.html",
-                  "when-does-an-svm-monitor-need-touch.html",
-                  "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html"
-                ]
-              }
-            ];
-
-            function getSiteBaseUrl() {
-              const script = document.querySelector(
-                'script[src$="nav.js"], script[src*="/nav.js?"]'
-              );
-
-              if (script) {
-                return new URL(
-                  ".",
-                  new URL(script.getAttribute("src"), window.location.href)
-                );
-              }
-
-              return new URL(".", window.location.href);
-            }
-
-            function getArticleTitle(article, fileName) {
-              if (
-                article &&
-                typeof article.title === "string" &&
-                article.title.trim()
-              ) {
-                return article.title
-                  .replace(/\s*\|\s*Jacky Liu\s*$/i, "")
-                  .trim();
-              }
-
-              return fileName
-                .replace(/\.html$/i, "")
-                .replace(/[-_]+/g, " ")
-                .replace(/\b\w/g, function (letter) {
-                  return letter.toUpperCase();
-                });
-            }
-
-            function setupDropdowns(root) {
-              const nav = root.querySelector(".shared-nav");
-              const mobileToggle = root.querySelector(".shared-mobile-toggle");
-
-              if (nav && mobileToggle) {
-                mobileToggle.addEventListener("click", function () {
-                  const isOpen = nav.classList.toggle("mobile-open");
-
-                  mobileToggle.setAttribute(
-                    "aria-expanded",
-                    String(isOpen)
-                  );
-                });
-              }
-
-              root
-                .querySelectorAll(".shared-dropdown-trigger")
-                .forEach(function (button) {
-                  button.addEventListener("click", function (event) {
-                    event.stopPropagation();
-
-                    const item = button.closest(".shared-nav-item");
-
-                    if (!item) {
-                      return;
-                    }
-
-                    const wasOpen = item.classList.contains("open");
-
-                    root
-                      .querySelectorAll(".shared-nav-item.open")
-                      .forEach(function (openItem) {
-                        openItem.classList.remove("open");
-
-                        const trigger =
-                          openItem.querySelector(".shared-dropdown-trigger");
-
-                        if (trigger) {
-                          trigger.setAttribute("aria-expanded", "false");
-                        }
-                      });
-
-                    if (!wasOpen) {
-                      item.classList.add("open");
-                      button.setAttribute("aria-expanded", "true");
-                    }
-                  });
-                });
-
-              document.addEventListener("click", function (event) {
-                if (!root.contains(event.target)) {
-                  root
-                    .querySelectorAll(".shared-nav-item.open")
-                    .forEach(function (item) {
-                      item.classList.remove("open");
-
-                      const trigger =
-                        item.querySelector(".shared-dropdown-trigger");
-
-                      if (trigger) {
-                        trigger.setAttribute("aria-expanded", "false");
-                      }
-                    });
-                }
-              });
-
-              root.querySelectorAll(".shared-nav a").forEach(function (link) {
-                link.addEventListener("click", function () {
-                  if (nav) {
-                    nav.classList.remove("mobile-open");
-                  }
-
-                  if (mobileToggle) {
-                    mobileToggle.setAttribute("aria-expanded", "false");
-                  }
-                });
-              });
-            }
-
-            function renderInsights(articles) {
-              const container = document.getElementById(
-                "shared-insights-content"
-              );
-
-              if (!container) {
-                return;
-              }
-
-              container.replaceChildren();
-
-              const articleMap = new Map();
-
-              if (Array.isArray(articles)) {
-                articles.forEach(function (article) {
-                  if (article && typeof article.file === "string") {
-                    articleMap.set(article.file, article);
-                  }
-                });
-              }
-
-              const siteBaseUrl = getSiteBaseUrl();
-
-              groups.forEach(function (group, index) {
-                const section = document.createElement("section");
-                section.className = "shared-insight-category";
-
-                const button = document.createElement("button");
-                button.type = "button";
-                button.className = "shared-insight-category-toggle";
-                button.setAttribute("aria-expanded", "false");
-                button.setAttribute(
-                  "aria-controls",
-                  "shared-insight-links-" + index
-                );
-
-                const label = document.createElement("span");
-                label.textContent = group.name;
-
-                const indicator = document.createElement("span");
-                indicator.className =
-                  "shared-insight-category-indicator";
-                indicator.setAttribute("aria-hidden", "true");
-                indicator.textContent = "+";
-
-                button.appendChild(label);
-                button.appendChild(indicator);
-
-                const links = document.createElement("div");
-                links.className = "shared-insight-category-links";
-                links.id = "shared-insight-links-" + index;
-                links.hidden = true;
-
-                const availableFiles = group.files.filter(function (fileName) {
-                  return articleMap.has(fileName);
-                });
-
-                if (availableFiles.length === 0) {
-                  const empty = document.createElement("div");
-                  empty.className = "shared-insight-empty";
-                  empty.textContent = "Articles coming soon.";
-                  links.appendChild(empty);
-                } else {
-                  availableFiles.forEach(function (fileName) {
-                    const article = articleMap.get(fileName);
-                    const link = document.createElement("a");
-
-                    link.className = "shared-insight-article";
-                    link.href = new URL(fileName, siteBaseUrl).href;
-                    link.textContent = getArticleTitle(
-                      article,
-                      fileName
-                    );
-
-                    links.appendChild(link);
-                  });
-                }
-
-                button.addEventListener("click", function () {
-                  const isExpanded =
-                    button.getAttribute("aria-expanded") === "true";
-
-                  button.setAttribute(
-                    "aria-expanded",
-                    String(!isExpanded)
-                  );
-
-                  links.hidden = isExpanded;
-                  indicator.textContent = isExpanded ? "+" : "−";
-                });
-
-                section.appendChild(button);
-                section.appendChild(links);
-                container.appendChild(section);
-              });
-            }
-
-            async function loadNavigation() {
-              const mount = document.getElementById("site-nav");
-
-              if (!mount) {
-                return;
-              }
-
-              try {
-                const script = document.querySelector(
-                  'script[src$="nav.js"], script[src*="/nav.js?"]'
-                );
-
-                const baseUrl = script
-                  ? new URL(
-                      ".",
-                      new URL(
-                        script.getAttribute("src"),
-                        window.location.href
-                      )
-                    )
-                  : new URL(".", window.location.href);
-
-                const navResponse = await fetch(
-                  new URL("nav.html", baseUrl).href
-                );
-
-                if (!navResponse.ok) {
-                  throw new Error("Could not load nav.html");
-                }
-
-                mount.innerHTML = await navResponse.text();
-
-                setupDropdowns(mount);
-
-                try {
-                  const articlesResponse = await fetch(
-                    new URL("articles.json", baseUrl).href
-                  );
-
-                  if (!articlesResponse.ok) {
-                    throw new Error("Could not load articles.json");
-                  }
-
-                  const articles = await articlesResponse.json();
-
-                  renderInsights(articles);
-                } catch (error) {
-                  console.error(
-                    "Could not load the Insights article list:",
-                    error
-                  );
-
-                  renderInsights([]);
-                }
-              } catch (error) {
-                console.error(
-                  "Could not load shared navigation:",
-                  error
-                );
-              }
-            }
-
-            if (document.readyState === "loading") {
-              document.addEventListener(
-                "DOMContentLoaded",
-                loadNavigation
-              );
-            } else {
-              loadNavigation();
-            }
-          })();
-          ''', encoding="utf-8")
+          echo "Shared navigation files exist."
+          echo "nav.html, nav.css and nav.js are manually maintained."
 
       - name: Update HTML pages
         shell: python {0}
@@ -721,12 +51,15 @@ jobs:
           root = Path(".")
 
           for path in root.glob("*.html"):
-              if path.name == "nav.html":
+              if path.name in {"nav.html"}:
                   continue
 
               content = path.read_text(encoding="utf-8")
 
-              # Replace an existing page header with the shared navigation mount.
+              # ---------------------------------------------------
+              # Replace an existing page header with the shared
+              # navigation mount.
+              # ---------------------------------------------------
               content, header_count = re.subn(
                   r"<header\b[^>]*>.*?</header>",
                   '<div id="site-nav"></div>',
@@ -735,17 +68,23 @@ jobs:
                   flags=re.IGNORECASE | re.DOTALL
               )
 
-              # Add the shared navigation mount if the page did not have a header.
+              # ---------------------------------------------------
+              # Add the shared navigation mount if the page did not
+              # have a header and does not already contain it.
+              # ---------------------------------------------------
               if 'id="site-nav"' not in content:
                   content, body_count = re.subn(
                       r"<body\b[^>]*>",
-                      lambda match: match.group(0) + '\n<div id="site-nav"></div>',
+                      lambda match: match.group(0)
+                      + '\n<div id="site-nav"></div>',
                       content,
                       count=1,
                       flags=re.IGNORECASE
                   )
 
-              # Remove an old script that generated the homepage Insights categories.
+              # ---------------------------------------------------
+              # Remove old homepage Insights category code.
+              # ---------------------------------------------------
               content = re.sub(
                   r"<script\b[^>]*>.*?INSIGHTS CATEGORY GROUPS.*?</script>",
                   "",
@@ -760,9 +99,36 @@ jobs:
                   flags=re.IGNORECASE | re.DOTALL
               )
 
-              # Ensure nav.js is loaded once.
+              # ---------------------------------------------------
+              # Ensure nav.css is loaded once.
+              # ---------------------------------------------------
               if not re.search(
-                  r'<script\b[^>]*src=["\'][^"\']*nav\.js(?:\?[^"\']*)?["\'][^>]*>',
+                  r'<link\b[^>]*href=["\'][^"\']*nav\.css(?:\?[^"\']*)?["\'][^>]*>',
+                  content,
+                  flags=re.IGNORECASE
+              ):
+                  css_tag = '\n<link rel="stylesheet" href="nav.css">\n'
+
+                  if re.search(
+                      r"</head\s*>",
+                      content,
+                      flags=re.IGNORECASE
+                  ):
+                      content = re.sub(
+                          r"</head\s*>",
+                          css_tag + "</head>",
+                          content,
+                          count=1,
+                          flags=re.IGNORECASE
+                      )
+                  else:
+                      content = css_tag + content
+
+              # ---------------------------------------------------
+              # Ensure nav.js is loaded once.
+              # ---------------------------------------------------
+              if not re.search(
+                  r'<script\b[^>]*src=["\'][^"\']*nav\.js(?:\?[^"\']*)?["\'][^>]*></script>',
                   content,
                   flags=re.IGNORECASE
               ):
@@ -795,7 +161,12 @@ jobs:
 
           articles = []
 
-          excluded = {"index.html", "404.html"}
+          # These HTML files are not articles.
+          excluded = {
+              "index.html",
+              "404.html",
+              "nav.html"
+          }
 
           for path in sorted(Path(".").glob("*.html")):
               if path.name in excluded:
@@ -874,12 +245,15 @@ jobs:
           import json
 
           articles = json.loads(
-              Path("articles.json").read_text(encoding="utf-8")
+              Path("articles.json").read_text(
+                  encoding="utf-8"
+              )
           )
 
           required_files = [
               "why-cables-can-matter-more-than-power-supply.html",
               "why-wiring-matters.html",
+
               "how-to-choose-vehicle-monitor.html",
               "1920x1080-vs-1024x600.html",
               "what-brightness-does-a-vehicle-monitor-need.html",
@@ -887,8 +261,10 @@ jobs:
               "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
               "why-vehicle-monitors-use-m12-connectors.html",
               "bench-test-vs-installation.html",
+
               "why-vehicle-camera-image-quality-changes-after-installation.html",
               "hdmi-vs-ahd-vehicle-camera-system.html",
+
               "monitor-as-hmi-in-svm-system.html",
               "svm-display-resolution-system-matching.html",
               "why-svm-avm-needs-proper-display-interface.html",
@@ -902,15 +278,49 @@ jobs:
           }
 
           for file_name in required_files:
-              if (
-                  Path(file_name).exists()
-                  and file_name not in available
-              ):
+              if Path(file_name).exists() and file_name not in available:
                   raise SystemExit(
                       f"Article missing from articles.json: {file_name}"
                   )
 
-          nav_js = Path("nav.js").read_text(encoding="utf-8")
+          nav_html = Path("nav.html").read_text(
+              encoding="utf-8"
+          )
+
+          nav_css = Path("nav.css").read_text(
+              encoding="utf-8"
+          )
+
+          nav_js = Path("nav.js").read_text(
+              encoding="utf-8"
+          )
+
+          required_navigation_files = [
+              "nav.html",
+              "nav.css",
+              "nav.js"
+          ]
+
+          for file_name in required_navigation_files:
+              if not Path(file_name).exists():
+                  raise SystemExit(
+                      f"Navigation file missing: {file_name}"
+                  )
+
+          if 'id="site-nav"' not in nav_html:
+              raise SystemExit(
+                  "nav.html does not contain the expected navigation structure."
+              )
+
+          if ".shared-site-header" not in nav_css:
+              raise SystemExit(
+                  "nav.css does not contain the shared navigation styles."
+              )
+
+          if "loadNavigation" not in nav_js:
+              raise SystemExit(
+                  "nav.js does not contain the shared navigation loader."
+              )
 
           required_categories = [
               "International Logistics",
@@ -924,11 +334,11 @@ jobs:
           for category in required_categories:
               if category not in nav_js:
                   raise SystemExit(
-                      f"Navigation category missing: {category}"
+                      f"Navigation category missing from nav.js: {category}"
                   )
 
           print(
-              "Navigation files and article index checks passed."
+              "Shared navigation and article index checks passed."
           )
           PY
 
@@ -947,3 +357,4 @@ jobs:
 
           git commit -m "Update shared site navigation [skip ci]"
           git push
+```
