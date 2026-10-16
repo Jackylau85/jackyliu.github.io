@@ -1,5 +1,4 @@
-```yaml
-name: Build Articles and Shared Navigation
+name: Build Articles Index
 
 on:
   push:
@@ -24,133 +23,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ---------------------------------------------------------
-      # IMPORTANT:
-      # nav.html, nav.css and nav.js are now manually maintained.
-      # This workflow must NEVER overwrite those three files.
-      # ---------------------------------------------------------
-
-      - name: Check shared navigation files
-        shell: bash
-        run: |
-          set -e
-
-          test -f nav.html
-          test -f nav.css
-          test -f nav.js
-
-          echo "Shared navigation files exist."
-          echo "nav.html, nav.css and nav.js are manually maintained."
-
-      - name: Update HTML pages
-        shell: python {0}
-        run: |
-          from pathlib import Path
-          import re
-
-          root = Path(".")
-
-          for path in root.glob("*.html"):
-              if path.name in {"nav.html"}:
-                  continue
-
-              content = path.read_text(encoding="utf-8")
-
-              # ---------------------------------------------------
-              # Replace an existing page header with the shared
-              # navigation mount.
-              # ---------------------------------------------------
-              content, header_count = re.subn(
-                  r"<header\b[^>]*>.*?</header>",
-                  '<div id="site-nav"></div>',
-                  content,
-                  count=1,
-                  flags=re.IGNORECASE | re.DOTALL
-              )
-
-              # ---------------------------------------------------
-              # Add the shared navigation mount if the page did not
-              # have a header and does not already contain it.
-              # ---------------------------------------------------
-              if 'id="site-nav"' not in content:
-                  content, body_count = re.subn(
-                      r"<body\b[^>]*>",
-                      lambda match: match.group(0)
-                      + '\n<div id="site-nav"></div>',
-                      content,
-                      count=1,
-                      flags=re.IGNORECASE
-                  )
-
-              # ---------------------------------------------------
-              # Remove old homepage Insights category code.
-              # ---------------------------------------------------
-              content = re.sub(
-                  r"<script\b[^>]*>.*?INSIGHTS CATEGORY GROUPS.*?</script>",
-                  "",
-                  content,
-                  flags=re.IGNORECASE | re.DOTALL
-              )
-
-              content = re.sub(
-                  r"<script\b[^>]*>.*?buildInsightsDropdown\s*\(\s*articles\s*\).*?</script>",
-                  "",
-                  content,
-                  flags=re.IGNORECASE | re.DOTALL
-              )
-
-              # ---------------------------------------------------
-              # Ensure nav.css is loaded once.
-              # ---------------------------------------------------
-              if not re.search(
-                  r'<link\b[^>]*href=["\'][^"\']*nav\.css(?:\?[^"\']*)?["\'][^>]*>',
-                  content,
-                  flags=re.IGNORECASE
-              ):
-                  css_tag = '\n<link rel="stylesheet" href="nav.css">\n'
-
-                  if re.search(
-                      r"</head\s*>",
-                      content,
-                      flags=re.IGNORECASE
-                  ):
-                      content = re.sub(
-                          r"</head\s*>",
-                          css_tag + "</head>",
-                          content,
-                          count=1,
-                          flags=re.IGNORECASE
-                      )
-                  else:
-                      content = css_tag + content
-
-              # ---------------------------------------------------
-              # Ensure nav.js is loaded once.
-              # ---------------------------------------------------
-              if not re.search(
-                  r'<script\b[^>]*src=["\'][^"\']*nav\.js(?:\?[^"\']*)?["\'][^>]*></script>',
-                  content,
-                  flags=re.IGNORECASE
-              ):
-                  script_tag = '\n<script src="nav.js"></script>\n'
-
-                  if re.search(
-                      r"</body\s*>",
-                      content,
-                      flags=re.IGNORECASE
-                  ):
-                      content = re.sub(
-                          r"</body\s*>",
-                          script_tag + "</body>",
-                          content,
-                          count=1,
-                          flags=re.IGNORECASE
-                      )
-                  else:
-                      content += script_tag
-
-              path.write_text(content, encoding="utf-8")
-
       - name: Build articles.json
         shell: python {0}
         run: |
@@ -161,7 +33,6 @@ jobs:
 
           articles = []
 
-          # These HTML files are not articles.
           excluded = {
               "index.html",
               "404.html",
@@ -253,7 +124,6 @@ jobs:
           required_files = [
               "why-cables-can-matter-more-than-power-supply.html",
               "why-wiring-matters.html",
-
               "how-to-choose-vehicle-monitor.html",
               "1920x1080-vs-1024x600.html",
               "what-brightness-does-a-vehicle-monitor-need.html",
@@ -261,10 +131,8 @@ jobs:
               "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
               "why-vehicle-monitors-use-m12-connectors.html",
               "bench-test-vs-installation.html",
-
               "why-vehicle-camera-image-quality-changes-after-installation.html",
               "hdmi-vs-ahd-vehicle-camera-system.html",
-
               "monitor-as-hmi-in-svm-system.html",
               "svm-display-resolution-system-matching.html",
               "why-svm-avm-needs-proper-display-interface.html",
@@ -307,22 +175,27 @@ jobs:
                       f"Navigation file missing: {file_name}"
                   )
 
-          if 'id="site-nav"' not in nav_html:
-              raise SystemExit(
-                  "nav.html does not contain the expected navigation structure."
-              )
+          required_navigation_items = [
+              "CASE",
+              "INSIGHTS",
+              "SOLUTION",
+              "ABOUT",
+              "CONTACT"
+          ]
 
-          if ".shared-site-header" not in nav_css:
-              raise SystemExit(
-                  "nav.css does not contain the shared navigation styles."
-              )
+          combined_navigation = (
+              nav_html +
+              nav_css +
+              nav_js
+          )
 
-          if "loadNavigation" not in nav_js:
-              raise SystemExit(
-                  "nav.js does not contain the shared navigation loader."
-              )
+          for item in required_navigation_items:
+              if item not in combined_navigation:
+                  raise SystemExit(
+                      f"Navigation item missing: {item}"
+                  )
 
-          required_categories = [
+          required_insight_categories = [
               "International Logistics",
               "Wire & Cable",
               "Monitors",
@@ -331,30 +204,29 @@ jobs:
               "SVM / AVM"
           ]
 
-          for category in required_categories:
+          for category in required_insight_categories:
               if category not in nav_js:
                   raise SystemExit(
-                      f"Navigation category missing from nav.js: {category}"
+                      f"Insights category missing: {category}"
                   )
 
           print(
-              "Shared navigation and article index checks passed."
+              "Navigation files and article index checks passed."
           )
           PY
 
-      - name: Commit and push changes
+      - name: Commit and push generated articles.json
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add "*.html" nav.html nav.css nav.js articles.json
+          git add articles.json
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "Update shared site navigation [skip ci]"
+          git commit -m "Update articles index [skip ci]"
           git push
-```
