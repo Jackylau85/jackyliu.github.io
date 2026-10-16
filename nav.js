@@ -1,16 +1,17 @@
+```javascript
 (function () {
   "use strict";
 
   /*
    * ============================================================
-   * INSIGHTS
+   * NAVIGATION DATA
    * ============================================================
    *
-   * These are knowledge/article categories.
+   * INSIGHTS = knowledge / technical articles
+   * CASE     = real applications / customer cases
+   * SOLUTION = application solutions
    *
-   * When you publish a new Insights article:
-   * 1. Add the HTML filename to the correct category.
-   * 2. The article title is taken automatically from articles.json.
+   * Each category automatically gets a + / − button.
    *
    */
 
@@ -62,18 +63,6 @@
   ];
 
 
-  /*
-   * ============================================================
-   * CASE
-   * ============================================================
-   *
-   * Case categories.
-   *
-   * Later, when you create a Case page/article,
-   * put its HTML filename into the correct category.
-   *
-   */
-
   const caseGroups = [
     {
       name: "Wire & Cable Applications",
@@ -105,18 +94,6 @@
     }
   ];
 
-
-  /*
-   * ============================================================
-   * SOLUTION
-   * ============================================================
-   *
-   * Solution categories.
-   *
-   * Later, when you create a Solution page/article,
-   * put its HTML filename into the correct category.
-   *
-   */
 
   const solutionGroups = [
     {
@@ -152,26 +129,28 @@
 
   /*
    * ============================================================
-   * SITE BASE URL
+   * VERSION
+   * ============================================================
+   *
+   * Change this number whenever nav.js is updated.
+   * This prevents the browser from using an old cached copy.
+   *
+   */
+
+  const NAV_VERSION = "20261016-02";
+
+
+  /*
+   * ============================================================
+   * BASE URL
    * ============================================================
    */
 
-  function getSiteBaseUrl() {
-    const script = document.querySelector(
-      'script[src$="nav.js"], script[src*="/nav.js?"]'
+  function getBaseUrl() {
+    return new URL(
+      ".",
+      window.location.href
     );
-
-    if (script) {
-      return new URL(
-        ".",
-        new URL(
-          script.getAttribute("src"),
-          window.location.href
-        )
-      );
-    }
-
-    return new URL(".", window.location.href);
   }
 
 
@@ -182,170 +161,233 @@
    */
 
   function getArticleTitle(article, fileName) {
+
     if (
       article &&
       typeof article.title === "string" &&
       article.title.trim()
     ) {
       return article.title
-        .replace(/\s*\|\s*Jacky Liu\s*$/i, "")
+        .replace(
+          /\s*\|\s*Jacky Liu\s*$/i,
+          ""
+        )
         .trim();
     }
 
     return fileName
-      .replace(/\.html$/i, "")
-      .replace(/[-_]+/g, " ")
-      .replace(/\b\w/g, function (letter) {
-        return letter.toUpperCase();
-      });
+      .replace(
+        /\.html$/i,
+        ""
+      )
+      .replace(
+        /[-_]+/g,
+        " "
+      )
+      .replace(
+        /\b\w/g,
+        function (letter) {
+          return letter.toUpperCase();
+        }
+      );
   }
 
 
   /*
    * ============================================================
-   * MAIN NAVIGATION DROPDOWNS
+   * MAIN NAVIGATION
    * ============================================================
    */
 
-  function setupDropdowns(root) {
-    const nav = root.querySelector(".shared-nav");
-    const mobileToggle = root.querySelector(
-      ".shared-mobile-toggle"
-    );
+  function setupMainDropdowns(root) {
 
-    if (nav && mobileToggle) {
-      mobileToggle.addEventListener("click", function () {
-        const isOpen = nav.classList.toggle("mobile-open");
+    const nav =
+      root.querySelector(
+        ".shared-nav"
+      );
 
-        mobileToggle.setAttribute(
-          "aria-expanded",
-          String(isOpen)
-        );
-      });
+    const mobileToggle =
+      root.querySelector(
+        ".shared-mobile-toggle"
+      );
+
+
+    /*
+     * Mobile menu
+     */
+
+    if (
+      nav &&
+      mobileToggle
+    ) {
+
+      mobileToggle.addEventListener(
+        "click",
+        function () {
+
+          const isOpen =
+            nav.classList.toggle(
+              "mobile-open"
+            );
+
+          mobileToggle.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+          );
+        }
+      );
     }
 
 
+    /*
+     * CASE / INSIGHTS / SOLUTION
+     */
+
     root
-      .querySelectorAll(".shared-dropdown-trigger")
-      .forEach(function (button) {
+      .querySelectorAll(
+        ".shared-dropdown-trigger"
+      )
+      .forEach(
+        function (button) {
 
-        button.addEventListener("click", function (event) {
-          event.stopPropagation();
+          button.addEventListener(
+            "click",
+            function (event) {
 
-          const item = button.closest(
-            ".shared-nav-item"
-          );
+              event.stopPropagation();
 
-          if (!item) {
-            return;
-          }
 
-          const wasOpen =
-            item.classList.contains("open");
-
-          root
-            .querySelectorAll(
-              ".shared-nav-item.open"
-            )
-            .forEach(function (openItem) {
-
-              openItem.classList.remove("open");
-
-              const trigger =
-                openItem.querySelector(
-                  ".shared-dropdown-trigger"
+              const item =
+                button.closest(
+                  ".shared-nav-item"
                 );
 
-              if (trigger) {
-                trigger.setAttribute(
+
+              if (!item) {
+                return;
+              }
+
+
+              const wasOpen =
+                item.classList.contains(
+                  "open"
+                );
+
+
+              /*
+               * Close other top-level menus.
+               */
+
+              root
+                .querySelectorAll(
+                  ".shared-nav-item.open"
+                )
+                .forEach(
+                  function (openItem) {
+
+                    openItem.classList.remove(
+                      "open"
+                    );
+
+
+                    const trigger =
+                      openItem.querySelector(
+                        ".shared-dropdown-trigger"
+                      );
+
+
+                    if (trigger) {
+
+                      trigger.setAttribute(
+                        "aria-expanded",
+                        "false"
+                      );
+                    }
+                  }
+                );
+
+
+              /*
+               * Open selected menu.
+               */
+
+              if (!wasOpen) {
+
+                item.classList.add(
+                  "open"
+                );
+
+                button.setAttribute(
                   "aria-expanded",
-                  "false"
+                  "true"
                 );
               }
-            });
+            }
+          );
+        }
+      );
 
 
-          if (!wasOpen) {
-            item.classList.add("open");
-
-            button.setAttribute(
-              "aria-expanded",
-              "true"
-            );
-          }
-        });
-      });
-
+    /*
+     * Close menus when clicking outside.
+     */
 
     document.addEventListener(
       "click",
       function (event) {
 
-        if (!root.contains(event.target)) {
+        if (
+          !root.contains(
+            event.target
+          )
+        ) {
 
           root
             .querySelectorAll(
               ".shared-nav-item.open"
             )
-            .forEach(function (item) {
+            .forEach(
+              function (item) {
 
-              item.classList.remove("open");
-
-              const trigger =
-                item.querySelector(
-                  ".shared-dropdown-trigger"
+                item.classList.remove(
+                  "open"
                 );
 
-              if (trigger) {
-                trigger.setAttribute(
-                  "aria-expanded",
-                  "false"
-                );
+
+                const trigger =
+                  item.querySelector(
+                    ".shared-dropdown-trigger"
+                  );
+
+
+                if (trigger) {
+
+                  trigger.setAttribute(
+                    "aria-expanded",
+                    "false"
+                  );
+                }
               }
-            });
+            );
         }
       }
     );
-
-
-    root
-      .querySelectorAll(".shared-nav a")
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            if (nav) {
-              nav.classList.remove(
-                "mobile-open"
-              );
-            }
-
-            if (mobileToggle) {
-              mobileToggle.setAttribute(
-                "aria-expanded",
-                "false"
-              );
-            }
-          }
-        );
-      });
   }
 
 
   /*
    * ============================================================
-   * RENDER CATEGORY GROUPS
+   * RENDER GROUPS
    * ============================================================
    *
-   * This is used by:
+   * This function creates:
    *
-   * CASE
-   * SOLUTION
-   * INSIGHTS
+   * Category name                  +
    *
-   * Every category has a + button.
+   * Clicking + changes it to:
+   *
+   * Category name                  −
+   *     Article / Case / Solution
    *
    */
 
@@ -355,216 +397,321 @@
     articles,
     emptyMessage
   ) {
+
     const container =
-      document.getElementById(containerId);
+      document.getElementById(
+        containerId
+      );
+
 
     if (!container) {
+
+      console.warn(
+        "Navigation container not found:",
+        containerId
+      );
+
       return;
     }
 
-    container.replaceChildren();
+
+    container.innerHTML = "";
 
 
-    const articleMap = new Map();
+    /*
+     * Create article lookup table.
+     */
+
+    const articleMap =
+      new Map();
 
 
-    if (Array.isArray(articles)) {
+    if (
+      Array.isArray(
+        articles
+      )
+    ) {
 
-      articles.forEach(function (article) {
+      articles.forEach(
+        function (article) {
 
-        if (
-          article &&
-          typeof article.file === "string"
-        ) {
-          articleMap.set(
-            article.file,
-            article
-          );
+          if (
+            article &&
+            typeof article.file === "string"
+          ) {
+
+            articleMap.set(
+              article.file,
+              article
+            );
+          }
         }
-      });
+      );
     }
 
 
-    const siteBaseUrl =
-      getSiteBaseUrl();
+    /*
+     * Build every category.
+     */
 
+    groups.forEach(
+      function (group, index) {
 
-    groups.forEach(function (group, index) {
+        /*
+         * Category wrapper
+         */
 
-      const section =
-        document.createElement("section");
-
-      section.className =
-        "shared-insight-category";
-
-
-      const button =
-        document.createElement("button");
-
-      button.type = "button";
-
-      button.className =
-        "shared-insight-category-toggle";
-
-      button.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-
-      button.setAttribute(
-        "aria-controls",
-        containerId +
-        "-links-" +
-        index
-      );
-
-
-      const label =
-        document.createElement("span");
-
-      label.textContent =
-        group.name;
-
-
-      const indicator =
-        document.createElement("span");
-
-      indicator.className =
-        "shared-insight-category-indicator";
-
-      indicator.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-      indicator.textContent =
-        "+";
-
-
-      button.appendChild(label);
-      button.appendChild(indicator);
-
-
-      const links =
-        document.createElement("div");
-
-      links.className =
-        "shared-insight-category-links";
-
-      links.id =
-        containerId +
-        "-links-" +
-        index;
-
-      links.hidden = true;
-
-
-      /*
-       * Only show files that actually exist
-       * in articles.json.
-       */
-
-      const availableFiles =
-        Array.isArray(group.files)
-          ? group.files.filter(
-              function (fileName) {
-                return articleMap.has(
-                  fileName
-                );
-              }
-            )
-          : [];
-
-
-      if (
-        availableFiles.length === 0
-      ) {
-
-        const empty =
-          document.createElement("div");
-
-        empty.className =
-          "shared-insight-empty";
-
-        empty.textContent =
-          emptyMessage;
-
-        links.appendChild(empty);
-
-      } else {
-
-        availableFiles.forEach(
-          function (fileName) {
-
-            const article =
-              articleMap.get(
-                fileName
-              );
-
-            const link =
-              document.createElement("a");
-
-            link.className =
-              "shared-insight-article";
-
-            link.href =
-              new URL(
-                fileName,
-                siteBaseUrl
-              ).href;
-
-            link.textContent =
-              getArticleTitle(
-                article,
-                fileName
-              );
-
-            links.appendChild(link);
-          }
-        );
-      }
-
-
-      /*
-       * Category + button
-       */
-
-      button.addEventListener(
-        "click",
-        function () {
-
-          const isExpanded =
-            button.getAttribute(
-              "aria-expanded"
-            ) === "true";
-
-          button.setAttribute(
-            "aria-expanded",
-            String(!isExpanded)
+        const section =
+          document.createElement(
+            "section"
           );
 
-          links.hidden =
-            isExpanded;
+        section.className =
+          "shared-insight-category";
 
-          indicator.textContent =
-            isExpanded
-              ? "+"
-              : "−";
+
+        /*
+         * Category button
+         */
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.type =
+          "button";
+
+        button.className =
+          "shared-insight-category-toggle";
+
+
+        button.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+
+        /*
+         * Category text
+         */
+
+        const label =
+          document.createElement(
+            "span"
+          );
+
+        label.textContent =
+          group.name;
+
+
+        /*
+         * + / − indicator
+         */
+
+        const indicator =
+          document.createElement(
+            "span"
+          );
+
+        indicator.className =
+          "shared-insight-category-indicator";
+
+        indicator.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+        indicator.textContent =
+          "+";
+
+
+        /*
+         * Put text + indicator into button.
+         */
+
+        button.appendChild(
+          label
+        );
+
+        button.appendChild(
+          indicator
+        );
+
+
+        /*
+         * Article / case / solution list
+         */
+
+        const links =
+          document.createElement(
+            "div"
+          );
+
+        links.className =
+          "shared-insight-category-links";
+
+
+        links.id =
+          containerId +
+          "-links-" +
+          index;
+
+
+        links.hidden =
+          true;
+
+
+        button.setAttribute(
+          "aria-controls",
+          links.id
+        );
+
+
+        /*
+         * Determine which files exist.
+         */
+
+        const availableFiles =
+          Array.isArray(
+            group.files
+          )
+            ? group.files.filter(
+                function (fileName) {
+
+                  return articleMap.has(
+                    fileName
+                  );
+                }
+              )
+            : [];
+
+
+        /*
+         * No content yet.
+         */
+
+        if (
+          availableFiles.length === 0
+        ) {
+
+          const empty =
+            document.createElement(
+              "div"
+            );
+
+          empty.className =
+            "shared-insight-empty";
+
+          empty.textContent =
+            emptyMessage;
+
+          links.appendChild(
+            empty
+          );
+
+        } else {
+
+          /*
+           * Render actual articles.
+           */
+
+          availableFiles.forEach(
+            function (fileName) {
+
+              const article =
+                articleMap.get(
+                  fileName
+                );
+
+
+              const link =
+                document.createElement(
+                  "a"
+                );
+
+
+              link.className =
+                "shared-insight-article";
+
+
+              link.href =
+                new URL(
+                  fileName,
+                  getBaseUrl()
+                ).href;
+
+
+              link.textContent =
+                getArticleTitle(
+                  article,
+                  fileName
+                );
+
+
+              links.appendChild(
+                link
+              );
+            }
+          );
         }
-      );
 
 
-      section.appendChild(button);
-      section.appendChild(links);
+        /*
+         * + / − click behavior.
+         */
 
-      container.appendChild(section);
-    });
+        button.addEventListener(
+          "click",
+          function () {
+
+            const expanded =
+              button.getAttribute(
+                "aria-expanded"
+              ) === "true";
+
+
+            button.setAttribute(
+              "aria-expanded",
+              String(!expanded)
+            );
+
+
+            links.hidden =
+              expanded;
+
+
+            indicator.textContent =
+              expanded
+                ? "+"
+                : "−";
+          }
+        );
+
+
+        /*
+         * Assemble category.
+         */
+
+        section.appendChild(
+          button
+        );
+
+        section.appendChild(
+          links
+        );
+
+        container.appendChild(
+          section
+        );
+      }
+    );
   }
 
 
   /*
    * ============================================================
-   * LOAD NAVIGATION
+   * LOAD SHARED NAVIGATION
    * ============================================================
    */
 
@@ -575,47 +722,56 @@
         "site-nav"
       );
 
+
     if (!mount) {
+
+      console.warn(
+        "site-nav mount not found."
+      );
+
       return;
     }
 
 
     try {
 
-      const script =
-        document.querySelector(
-          'script[src$="nav.js"], script[src*="/nav.js?"]'
-        );
-
-
-      const baseUrl = script
-        ? new URL(
-            ".",
-            new URL(
-              script.getAttribute("src"),
-              window.location.href
-            )
-          )
-        : new URL(
-            ".",
-            window.location.href
-          );
+      const baseUrl =
+        getBaseUrl();
 
 
       /*
        * Load nav.html
+       *
+       * Add version parameter to prevent
+       * browser cache problems.
        */
 
-      const navResponse =
-        await fetch(
-          new URL(
-            "nav.html",
-            baseUrl
-          ).href
+      const navUrl =
+        new URL(
+          "nav.html",
+          baseUrl
         );
 
 
-      if (!navResponse.ok) {
+      navUrl.searchParams.set(
+        "v",
+        NAV_VERSION
+      );
+
+
+      const navResponse =
+        await fetch(
+          navUrl.href,
+          {
+            cache: "no-store"
+          }
+        );
+
+
+      if (
+        !navResponse.ok
+      ) {
+
         throw new Error(
           "Could not load nav.html"
         );
@@ -626,101 +782,119 @@
         await navResponse.text();
 
 
-      setupDropdowns(mount);
+      /*
+       * Set up CASE / INSIGHTS / SOLUTION.
+       */
+
+      setupMainDropdowns(
+        mount
+      );
 
 
       /*
-       * Load articles.json
+       * Load articles.json.
        */
+
+      const articlesUrl =
+        new URL(
+          "articles.json",
+          baseUrl
+        );
+
+
+      articlesUrl.searchParams.set(
+        "v",
+        NAV_VERSION
+      );
+
+
+      let articles = [];
+
 
       try {
 
         const articlesResponse =
           await fetch(
-            new URL(
-              "articles.json",
-              baseUrl
-            ).href
+            articlesUrl.href,
+            {
+              cache: "no-store"
+            }
           );
 
 
-        if (!articlesResponse.ok) {
-          throw new Error(
-            "Could not load articles.json"
+        if (
+          articlesResponse.ok
+        ) {
+
+          articles =
+            await articlesResponse.json();
+
+        } else {
+
+          console.warn(
+            "articles.json could not be loaded."
           );
         }
 
-
-        const articles =
-          await articlesResponse.json();
-
-
-        /*
-         * Render INSIGHTS
-         */
-
-        renderGroups(
-          "shared-insights-content",
-          insightGroups,
-          articles,
-          "Articles coming soon."
-        );
-
-
-        /*
-         * Render CASE
-         */
-
-        renderGroups(
-          "shared-case-content",
-          caseGroups,
-          articles,
-          "Cases coming soon."
-        );
-
-
-        /*
-         * Render SOLUTION
-         */
-
-        renderGroups(
-          "shared-solution-content",
-          solutionGroups,
-          articles,
-          "Solutions coming soon."
-        );
-
       } catch (error) {
 
-        console.error(
-          "Could not load the article list:",
+        console.warn(
+          "Error loading articles.json:",
           error
         );
-
-
-        renderGroups(
-          "shared-insights-content",
-          insightGroups,
-          [],
-          "Articles coming soon."
-        );
-
-
-        renderGroups(
-          "shared-case-content",
-          caseGroups,
-          [],
-          "Cases coming soon."
-        );
-
-
-        renderGroups(
-          "shared-solution-content",
-          solutionGroups,
-          [],
-          "Solutions coming soon."
-        );
       }
+
+
+      /*
+       * ========================================================
+       * INSIGHTS
+       * ========================================================
+       */
+
+      renderGroups(
+        "shared-insights-content",
+        insightGroups,
+        articles,
+        "Articles coming soon."
+      );
+
+
+      /*
+       * ========================================================
+       * CASE
+       * ========================================================
+       */
+
+      renderGroups(
+        "shared-case-content",
+        caseGroups,
+        articles,
+        "Cases coming soon."
+      );
+
+
+      /*
+       * ========================================================
+       * SOLUTION
+       * ========================================================
+       */
+
+      renderGroups(
+        "shared-solution-content",
+        solutionGroups,
+        articles,
+        "Solutions coming soon."
+      );
+
+
+      /*
+       * Finished.
+       */
+
+      console.log(
+        "Shared navigation loaded:",
+        NAV_VERSION
+      );
 
     } catch (error) {
 
@@ -739,7 +913,8 @@
    */
 
   if (
-    document.readyState === "loading"
+    document.readyState ===
+    "loading"
   ) {
 
     document.addEventListener(
@@ -753,3 +928,4 @@
   }
 
 })();
+```
