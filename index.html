@@ -1,117 +1,379 @@
 ```html
-<script>
-  /* =========================
-     LOAD ARTICLES
-     ========================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  async function loadArticles() {
-    const articleList = document.getElementById("article-list");
-    const viewMoreWrapper = document.getElementById("view-more-wrapper");
-    const viewMoreBtn = document.getElementById("view-more-btn");
+  <title>Jacky Liu | Vehicle Monitor, Vehicle Safety & SVM / AVM</title>
 
-    if (!articleList || !viewMoreWrapper || !viewMoreBtn) {
-      console.error("Required article elements were not found.");
-      return;
+  <meta name="description" content="Jacky Liu shares practical insights, application cases and solutions for vehicle monitors, SVM / AVM systems and vehicle safety displays.">
+
+  <link rel="stylesheet" href="nav.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    try {
-      const response = await fetch("articles.json", {
-        cache: "no-cache"
-      });
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
-      if (!response.ok) {
-        throw new Error("Unable to load articles.json");
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #202936;
+      background: #ffffff;
+      line-height: 1.7;
+    }
+
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 72px 0;
+      border-bottom: 1px solid #e8edf2;
+    }
+
+    .hero {
+      padding: 100px 0 80px;
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.2;
+      margin: 0 0 24px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: #566273;
+      font-size: 18px;
+    }
+
+    h2 {
+      font-size: 30px;
+      margin: 0 0 16px;
+    }
+
+    .section-intro {
+      color: #647184;
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      display: block;
+      padding: 24px;
+      border: 1px solid #e0e6ed;
+      border-radius: 10px;
+      color: inherit;
+      text-decoration: none;
+      background: #fff;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: #8297b0;
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      font-size: 19px;
+      line-height: 1.45;
+      margin: 10px 0;
+    }
+
+    .card p {
+      color: #647184;
+      font-size: 14px;
+    }
+
+    .category {
+      color: #526b88;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .article-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .article-hidden {
+      display: none;
+    }
+
+    .view-more-wrapper {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .view-more-btn {
+      padding: 12px 24px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .placeholder {
+      padding: 24px;
+      background: #f6f8fa;
+      border-radius: 8px;
+      color: #647184;
+    }
+
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      color: #647184;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .article-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      const articles = await response.json();
+      .hero {
+        padding-top: 64px;
+      }
+    }
 
-      if (!Array.isArray(articles)) {
-        throw new Error("articles.json must contain an array.");
+    @media (max-width: 560px) {
+      main {
+        padding: 0 18px;
       }
 
-      articleList.innerHTML = "";
-      viewMoreWrapper.style.display = "none";
+      section {
+        padding: 52px 0;
+      }
 
-      articles.forEach((article, index) => {
-        const card = document.createElement("a");
-        card.className = "card";
-        card.href = article.url;
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
 
-        if (index >= 3) {
-          card.classList.add("article-hidden");
+<body>
+
+  <!-- Shared fixed navigation -->
+  <div id="site-nav"></div>
+
+  <main>
+
+    <!-- HOME -->
+    <section class="hero" id="home">
+      <h1>Vehicle Displays for Real-World Applications</h1>
+
+      <p>
+        Practical insights, application cases and display solutions
+        for vehicle monitors, SVM / AVM systems and vehicle safety applications.
+      </p>
+    </section>
+
+    <!-- CASE -->
+    <section id="case">
+      <h2>CASE</h2>
+
+      <p class="section-intro">
+        Explore vehicle display applications and real-world integration cases.
+      </p>
+
+      <div class="placeholder">
+        Application cases will be added here.
+      </div>
+    </section>
+
+    <!-- INSIGHTS -->
+    <section id="insights">
+      <h2>INSIGHTS</h2>
+
+      <p class="section-intro">
+        Practical articles about vehicle monitors, signal compatibility,
+        installation, touch interfaces and display system integration.
+      </p>
+
+      <div class="article-grid" id="article-list">
+        <p>Loading articles...</p>
+      </div>
+
+      <div
+        class="view-more-wrapper"
+        id="view-more-wrapper"
+        style="display: none;"
+      >
+        <button
+          class="view-more-btn"
+          id="view-more-btn"
+          type="button"
+        >
+          View More Articles
+        </button>
+      </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section id="solution">
+      <h2>SOLUTION</h2>
+
+      <p class="section-intro">
+        Display solutions for different vehicle environments,
+        camera systems and operator interaction requirements.
+      </p>
+
+      <div class="placeholder">
+        Solutions will be organized by application and customer requirements.
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>ABOUT</h2>
+
+      <p>
+        I'm Jacky Liu, working with vehicle display applications,
+        vehicle camera systems and SVM / AVM integration.
+      </p>
+
+      <p>
+        I share practical observations about display selection,
+        system compatibility and installation challenges.
+      </p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>CONTACT</h2>
+
+      <p>
+        For vehicle display projects, product discussions
+        or potential business cooperation, please get in touch.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="current-year"></span> Jacky Liu.
+    All rights reserved.
+  </footer>
+
+  <script src="nav.js"></script>
+
+  <script>
+    document.getElementById("current-year").textContent =
+      new Date().getFullYear();
+
+    async function loadArticles() {
+      const articleList = document.getElementById("article-list");
+      const viewMoreWrapper =
+        document.getElementById("view-more-wrapper");
+      const viewMoreBtn =
+        document.getElementById("view-more-btn");
+
+      try {
+        const response = await fetch("articles.json", {
+          cache: "no-cache"
+        });
+
+        if (!response.ok) {
+          throw new Error("Unable to load articles.json");
         }
 
-        const category = document.createElement("div");
-        category.className = "category";
-        category.textContent = article.category || "Insight";
+        const articles = await response.json();
 
-        const title = document.createElement("h3");
-        title.textContent = article.title || "Untitled Article";
-
-        const description = document.createElement("p");
-        description.textContent = article.description || "";
-
-        card.appendChild(category);
-        card.appendChild(title);
-        card.appendChild(description);
-
-        if (article.date) {
-          const meta = document.createElement("div");
-          meta.className = "article-meta";
-          meta.textContent = article.date;
-          card.appendChild(meta);
+        if (!Array.isArray(articles)) {
+          throw new Error("Article data must be an array.");
         }
 
-        const linkText = document.createElement("span");
-        linkText.className = "article-link";
-        linkText.textContent = "Read Article →";
-        card.appendChild(linkText);
+        // nav.html is not an article.
+        const validArticles = articles.filter(article =>
+          article.file &&
+          article.file.toLowerCase() !== "nav.html"
+        );
 
-        articleList.appendChild(card);
-      });
+        articleList.innerHTML = "";
 
-      if (articles.length > 3) {
-        viewMoreWrapper.style.display = "block";
+        validArticles.forEach((article, index) => {
+          const card = document.createElement("a");
+          card.className = "card";
+          card.href = encodeURI(article.file);
 
-        let expanded = false;
+          if (index >= 3) {
+            card.classList.add("article-hidden");
+          }
 
-        viewMoreBtn.onclick = () => {
-          expanded = !expanded;
+          const category = document.createElement("div");
+          category.className = "category";
+          category.textContent = "INSIGHTS";
 
-          document.querySelectorAll(".article-hidden").forEach(article => {
-            article.style.display = expanded ? "block" : "none";
+          const title = document.createElement("h3");
+          title.textContent = article.title || "Untitled Article";
+
+          const description = document.createElement("p");
+          description.textContent = article.description || "";
+
+          const linkText = document.createElement("span");
+          linkText.className = "article-link";
+          linkText.textContent = "Read Article →";
+
+          card.appendChild(category);
+          card.appendChild(title);
+          card.appendChild(description);
+          card.appendChild(linkText);
+
+          articleList.appendChild(card);
+        });
+
+        if (validArticles.length > 3) {
+          viewMoreWrapper.style.display = "block";
+
+          let expanded = false;
+
+          viewMoreBtn.addEventListener("click", () => {
+            expanded = !expanded;
+
+            document.querySelectorAll(".article-hidden")
+              .forEach(card => {
+                card.style.display = expanded ? "block" : "none";
+              });
+
+            viewMoreBtn.textContent = expanded
+              ? "Show Fewer Articles"
+              : "View More Articles";
           });
+        }
 
-          viewMoreBtn.textContent = expanded
-            ? "Show Fewer Articles"
-            : "View More Articles";
-        };
+      } catch (error) {
+        console.error("Failed to load articles:", error);
+
+        articleList.innerHTML =
+          "<p>Articles could not be loaded. Please check articles.json.</p>";
       }
-    } catch (error) {
-      console.error("Failed to load articles:", error);
-
-      articleList.innerHTML = "";
-
-      const card = document.createElement("div");
-      card.className = "card";
-
-      const title = document.createElement("h3");
-      title.textContent = "Articles unavailable";
-
-      const description = document.createElement("p");
-      description.textContent =
-        "Please check articles.json and try again.";
-
-      card.appendChild(title);
-      card.appendChild(description);
-      articleList.appendChild(card);
     }
-  }
 
-  /* =========================
-     START
-     ========================= */
+    loadArticles();
+  </script>
 
-  loadArticles();
-</script>
+</body>
+</html>
 ```
