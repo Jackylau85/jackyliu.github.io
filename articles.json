@@ -1,114 +1,87 @@
 [
   {
-    "title": "Why Is an Automotive Touchscreen Different from a Normal Tablet?",
-    "description": "Why is an automotive touchscreen different from a normal tablet? Compare vehicle touchscreens and consumer tablets in terms of environment, temperature, vibration, power, EMI, gloves, wet fingers and HMI requirements.",
-    "category": "Technical Insight · Vehicle Monitor · Touchscreen / HMI",
-    "date": "September 29, 2026",
-    "url": "Why Is an Automotive Touchscreen Different from a Normal Tablet.html"
+    "file": "1920x1080-vs-1024x600.html",
+    "title": "1920×1080 vs 1024×600: Which Resolution Is Better for Vehicle Monitors? | Jacky Liu",
+    "description": "1920×1080 vs 1024×600 for vehicle monitors. Learn how screen resolution, camera input, display size, viewing distance, and application requirements affect the right choice for SVM and AVM systems."
   },
   {
-    "title": "SVM Display Resolution: Why Does System Matching Matter More Than Pixels?",
-    "description": "How important is display resolution in an SVM system? Compare 1024×600, 1280×800 and 1920×1080 and learn why Camera → SVM Box → Display matching matters more than choosing the highest resolution.",
-    "category": "Technical Guide · SVM / AVM · Vehicle Display",
-    "date": "September 29, 2026",
-    "url": "svm-display-resolution-system-matching.html"
+    "file": "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html",
+    "title": "5 Things to Check When Connecting an SVM Box to a Vehicle Monitor | Jacky Liu",
+    "description": "Before connecting an SVM Box to a vehicle monitor, check HDMI signal, resolution, touch interface, power supply, and EMI/cable conditions. A practical guide for SVM and AVM systems."
   },
   {
-    "title": "Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation?",
-    "description": "Why can a vehicle monitor work perfectly on the bench but fail after installation? A practical look at power supply, grounding, voltage drop, EMI, wiring and signal compatibility.",
-    "category": "Technical Insight · Vehicle Monitor",
-    "date": "September 29, 2026",
-    "url": "bench-test-vs-installation.html"
+    "file": "Why Is an Automotive Touchscreen Different from a Normal Tablet.html",
+    "title": "Why Is an Automotive Touchscreen Different from a Normal Tablet? | Jacky Liu",
+    "description": "Why is an automotive touchscreen different from a normal tablet? Compare vehicle touchscreens and consumer tablets in terms of environment, temperature, vibration, power, EMI, gloves, wet fingers and HMI requirements."
   },
   {
-    "title": "1920×1080 vs 1024×600: Which Resolution Is Better for Vehicle Monitors?",
-    "description": "1920×1080 vs 1024×600 for vehicle monitors. Learn how screen resolution, camera input, display size, viewing distance, and application requirements affect the right choice for SVM and AVM systems.",
-    "category": "Technical Guide · Vehicle Monitor / SVM / AVM",
-    "date": "September 29, 2026",
-    "url": "1920x1080-vs-1024x600.html"
+    "file": "bench-test-vs-installation.html",
+    "title": "Why Does a Vehicle Monitor Work Perfectly on the Bench but Fail After Installation? | Jacky Liu",
+    "description": "Why can a vehicle monitor work perfectly on the bench but fail after installation? A practical look at power supply, grounding, voltage drop, EMI, wiring and signal compatibility."
   },
   {
-    "title": "Why Does an SVM / AVM System Need a Proper Display Interface?",
-    "description": "Why does an SVM or AVM system need the right display interface? A practical look at HDMI, AHD, CVBS, USB, signal compatibility, touch control and system architecture.",
-    "category": "Technical Guide · SVM / AVM",
-    "date": "September 29, 2026",
-    "url": "why-svm-avm-needs-proper-display-interface.html"
+    "file": "hdmi-vs-ahd-vehicle-camera-system.html",
+    "title": "HDMI vs AHD for Vehicle Camera Systems: What Is the Difference? | Jacky Liu",
+    "description": "HDMI vs AHD for vehicle camera systems. Learn how HDMI and AHD differ in signal transmission, system structure, cable requirements, display compatibility and SVM / AVM applications."
   },
   {
-    "title": "When Does an SVM Monitor Need Touch?",
-    "description": "When does an SVM monitor need touch? Learn how USB touch, UART touch, capacitive touch, glove operation and wet finger operation affect SVM and AVM vehicle monitor design.",
-    "category": "Technical Guide · SVM / AVM · Vehicle Monitor / HMI",
-    "date": "September 29, 2026",
-    "url": "when-does-an-svm-monitor-need-touch.html"
+    "file": "how-to-choose-vehicle-monitor.html",
+    "title": "How to Choose a Vehicle Monitor for SVM / AVM Systems? | Jacky Liu",
+    "description": "A practical guide to choosing a vehicle monitor for SVM and AVM systems, including resolution, input compatibility, brightness, trigger control, touch and installation conditions."
   },
   {
-    "title": "5 Things to Check When Connecting an SVM Box to a Vehicle Monitor",
-    "description": "Before connecting an SVM Box to a vehicle monitor, check HDMI signal, resolution, touch interface, power supply, and EMI/cable conditions. A practical guide for SVM and AVM systems.",
-    "category": "Technical Guide · SVM / AVM · Vehicle Monitor",
-    "date": "September 29, 2026",
-    "url": "5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html"
+    "file": "monitor-as-hmi-in-svm-system.html",
+    "title": "Why Is the Monitor More Than a Display Device in an SVM System? | Jacky Liu",
+    "description": "In an SVM system, the monitor is more than a device for displaying images. It is the HMI between the camera system, SVM box and driver, combining video display, touch interaction, alerts and system control."
   },
   {
-    "title": "HDMI vs AHD for Vehicle Camera Systems: What Is the Difference?",
-    "description": "HDMI vs AHD for vehicle camera systems. Learn how HDMI and AHD differ in signal transmission, system structure, cable requirements, display compatibility and SVM / AVM applications.",
-    "category": "Technical Guide · Vehicle Monitor / SVM / AVM",
-    "date": "September 29, 2026",
-    "url": "hdmi-vs-ahd-vehicle-camera-system.html"
+    "file": "nav.html",
+    "title": "nav",
+    "description": ""
   },
   {
-    "title": "What Brightness Does a Vehicle Monitor Really Need for Outdoor Use?",
-    "description": "What brightness does a vehicle monitor really need for outdoor use? A practical look at sunlight, viewing angle, screen reflection, installation position and real-world vehicle applications.",
-    "category": "Technical Guide · Vehicle Monitor",
-    "date": "September 29, 2026",
-    "url": "what-brightness-does-a-vehicle-monitor-need.html"
+    "file": "svm-display-resolution-system-matching.html",
+    "title": "SVM Display Resolution: Why Does System Matching Matter More Than Pixels? | Jacky Liu",
+    "description": "How important is display resolution in an SVM system? Compare 1024×600, 1280×800 and 1920×1080 and learn why Camera → SVM Box → Display matching matters more than choosing the highest resolution."
   },
   {
-    "title": "Why Does a Vehicle Camera Image Look Good in the Factory but Poor After Installation?",
-    "description": "Why can a vehicle camera image look clear during testing but become noisy, unstable or darker after installation? A practical look at cables, power, grounding, EMI, connectors and installation conditions.",
-    "category": "Technical Insight · Vehicle Camera System",
-    "date": "September 29, 2026",
-    "url": "why-vehicle-camera-image-quality-changes-after-installation.html"
+    "file": "what-brightness-does-a-vehicle-monitor-need.html",
+    "title": "What Brightness Does a Vehicle Monitor Really Need for Outdoor Use? | Jacky Liu",
+    "description": "What brightness does a vehicle monitor really need for outdoor use? A practical look at sunlight, viewing angle, screen reflection, installation position and real-world vehicle applications."
   },
   {
-    "title": "Why Is the Monitor More Than a Display Device in an SVM System?",
-    "description": "In an SVM system, the monitor is more than a device for displaying images. It is the HMI between the camera system, SVM box and driver, combining video display, touch interaction, alerts and system control.",
-    "category": "Technical Insight",
-    "date": "",
-    "url": "monitor-as-hmi-in-svm-system.html"
+    "file": "when-does-an-svm-monitor-need-touch.html",
+    "title": "When Does an SVM Monitor Need Touch? | Jacky Liu",
+    "description": "When does an SVM monitor need touch? Learn how USB touch, UART touch, capacitive touch, glove operation and wet finger operation affect SVM and AVM vehicle monitor design."
   },
   {
-    "title": "Why Does a Vehicle Monitor Have EMI Problems?",
-    "description": "Why do vehicle monitors sometimes experience EMI problems after installation? Learn how power supply, grounding, wiring, switching devices, video cables and vehicle electrical environments affect display stability.",
-    "category": "Technical Insight",
-    "date": "",
-    "url": "why-vehicle-monitor-has-emi-problems.html"
+    "file": "why-cables-can-matter-more-than-power-supply.html",
+    "title": "Why Can Cables Matter More Than the Power Supply in a Vehicle Monitor? | Jacky Liu",
+    "description": "In vehicle monitor systems, the power supply is important, but cables, connectors, voltage drop, grounding, shielding and cable routing can sometimes have an even greater impact on system stability."
   },
   {
-    "title": "How to Choose a Vehicle Monitor for SVM / AVM Systems?",
-    "description": "A practical guide to choosing a vehicle monitor for SVM and AVM systems, including resolution, input compatibility, brightness, trigger control, touch and installation conditions.",
-    "category": "Technical Guide · SVM / AVM",
-    "date": "",
-    "url": "how-to-choose-vehicle-monitor.html"
+    "file": "why-svm-avm-needs-proper-display-interface.html",
+    "title": "Why Does an SVM / AVM System Need a Proper Display Interface? | Jacky Liu",
+    "description": "Why does an SVM or AVM system need the right display interface? A practical look at HDMI, AHD, CVBS, USB, signal compatibility, touch control and system architecture."
   },
   {
-    "title": "Why Wiring Matters in Vehicle Safety Systems",
-    "description": "Why wiring, connectors, power supply and signal transmission matter in vehicle safety and camera systems. Practical observations from vehicle electronics applications.",
-    "category": "Technical Insight · Vehicle Safety",
-    "date": "",
-    "url": "why-wiring-matters.html"
+    "file": "why-vehicle-camera-image-quality-changes-after-installation.html",
+    "title": "Why Does a Vehicle Camera Image Look Good in the Factory but Poor After Installation? | Jacky Liu",
+    "description": "Why can a vehicle camera image look clear during testing but become noisy, unstable or darker after installation? A practical look at cables, power, grounding, EMI, connectors and installation conditions."
   },
   {
-    "title": "Why Do Vehicle Monitors Use M12 Connectors?",
-    "description": "Why do vehicle monitors and camera systems use M12 connectors? Learn how M12 connectors provide reliable locking, vibration resistance, environmental protection, power and signal connectivity for vehicle applications.",
-    "category": "Technical Insight",
-    "date": "",
-    "url": "why-vehicle-monitors-use-m12-connectors.html"
+    "file": "why-vehicle-monitor-has-emi-problems.html",
+    "title": "Why Does a Vehicle Monitor Have EMI Problems? | Jacky Liu",
+    "description": "Why do vehicle monitors sometimes experience EMI problems after installation? Learn how power supply, grounding, wiring, switching devices, video cables and vehicle electrical environments affect display stability."
   },
   {
-    "title": "Why Can Cables Matter More Than the Power Supply in a Vehicle Monitor?",
-    "description": "In vehicle monitor systems, the power supply is important, but cables, connectors, voltage drop, grounding, shielding and cable routing can sometimes have an even greater impact on system stability.",
-    "category": "Technical Insight",
-    "date": "",
-    "url": "why-cables-can-matter-more-than-power-supply.html"
+    "file": "why-vehicle-monitors-use-m12-connectors.html",
+    "title": "Why Do Vehicle Monitors Use M12 Connectors? | Jacky Liu",
+    "description": "Why do vehicle monitors and camera systems use M12 connectors? Learn how M12 connectors provide reliable locking, vibration resistance, environmental protection, power and signal connectivity for vehicle applications."
+  },
+  {
+    "file": "why-wiring-matters.html",
+    "title": "Why Wiring Matters in Vehicle Safety Systems | Jacky Liu",
+    "description": "Why wiring, connectors, power supply and signal transmission matter in vehicle safety and camera systems. Practical observations from vehicle electronics applications."
   }
 ]
