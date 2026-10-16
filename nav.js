@@ -1,5 +1,5 @@
-(function () {
 
+(function () {
   function loadCSS() {
     if (document.querySelector('link[data-shared-nav-css]')) {
       return;
@@ -9,22 +9,16 @@
     link.rel = 'stylesheet';
     link.href = 'nav.css';
     link.dataset.sharedNavCss = 'true';
-
     document.head.appendChild(link);
   }
 
   async function loadNavigation() {
-
     loadCSS();
 
     const container = document.getElementById('site-nav');
-
-    if (!container) {
-      return;
-    }
+    if (!container) return;
 
     try {
-
       const response = await fetch('nav.html', {
         cache: 'no-store'
       });
@@ -38,232 +32,300 @@
       setupDropdowns();
       setupMobileMenu();
       loadInsights();
-
     } catch (error) {
-
-      console.error(
-        'Shared navigation error:',
-        error
-      );
-
+      console.error('Shared navigation error:', error);
     }
   }
 
   function setupDropdowns() {
-
     const buttons = document.querySelectorAll(
       '#site-nav .shared-dropdown-toggle'
     );
 
     buttons.forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
 
-      button.addEventListener(
-        'click',
-        function (event) {
+        const item = button.closest('.shared-nav-item');
+        if (!item) return;
 
-          event.preventDefault();
-          event.stopPropagation();
+        document
+          .querySelectorAll('#site-nav .shared-nav-item.open')
+          .forEach(function (other) {
+            if (other !== item) {
+              other.classList.remove('open');
+            }
+          });
 
-          const item =
-            button.closest('.shared-nav-item');
-
-          document
-            .querySelectorAll(
-              '#site-nav .shared-nav-item.open'
-            )
-            .forEach(function (other) {
-
-              if (other !== item) {
-                other.classList.remove('open');
-              }
-
-            });
-
-          item.classList.toggle('open');
-
-        }
-      );
-
+        item.classList.toggle('open');
+      });
     });
 
-    document.addEventListener(
-      'click',
-      function (event) {
-
-        if (
-          !event.target.closest(
-            '#site-nav .shared-nav-item'
-          )
-        ) {
-
-          document
-            .querySelectorAll(
-              '#site-nav .shared-nav-item.open'
-            )
-            .forEach(function (item) {
-
-              item.classList.remove('open');
-
-            });
-
-        }
-
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('#site-nav .shared-nav-item')) {
+        document
+          .querySelectorAll('#site-nav .shared-nav-item.open')
+          .forEach(function (item) {
+            item.classList.remove('open');
+          });
       }
-    );
+    });
 
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        document
+          .querySelectorAll('#site-nav .shared-nav-item.open')
+          .forEach(function (item) {
+            item.classList.remove('open');
+          });
+      }
+    });
   }
 
   function setupMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const nav = document.getElementById('main-nav');
 
-    const toggle =
-      document.getElementById(
-        'mobile-menu-toggle'
-      );
+    if (!toggle || !nav) return;
 
-    const nav =
-      document.getElementById(
-        'main-nav'
-      );
+    toggle.addEventListener('click', function () {
+      nav.classList.toggle('mobile-open');
+    });
+  }
 
-    if (!toggle || !nav) {
-      return;
-    }
+  function addInsightsStyles() {
+    if (document.getElementById('shared-insights-styles')) return;
 
-    toggle.addEventListener(
-      'click',
-      function () {
+    const style = document.createElement('style');
+    style.id = 'shared-insights-styles';
 
-        nav.classList.toggle(
-          'mobile-open'
-        );
-
+    style.textContent = `
+      #shared-insights-dropdown .insight-category {
+        border-bottom: 1px solid #e5e7eb;
       }
-    );
 
+      #shared-insights-dropdown .insight-category:last-child {
+        border-bottom: none;
+      }
+
+      #shared-insights-dropdown .insight-category-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 11px 14px;
+        border: 0;
+        background: transparent;
+        color: #111827;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      #shared-insights-dropdown .insight-category-toggle:hover {
+        background: #f3f4f6;
+      }
+
+      #shared-insights-dropdown .insight-category-arrow {
+        flex: 0 0 auto;
+        font-size: 11px;
+        transition: transform 0.18s ease;
+      }
+
+      #shared-insights-dropdown .insight-category.expanded
+      .insight-category-arrow {
+        transform: rotate(90deg);
+      }
+
+      #shared-insights-dropdown .insight-article-list {
+        display: none;
+        padding: 0 0 7px;
+      }
+
+      #shared-insights-dropdown .insight-category.expanded
+      .insight-article-list {
+        display: block;
+      }
+
+      #shared-insights-dropdown .insight-article-list a {
+        display: block;
+        padding: 8px 14px 8px 28px;
+        color: #374151;
+        font-size: 12px;
+        line-height: 1.5;
+        text-decoration: none;
+        white-space: normal;
+      }
+
+      #shared-insights-dropdown .insight-article-list a:hover {
+        background: #f3f4f6;
+        color: #111827;
+      }
+
+      #shared-insights-dropdown .insight-empty {
+        padding: 7px 28px 12px;
+        color: #6b7280;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    `;
+
+    document.head.appendChild(style);
   }
 
   async function loadInsights() {
+    const container = document.getElementById(
+      'shared-insights-dropdown'
+    );
 
-    const container =
-      document.getElementById(
-        'shared-insights-dropdown'
-      );
+    if (!container) return;
 
-    if (!container) {
-      return;
-    }
+    const insightGroups = [
+      {
+        name: 'International Logistics',
+        files: []
+      },
+      {
+        name: 'Wire & Cable',
+        files: [
+          'why-cables-can-matter-more-than-power-supply.html',
+          'why-wiring-matters.html'
+        ]
+      },
+      {
+        name: 'Monitors',
+        files: [
+          'how-to-choose-vehicle-monitor.html',
+          '1920x1080-vs-1024x600.html',
+          'what-brightness-does-a-vehicle-monitor-need.html',
+          'why-vehicle-monitor-has-emi-problems.html',
+          'Why Is an Automotive Touchscreen Different from a Normal Tablet.html',
+          'why-vehicle-monitors-use-m12-connectors.html',
+          'bench-test-vs-installation.html'
+        ]
+      },
+      {
+        name: 'Cameras',
+        files: [
+          'why-vehicle-camera-image-quality-changes-after-installation.html',
+          'hdmi-vs-ahd-vehicle-camera-system.html'
+        ]
+      },
+      {
+        name: 'MDVR',
+        files: []
+      },
+      {
+        name: 'SVM / AVM',
+        files: [
+          'monitor-as-hmi-in-svm-system.html',
+          'svm-display-resolution-system-matching.html',
+          'why-svm-avm-needs-proper-display-interface.html',
+          'when-does-an-svm-monitor-need-touch.html',
+          '5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html'
+        ]
+      }
+    ];
 
-    const insightGroups = {
-
-      'Vehicle Monitors': [
-        'how-to-choose-vehicle-monitor.html',
-        '1920x1080-vs-1024x600.html',
-        'what-brightness-does-a-vehicle-monitor-need.html',
-        'why-vehicle-monitor-has-emi-problems.html',
-        'Why Is an Automotive Touchscreen Different from a Normal Tablet.html',
-        'why-vehicle-monitors-use-m12-connectors.html',
-        'bench-test-vs-installation.html'
-      ],
-
-      'SVM / AVM': [
-        'monitor-as-hmi-in-svm-system.html',
-        'svm-display-resolution-system-matching.html',
-        'why-svm-avm-needs-proper-display-interface.html',
-        'when-does-an-svm-monitor-need-touch.html',
-        '5-things-to-check-when-connecting-svm-box-to-vehicle-monitor.html',
-        'hdmi-vs-ahd-vehicle-camera-system.html'
-      ],
-
-      'Vehicle Safety': [
-        'why-wiring-matters.html',
-        'why-vehicle-camera-image-quality-changes-after-installation.html'
-      ],
-
-      'Wiring & Connectivity': [
-        'why-cables-can-matter-more-than-power-supply.html'
-      ]
-
-    };
+    addInsightsStyles();
 
     try {
-
-      const response =
-        await fetch('articles.json', {
-          cache: 'no-store'
-        });
+      const response = await fetch('articles.json', {
+        cache: 'no-store'
+      });
 
       if (!response.ok) {
-        throw new Error(
-          'Failed to load articles.json'
-        );
+        throw new Error('Failed to load articles.json');
       }
 
-      const articles =
-        await response.json();
-
+      const articles = await response.json();
       const articleMap = {};
 
       articles.forEach(function (article) {
-        articleMap[article.file] = article;
+        if (article && article.file && article.file !== 'nav.html') {
+          articleMap[article.file] = article;
+        }
       });
 
       container.innerHTML = '';
 
-      Object.entries(
-        insightGroups
-      ).forEach(
-        function ([groupName, files]) {
+      insightGroups.forEach(function (group, index) {
+        const section = document.createElement('div');
+        section.className = 'insight-category';
 
-          const title =
-            document.createElement('div');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'insight-category-toggle';
+        button.setAttribute('aria-expanded', 'false');
 
-          title.style.fontWeight = '700';
-          title.style.padding = '8px 12px 5px';
-          title.style.color = '#111827';
-          title.style.fontSize = '12px';
+        const label = document.createElement('span');
+        label.textContent = group.name;
 
-          title.textContent = groupName;
+        const arrow = document.createElement('span');
+        arrow.className = 'insight-category-arrow';
+        arrow.textContent = '▶';
+        arrow.setAttribute('aria-hidden', 'true');
 
-          container.appendChild(title);
+        button.appendChild(label);
+        button.appendChild(arrow);
 
-          files.forEach(function (fileName) {
+        const list = document.createElement('div');
+        list.className = 'insight-article-list';
+        list.id = 'insight-articles-' + index;
 
-            const article =
-              articleMap[fileName];
+        button.setAttribute('aria-controls', list.id);
 
-            if (!article) {
-              return;
-            }
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
 
-            const link =
-              document.createElement('a');
+          const willExpand = !section.classList.contains('expanded');
+          section.classList.toggle('expanded', willExpand);
+          button.setAttribute('aria-expanded', String(willExpand));
+        });
 
-            link.href = fileName;
+        let articleCount = 0;
 
-            link.textContent =
-              article.title || fileName;
+        group.files.forEach(function (fileName) {
+          const article = articleMap[fileName];
 
-            container.appendChild(link);
+          if (!article) return;
 
-          });
+          const link = document.createElement('a');
 
+          // Use the site's project path so links work on GitHub Pages.
+          link.href = new URL(fileName, document.baseURI).href;
+          link.textContent = article.title || fileName;
+
+          list.appendChild(link);
+          articleCount += 1;
+        });
+
+        if (articleCount === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'insight-empty';
+          empty.textContent = 'Articles coming soon.';
+          list.appendChild(empty);
         }
-      );
 
+        section.appendChild(button);
+        section.appendChild(list);
+        container.appendChild(section);
+      });
     } catch (error) {
+      console.error('Failed to load shared INSIGHTS:', error);
 
-      console.error(
-        'Failed to load shared INSIGHTS:',
-        error
-      );
+      container.innerHTML = '';
 
-      container.innerHTML =
-        '<div class="shared-dropdown-loading">Unable to load articles.</div>';
-
+      const message = document.createElement('div');
+      message.className = 'shared-dropdown-loading';
+      message.textContent = 'Unable to load articles.';
+      container.appendChild(message);
     }
-
   }
 
   loadNavigation();
-
 })();
