@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +7,7 @@
 
   <title>Jacky Liu | Vehicle Monitor, Vehicle Safety & SVM / AVM</title>
 
-  <meta name="description" content="Jacky Liu shares practical insights, application cases and solutions for vehicle monitors, SVM / AVM systems and vehicle safety displays.">
+  <meta name="description" content="Jacky Liu shares practical insights on vehicle displays, SVM / AVM systems and heavy-duty vehicle safety, backed by experience in international logistics and wire and cable manufacturing.">
 
   <link rel="stylesheet" href="nav.css">
 
@@ -23,9 +23,9 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       color: #202936;
-      background: #ffffff;
+      background: #fff;
       line-height: 1.7;
     }
 
@@ -36,52 +36,68 @@
     }
 
     section {
-      padding: 72px 0;
+      padding: 76px 0;
       border-bottom: 1px solid #e8edf2;
     }
 
     .hero {
-      padding: 100px 0 80px;
+      padding: 110px 0 90px;
+    }
+
+    .eyebrow {
+      color: #526b88;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     .hero h1 {
-      max-width: 800px;
-      font-size: clamp(32px, 5vw, 52px);
-      line-height: 1.2;
-      margin: 0 0 24px;
+      max-width: 850px;
+      margin: 18px 0 24px;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.18;
+      letter-spacing: -1px;
     }
 
     .hero p {
-      max-width: 760px;
+      max-width: 780px;
       color: #566273;
       font-size: 18px;
     }
 
     h2 {
-      font-size: 30px;
       margin: 0 0 16px;
+      font-size: 32px;
+      line-height: 1.3;
     }
 
     .section-intro {
+      max-width: 780px;
+      margin: 0 0 32px;
       color: #647184;
-      max-width: 760px;
-      margin-bottom: 32px;
     }
 
-    .article-grid {
+    .article-grid,
+    .experience-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
+      gap: 22px;
+    }
+
+    .card,
+    .experience-card {
+      min-width: 0;
+      padding: 24px;
+      border: 1px solid #e0e6ed;
+      border-radius: 10px;
+      background: #fff;
     }
 
     .card {
       display: block;
-      padding: 24px;
-      border: 1px solid #e0e6ed;
-      border-radius: 10px;
       color: inherit;
       text-decoration: none;
-      background: #fff;
       transition: border-color 0.2s, transform 0.2s;
     }
 
@@ -90,38 +106,49 @@
       transform: translateY(-2px);
     }
 
-    .card h3 {
-      font-size: 19px;
-      line-height: 1.45;
-      margin: 10px 0;
-    }
-
-    .card p {
-      color: #647184;
-      font-size: 14px;
-    }
-
     .category {
       color: #526b88;
       font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .card h3,
+    .experience-card h3 {
+      margin: 12px 0;
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .card p,
+    .experience-card p {
+      color: #647184;
+      font-size: 14px;
     }
 
     .article-link {
       display: inline-block;
       margin-top: 12px;
       font-size: 14px;
-      font-weight: bold;
+      font-weight: 700;
     }
 
-    .article-hidden {
-      display: none;
+    .experience-years {
+      color: #526b88;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .placeholder {
+      padding: 26px;
+      border-radius: 8px;
+      background: #f6f8fa;
+      color: #647184;
     }
 
     .view-more-wrapper {
-      text-align: center;
       margin-top: 32px;
+      text-align: center;
     }
 
     .view-more-btn {
@@ -129,31 +156,70 @@
       border: 1px solid #cbd5e1;
       border-radius: 6px;
       background: #fff;
-      cursor: pointer;
+      color: #202936;
       font-size: 15px;
+      cursor: pointer;
     }
 
-    .placeholder {
-      padding: 24px;
+    .view-more-btn:hover {
       background: #f6f8fa;
-      border-radius: 8px;
+    }
+
+    .contact-intro {
+      max-width: 740px;
       color: #647184;
     }
 
-    footer {
-      padding: 32px 24px;
-      text-align: center;
+    .contact-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .contact-item {
+      padding: 22px;
+      border: 1px solid #e0e6ed;
+      border-radius: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-label {
+      display: block;
+      margin-bottom: 6px;
       color: #647184;
       font-size: 13px;
     }
 
-    @media (max-width: 800px) {
-      .article-grid {
+    .contact-item a {
+      color: #202936;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 30px 20px;
+      color: #647184;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      .article-grid,
+      .experience-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .contact-list {
+        grid-template-columns: 1fr;
+      }
+
       .hero {
-        padding-top: 64px;
+        padding-top: 76px;
       }
     }
 
@@ -163,11 +229,16 @@
       }
 
       section {
-        padding: 52px 0;
+        padding: 54px 0;
       }
 
-      .article-grid {
+      .article-grid,
+      .experience-grid {
         grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        letter-spacing: -0.5px;
       }
     }
   </style>
@@ -175,18 +246,23 @@
 
 <body>
 
-  <!-- Shared fixed navigation -->
+  <!-- Shared navigation: keep nav.html, nav.css and nav.js -->
   <div id="site-nav"></div>
 
   <main>
 
     <!-- HOME -->
     <section class="hero" id="home">
+      <div class="eyebrow">Vehicle Displays · Vehicle Safety · SVM / AVM</div>
+
       <h1>Vehicle Displays for Real-World Applications</h1>
 
       <p>
-        Practical insights, application cases and display solutions
-        for vehicle monitors, SVM / AVM systems and vehicle safety applications.
+        I'm Jacky Liu. I work with vehicle display applications,
+        SVM / AVM systems and heavy-duty vehicle safety.
+        My background in international logistics and wire and cable
+        manufacturing also shapes how I approach product development,
+        manufacturing requirements and international business.
       </p>
     </section>
 
@@ -195,11 +271,12 @@
       <h2>CASE</h2>
 
       <p class="section-intro">
-        Explore vehicle display applications and real-world integration cases.
+        Practical applications and project experience involving
+        vehicle displays, camera systems and vehicle safety.
       </p>
 
       <div class="placeholder">
-        Application cases will be added here.
+        Application cases will be organized here.
       </div>
     </section>
 
@@ -208,8 +285,8 @@
       <h2>INSIGHTS</h2>
 
       <p class="section-intro">
-        Practical articles about vehicle monitors, signal compatibility,
-        installation, touch interfaces and display system integration.
+        Practical observations on vehicle monitor selection,
+        display interfaces, SVM / AVM integration and installation challenges.
       </p>
 
       <div class="article-grid" id="article-list">
@@ -236,12 +313,13 @@
       <h2>SOLUTION</h2>
 
       <p class="section-intro">
-        Display solutions for different vehicle environments,
-        camera systems and operator interaction requirements.
+        Vehicle display solutions organized around application
+        requirements, camera interfaces, operating environments
+        and operator interaction.
       </p>
 
       <div class="placeholder">
-        Solutions will be organized by application and customer requirements.
+        Solutions will be organized by application and system requirements.
       </div>
     </section>
 
@@ -249,36 +327,115 @@
     <section id="about">
       <h2>ABOUT</h2>
 
-      <p>
-        I'm Jacky Liu, working with vehicle display applications,
-        vehicle camera systems and SVM / AVM integration.
+      <p class="section-intro">
+        My professional experience spans three industries:
+        international logistics, wire and cable manufacturing,
+        and vehicle electronics.
       </p>
 
-      <p>
-        I share practical observations about display selection,
-        system compatibility and installation challenges.
-      </p>
+      <div class="experience-grid">
+
+        <article class="experience-card">
+          <div class="experience-years">8 YEARS</div>
+
+          <h3>International Logistics</h3>
+
+          <p>
+            Eight years of experience in international freight
+            and logistics operations, covering sea freight,
+            air freight, express delivery and specialized cargo.
+          </p>
+
+          <p>
+            Familiar with the operational procedures and coordination
+            involved in reefer container shipments, Ro-Ro vessels
+            and breakbulk shipping.
+          </p>
+        </article>
+
+        <article class="experience-card">
+          <div class="experience-years">8 YEARS</div>
+
+          <h3>Wire &amp; Cable Industry</h3>
+
+          <p>
+            Eight years of experience in the wire and cable industry,
+            with knowledge of low-voltage cable materials,
+            manufacturing processes and project development.
+          </p>
+
+          <p>
+            Familiar with material selection, production requirements
+            and practical considerations in developing cable products
+            for different applications.
+          </p>
+        </article>
+
+        <article class="experience-card">
+          <div class="experience-years">3 YEARS</div>
+
+          <h3>Vehicle Electronics</h3>
+
+          <p>
+            Currently focused on heavy-duty vehicle safety and
+            vehicle electronics, particularly SVM (Surround View
+            Monitoring) systems, vehicle displays and cameras.
+          </p>
+
+          <p>
+            Continuing to deepen my understanding of vehicle electronics
+            manufacturing, product integration and display solutions
+            for demanding vehicle applications.
+          </p>
+        </article>
+
+      </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
       <h2>CONTACT</h2>
 
-      <p>
-        For vehicle display projects, product discussions
-        or potential business cooperation, please get in touch.
+      <p class="contact-intro">
+        For business inquiries, product discussions or potential
+        cooperation in vehicle displays and vehicle safety systems,
+        feel free to get in touch.
       </p>
+
+      <div class="contact-list">
+
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <a href="mailto:jacky@anlisz.com">
+            jacky@anlisz.com
+          </a>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">Phone</span>
+          <a href="tel:+8618933916054">
+            +86 189 3391 6054
+          </a>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-label">WeChat</span>
+          <span>redstar</span>
+        </div>
+
+      </div>
     </section>
 
   </main>
 
   <footer>
-    © <span id="current-year"></span> Jacky Liu.
-    All rights reserved.
+    © <span id="current-year"></span> Jacky Liu. All rights reserved.
   </footer>
 
+  <!-- Shared navigation behavior -->
   <script src="nav.js"></script>
 
+  <!-- Homepage article loader -->
   <script>
     document.getElementById("current-year").textContent =
       new Date().getFullYear();
@@ -305,7 +462,6 @@
           throw new Error("Article data must be an array.");
         }
 
-        // nav.html is not an article.
         const validArticles = articles.filter(article =>
           article.file &&
           article.file.toLowerCase() !== "nav.html"
@@ -320,6 +476,7 @@
 
           if (index >= 3) {
             card.classList.add("article-hidden");
+            card.style.display = "none";
           }
 
           const category = document.createElement("div");
@@ -376,4 +533,3 @@
 
 </body>
 </html>
-```
