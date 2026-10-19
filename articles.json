@@ -40,6 +40,11 @@
     "description": "How important is display resolution in an SVM system? Compare 1024×600, 1280×800 and 1920×1080 and learn why Camera → SVM Box → Display matching matters more than choosing the highest resolution."
   },
   {
+    "file": "vehicle-monitor-lighting-conditions.html",
+    "title": "How to Ensure Reliable Vehicle Monitor Performance in Different Lighting Conditions? | Jacky Liu",
+    "description": "Learn how installation position, sunshades, brightness adjustment, windshield reflections, and thermal management affect vehicle monitor visibility in commercial vehicles."
+  },
+  {
     "file": "what-brightness-does-a-vehicle-monitor-need.html",
     "title": "What Brightness Does a Vehicle Monitor Really Need for Outdoor Use? | Jacky Liu",
     "description": "What brightness does a vehicle monitor really need for outdoor use? A practical look at sunlight, viewing angle, screen reflection, installation position and real-world vehicle applications."
